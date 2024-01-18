@@ -18,7 +18,9 @@ const consumerSetup = async () => {
   await consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
       console.log({
+        key: message.key.toString(),
         value: message.value.toString(),
+        headers: message.headers,
       });
     },
   });
@@ -41,3 +43,5 @@ app.get('/', async (req, res) => {
 app.listen(PORT, () => {
   console.log(` listening on port: ${PORT}`);
 });
+
+module.exports = { produer, consumer, consumerSetup};

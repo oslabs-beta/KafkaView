@@ -4,15 +4,16 @@
   "description": "Kafka metrics viewing application",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "nodemon src/server/server.js",
+    "start": "nodemon server/server.js",
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
     "dev:client": "webpack-dev-server --mode development --open --hot",
-    "dev:server": "nodemon ./src/server/server.js",
+    "dev:server": "nodemon server/server.js",
     "build": "webpack --mode production"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^8.2.2",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
@@ -21,9 +22,9 @@
     "nodemon": "^3.0.1",
     "path": "^0.12.7",
     "pg": "^8.11.3",
-    "react-router-dom": "^6.9.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.9.0",
     "reactflow": "^11.10.1"
   },
   "devDependencies": {
