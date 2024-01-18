@@ -4,7 +4,7 @@
   "description": "Kafka metrics viewing application",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "nodemon src/server/server.js",
+    "start": "nodemon server/server.js",
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
     "dev:client": "webpack-dev-server --mode development --open --hot",
     "dev:server": "nodemon ./src/server/server.js",
