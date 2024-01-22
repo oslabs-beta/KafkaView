@@ -1,6 +1,6 @@
 import React from 'react';
-import '../styles.css';
-function Broker() {
+
+function Cluster() {
     return (
         <div id="container">
           <div id="buttonContainer">
@@ -13,4 +13,4 @@ function Broker() {
       );
 }
 
-export default Broker;
+export default Cluster;
