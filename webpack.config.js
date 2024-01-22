@@ -2,10 +2,10 @@ const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
-
+  entry: './src/index.jsx',
+  mode: process.env.NODE_ENV || 'development',
   output: {
-    path: path.join(__dirname, '/dist'),
+    path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
   },
 
@@ -28,14 +28,26 @@ module.exports = {
         },
       },
       {
-        test: /\.css$/i,
+        test: /\.css$/,
         exclude: /node_modules/,
         use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/,
-        type: 'asset/resource',
+        type: 'assets/resource',
       },
     ],
+  },
+  devServer: {
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    open: true,
+    hot: true,
+    compress: true,
+    historyApiFallback: true,
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
 };

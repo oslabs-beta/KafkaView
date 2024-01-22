@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles.css';
+
 function Producer() {
     return (
       <div id="container">
