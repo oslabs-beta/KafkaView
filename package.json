@@ -6,12 +6,13 @@
     "start": "nodemon server/server.js",
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
     "dev:client": "webpack-dev-server --mode development --open --hot",
-    "dev:server": "nodemon ./src/server/server.js",
+    "dev:server": "nodemon server/server.js",
     "build": "webpack --mode production"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^8.2.2",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
