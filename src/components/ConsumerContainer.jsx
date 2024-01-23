@@ -1,15 +1,33 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
+import VisualizerBtn from './visualizerBtn';
 
 function ConsumerContainer() {
-    return (
-        <div id="container">
-          <div id="buttonContainer">
-            <button id="button">Consumer 1</button>
-            <button id="button">Consumer 2</button>
-            <button id="button">Consumer 3</button>
-          </div>
-        </div>
-      );
+  const [consumers, setConsumers] = useState([]);
+
+  useEffect(() => {
+    const getConsumers = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/kafka/consumers');
+        const data = await response.json();
+        setConsumers(data);
+      } catch (error) {
+        console.log(error + ": error fetching consumers");
+      }
+    };
+
+    getConsumers();
+  }, []);
+
+  return (
+    <div id="container">
+      <div id="buttonContainer">
+      {consumers.map((consumer, index) => (
+        <VisualizerBtn name={consumer} key={index} type='consumer'/>
+      ))}
+      </div>
+    </div>
+  );
 }
 
 export default ConsumerContainer;

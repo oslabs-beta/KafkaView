@@ -7,8 +7,6 @@ import './styles/styles.css';
 const root = createRoot(document.getElementById("root"));
 root.render(
     <BrowserRouter>
-      <App />
+        <App />
     </BrowserRouter>
 );
-{/* <React.StrictMode>
-</React.StrictMode> */}
