@@ -1,0 +1,29 @@
+body {
+  background: linear-gradient(to bottom, #002850, #81dbff);
+  height: 100vh;
+  }
+
+#welcome {
+
+  border: 2px black;
+}
+#container {
+  border: '1px solid #ccc';
+  padding: '10px';
+  border-Radius: '5px';
+  text-align: 'center';
+}
+
+h1 {
+  color: blue;
+}
+
+#button {
+  color: red;
+}
+
+/* #buttonContainer {
+  display: 'flex';
+  justify-Content: 'space-around';
+} */
+
