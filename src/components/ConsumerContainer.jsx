@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Consumer() {
+function ConsumerContainer() {
     return (
         <div id="container">
           <div id="buttonContainer">
@@ -12,4 +12,4 @@ function Consumer() {
       );
 }
 
-export default Consumer;
+export default ConsumerContainer;

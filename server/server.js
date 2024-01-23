@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const path = require('path');
 const app = express();
 const PORT = 3000;
@@ -8,6 +9,7 @@ const cookieParser = require('cookie-parser');
 const kafkaRouter = require('./routers/kafkaRouter');
 app.use(express.static(path.join(__dirname, '../dist')));
 app.use(express.json());
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
