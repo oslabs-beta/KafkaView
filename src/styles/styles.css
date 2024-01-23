@@ -73,7 +73,7 @@ h1 {
 }
 
 #detailsContainer{
-  margin-top: 150px;
+  margin-top: 20px;
   display: flex;
   justify-content: space-around;
 }
@@ -114,7 +114,6 @@ h1 {
   opacity: var(--text-opacity-on-hover);
   background-color: #8c49ff40;
 }
-
 
 #ipSubmission {
   outline: none;
