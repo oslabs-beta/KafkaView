@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Cluster() {
+function ClusterContainer() {
     return (
         <div id="container">
           <div id="buttonContainer">
@@ -13,4 +13,4 @@ function Cluster() {
       );
 }
 
-export default Cluster;
+export default ClusterContainer;
