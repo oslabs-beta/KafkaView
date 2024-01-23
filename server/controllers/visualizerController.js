@@ -4,7 +4,7 @@ const visualizerController = {};
 // gets list of producers
 visualizerController.getProducers = async (req, res, next) => {
   try {
-    res.locals.producers = ['one', 'two', 'three'];
+    res.locals.producers = ['Producer: 1', 'Producer: 2'];
   
   } catch (error) {
     console.log("error: " + error + " in getProducers");
@@ -18,6 +18,7 @@ visualizerController.getProducers = async (req, res, next) => {
 // gets list of consumers
 visualizerController.getConsumers = async (req, res, next) => {
   try {
+    res.locals.consumers = ['Consumer: 1', 'Consumer: 2', 'Consumer: 3', 'Consumer: 4', 'Consumer: 5'];
   
   } catch (error) {
     console.log("error: " + error + " in getConsumers");
@@ -31,7 +32,8 @@ visualizerController.getConsumers = async (req, res, next) => {
 // gets list of brokers
 visualizerController.getBrokers = async (req, res, next) => {
   try {
-  
+    res.locals.brokers = ['Broker: 1', 'Broker: 2', 'Broker: 3'];
+
   } catch (error) {
     console.log("error: " + error + " in getBrokers");
   }

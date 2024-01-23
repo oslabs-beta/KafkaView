@@ -5,7 +5,9 @@ import '../styles/navbar.css';
 function Navbar() {
   const location = useLocation()
 
-  if(location.pathname === `/`) {
+  // checks if user is on Home page
+  // if on Home page, no Navbar is required
+  if (location.pathname === `/`) {
     return null;
   }
 

@@ -14,6 +14,22 @@ router.get(
 );
 
 router.get(
+  '/consumers',
+  visualizerController.getConsumers,
+  (req, res) => {
+    return res.status(200).send(res.locals.consumers)
+  }
+);
+
+router.get(
+  '/brokers',
+  visualizerController.getBrokers,
+  (req, res) => {
+    return res.status(200).send(res.locals.brokers)
+  }
+);
+
+router.get(
   '/demo',
   demoController.initializeConsumer,
   demoController.initializeProducer,

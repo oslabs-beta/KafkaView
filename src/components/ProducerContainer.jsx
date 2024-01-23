@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import ProducerBtn from './ProducerBtn';
+import VisualizerBtn from './visualizerBtn';
 
 function ProducerContainer () {
   const [producers, setProducers] = useState([]);
@@ -23,7 +23,7 @@ function ProducerContainer () {
     <div id="container">
       <div id="buttonContainer">
       {producers.map((producer, index) => (
-        <ProducerBtn name={producer} key={index}/>
+        <VisualizerBtn name={producer} key={index} type='producer'/>
       ))}
       </div>
     </div>

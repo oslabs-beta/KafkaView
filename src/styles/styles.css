@@ -3,6 +3,10 @@ body {
   height: 100vh;
   }
 
+#welcome {
+
+  border: 2px black;
+}
 #container {
   border: '1px solid #ccc';
   padding: '10px';
