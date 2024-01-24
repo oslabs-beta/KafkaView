@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import icon from '../../assets/KafkaViewLogo.png';
 
 function Home() {
   const [ip, setIP] = useState("");
@@ -26,13 +27,14 @@ function Home() {
 
   return (
     <div>
-      <h1>Welcome to KafkaView!</h1>
+      <h1>Welcome to Kafka View!</h1>
       <div id="homeDescription">
+      <img id="icon1" src={icon}/>
         <p>
-          KafkaView is a KafkaJS visualizer and data monitoring tool aimed to
+          Kafka View is a KafkaJS visualizer and data monitoring tool aimed to
           demystify your KafkaJS project. Simply import your project's IP to
           begin monitoring your project's real-time data. Developers can have
-          confidence in their project's upkeep with KafkaView.
+          confidence in their project's upkeep with Kafka View.
         </p>
       </div>
       <div id="homeInput">
