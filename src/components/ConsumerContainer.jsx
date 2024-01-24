@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import VisualizerBtn from './visualizerBtn';
+import '../styles/styles.css';
 
 function ConsumerContainer() {
   const [consumers, setConsumers] = useState([]);
@@ -20,8 +21,8 @@ function ConsumerContainer() {
   }, []);
 
   return (
-    <div id="container">
-      <div id="buttonContainer">
+    <div id="consumerContainer">
+      <div id="consumerButton">
       {consumers.map((consumer, index) => (
         <VisualizerBtn name={consumer} key={index} type='consumer'/>
       ))}

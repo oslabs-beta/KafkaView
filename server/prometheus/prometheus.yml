@@ -1,0 +1,18 @@
+# global:
+#   scrape_interval: 5s
+#   evaluation_interval: 5s
+# rule_files:
+#   scrape_configs:
+#     - job_name: 'kafka_cluster'
+#       scrape_interval: 5s
+#       static_configs:
+#         - targets:
+#             - kafka-cluster: 7070
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+scrape_configs:
+  - job_name: 'kafka'
+    static_configs:
+      - targets:
+          - localhost:7070

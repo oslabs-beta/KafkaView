@@ -26,8 +26,8 @@ function Home() {
 
   return (
     <div>
+      <h1>Welcome to KafkaView!</h1>
       <div id="homeDescription">
-        <h1>Welcome to KafkaView!</h1>
         <p>
           KafkaView is a KafkaJS visualizer and data monitoring tool aimed to
           demystify your KafkaJS project. Simply import your project's IP to
@@ -35,10 +35,9 @@ function Home() {
           confidence in their project's upkeep with KafkaView.
         </p>
       </div>
-
       <div id="homeInput">
         <h2>Enter your cluster IP here:</h2>
-        <form onSubmit={routeChange}>
+        <form id="ipSubmission" onSubmit={routeChange}>
           <input
             placeholder="Enter Valid IP"
             onChange={(el) => setIP(el.target.value)}

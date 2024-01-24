@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import VisualizerBtn from './visualizerBtn';
+import '../styles/styles.css';
 
 function ProducerContainer () {
   const [producers, setProducers] = useState([]);
@@ -20,8 +21,8 @@ function ProducerContainer () {
   }, []);
 
   return (
-    <div id="container">
-      <div id="buttonContainer">
+    <div id="producerContainer">
+      <div id="producerButton">
       {producers.map((producer, index) => (
         <VisualizerBtn name={producer} key={index} type='producer'/>
       ))}
