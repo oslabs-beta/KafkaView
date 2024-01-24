@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import VisualizerBtn from './visualizerBtn';
+import '../styles/styles.css';
 
 function ClusterContainer() {
   const [brokers, setBrokers] = useState([]);
@@ -20,8 +21,8 @@ function ClusterContainer() {
   }, []);
 
   return (
-    <div id="container">
-      <div id="buttonContainer">
+    <div id="clusterContainer">
+      <div id="clusterButton">
       {brokers.map((broker, index) => (
         <VisualizerBtn name={broker} key={index} type='cluster'/>
       ))}
