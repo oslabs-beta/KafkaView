@@ -6,37 +6,22 @@ import "../styles/navbar.css";
 
 function Navbar() {
   const location = useLocation();
-  const [producers, setProducers] = useState([]);
-  const [consumers, setConsumers] = useState([]);
-
-  
+  const [visualizerMetrics, setVisualizerMetrics] = useState([]);
+  const [destination, setDestination] = useState('http://localhost:3000');
+  const [ip, setIp] = useState();
 
   useEffect(() => {
-    const getProducers = async () => {
+    const getVisualizerMetrics = async () => {
       try {
-        const response = await fetch("http://localhost:3000/kafka/producers");
+        const response = await fetch("http://localhost:3000/demo/visualizerMetrics");
         const data = await response.json();
-        setProducers(data);
+        setVisualizerMetrics(data);
       } catch (error) {
         console.log(error + ": error fetching producers");
       }
     };
 
-    getProducers();
-  }, []);
-
-  useEffect(() => {
-    const getConsumers = async () => {
-      try {
-        const response = await fetch('http://localhost:3000/kafka/consumers');
-        const data = await response.json();
-        setConsumers(data);
-      } catch (error) {
-        console.log(error + ": error fetching consumers");
-      }
-    };
-
-    getConsumers();
+    getVisualizerMetrics();
   }, []);
 
   // checks if user is on Home page
@@ -62,15 +47,20 @@ function Navbar() {
             Visualizer
           </Link>
         </li>
-        <li>
-          <Link id="navbarLink" to="/cluster">
-            Cluster Metrics
-          </Link>
+        <li id="dropdown">
+          <a id="navbarLink">Cluster Metrics</a>
+          <div id="dropdown-content1">
+            {visualizerMetrics.brokers.map((name) => (
+              <Link id="navbarLink" to="/cluster" key={name} state={{id: name}}>
+                {name}
+              </Link>
+            ))}
+          </div>
         </li>
         <li id="dropdown">
           <a id="navbarLink">Producer Metrics</a>
           <div id="dropdown-content1">
-            {producers.map((name) => (
+            {visualizerMetrics.producers.map((name) => (
               <Link id="navbarLink" to="/producer" key={name} state={{id: name}}>
                 {name}
               </Link>
@@ -80,7 +70,7 @@ function Navbar() {
         <li id="dropdown">
           <a id="navbarLink">Consumer Metrics</a>
           <div id="dropdown-content2">
-          {consumers.map((name) => (
+          {visualizerMetrics.consumers.map((name) => (
               <Link id="navbarLink" to="/consumer" key={name} state={{id: name}}>
                 {name}
               </Link>
