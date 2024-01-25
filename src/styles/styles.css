@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@300&family=Rubik+Doodle+Shadow&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@300&family=Rubik+Doodle+Shadow&display=swap");
 
 :root {
   --primary-color: #a3acce;
@@ -13,7 +13,7 @@
 }
 
 body {
-  font-family: 'Josefin Slab', serif;
+  font-family: "Josefin Slab", serif;
   box-sizing: border-box;
   background: linear-gradient(132deg, #fffafa, #a26dff, #282d59);
   background-size: 400% 400%;
@@ -22,32 +22,38 @@ body {
   height: 100vh;
   width: 100%;
   overflow: hidden;
-  padding:0;
-  margin:0px;
+  padding: 0;
+  margin: 0px;
   font-size: 3vh;
+}
+
+.App {
+  overflow-y: auto;
+  max-height: 100vh;
 }
 
 h1 {
   display: flex;
   justify-content: center;
-  font-family: 'Rubik Doodle Shadow', system-ui;
+  font-family: "Rubik Doodle Shadow", system-ui;
   font-size: 6vh;
 }
 
 #icon1 {
-  height: 20rem;
-  width: 20rem;
+  height: 40vh;
+  width: 40vh;
 }
 
-#homeDescription{
+
+#homeDescription {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px; 
-  border-radius: 10px; 
-  width: fit-content; 
-  max-width: 80%; 
+  padding: 20px;
+  border-radius: 10px;
+  width: fit-content;
+  max-width: 80%;
   margin: 0 auto;
 }
 
@@ -57,12 +63,13 @@ h1 {
   justify-content: center;
   align-items: center;
   background-color: var(--background-color-medium);
-  padding: 20px; 
-  border: 1px solid var(--primary-color); 
-  border-radius: 10px; 
-  width: fit-content; 
-  max-width: 80%; 
+  padding: 20px;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  width: fit-content;
+  max-width: 80%;
   margin: 0 auto;
+  margin-bottom: 5vh;
 }
 
 #homeInput:hover {
@@ -71,17 +78,16 @@ h1 {
   color: white;
 }
 
-#containersContainer{
+#containersContainer {
   display: flex;
   justify-content: space-around;
   flex-direction: row;
 }
 
-#detailsContainer{
+#detailsContainer {
   margin-top: 20px;
   display: flex;
   justify-content: space-around;
-
 }
 
 #consumerContainer,
@@ -95,7 +101,7 @@ h1 {
 }
 
 #visualizedButton {
-  font-family: 'Josefin Slab', serif;
+  font-family: "Josefin Slab", serif;
   cursor: pointer;
   color: #dbfcff;
   background-color: #8c49ffad;
@@ -105,9 +111,11 @@ h1 {
   padding: 8px;
 }
 
-#homeBtn{
+#homeBtn {
   cursor: pointer;
   color: #dbfcff;
+  height: 6vh;
+  width: 15vh;
   background-color: #8c49ffad;
   margin-bottom: 10px;
   border-radius: 8px;
@@ -115,14 +123,50 @@ h1 {
   padding: 8px;
 }
 
-#homeBtn:hover{
+#homeBtn:hover {
+  border: .2vh solid white;
   text-decoration: none;
   opacity: var(--text-opacity-on-hover);
   background-color: #8c49ff40;
 }
 
+#ipInput {
+  padding: 1.5vh;
+  font-family: "Josefin Slab", serif;
+  font-size: 2.5vh;
+  border: 1px solid #ccc;
+  border-radius: 1vh;
+  margin-right: 2vh;
+}
+
 #ipSubmission {
   outline: none;
+}
+
+#metricsOverallDiv {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+#chartDiv {
+  display: block;
+  width: 120vh;
+  height: 50vh;
+  border: 1vh solid black;
+  border-radius: 1vh;
+  background-color: rgb(234, 234, 234);
+ 
+}
+
+#metricTitle {
+  display: flex;
+  justify-content: left;
+  margin-bottom: 1vh;
+}
+#metricParagraph {
+  max-width: 120vh;
 }
 
 @keyframes Gradient {
@@ -146,4 +190,3 @@ h1 {
     opacity: 0;
   }
 }
-

@@ -1,4 +1,3 @@
-const { Kafka } = require("kafkajs");
 const visualizerController = {};
 
 // gets list of producers
