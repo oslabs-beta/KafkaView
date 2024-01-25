@@ -26,7 +26,7 @@ function Home() {
   };
 
   return (
-    <div>
+    <div id='homeDiv'>
       <h1>Welcome to Kafka View!</h1>
       <div id="homeDescription">
       <img id="icon1" src={icon}/>
@@ -41,6 +41,7 @@ function Home() {
         <h2>Enter your cluster IP here:</h2>
         <form id="ipSubmission" onSubmit={routeChange}>
           <input
+            id='ipInput'
             placeholder="Enter Valid IP"
             onChange={(el) => setIP(el.target.value)}
             value={ip}
