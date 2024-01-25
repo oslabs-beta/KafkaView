@@ -9,9 +9,9 @@ function ConsumerContainer() {
   useEffect(() => {
     const getConsumers = async () => {
       try {
-        const response = await fetch('http://localhost:3000/kafka/consumers');
+        const response = await fetch('http://localhost:3000/demo/visualizerMetrics');
         const data = await response.json();
-        setConsumers(data);
+        setConsumers(data.consumers);
       } catch (error) {
         console.log(error + ": error fetching consumers");
       }

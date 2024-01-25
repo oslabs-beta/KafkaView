@@ -9,9 +9,9 @@ function ClusterContainer() {
   useEffect(() => {
     const getBrokers = async () => {
       try {
-        const response = await fetch('http://localhost:3000/kafka/brokers');
+        const response = await fetch('http://localhost:3000/demo/visualizerMetrics');
         const data = await response.json();
-        setBrokers(data);
+        setBrokers(data.brokers);
       } catch (error) {
         console.log(error + ": error fetching brokers");
       }

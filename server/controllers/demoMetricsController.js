@@ -12,14 +12,25 @@ let recordsConsumedRateNum;
 let recordsLag;
 let bytesConsumedRate;
 
+// broker variables
+const activeControllerCount = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2];
+let activeControllerCountNum;
+let diskUsage = 20;
+let underRepPartitions = 0;
+let randomChance1;
+let randomChance2;
+
 // gets list of producers
-demoMetricsController.getProducers = async (req, res, next) => {
+demoMetricsController.getVisualizerMetrics = async (req, res, next) => {
   try {
-    res.locals.producers = ['Producer: 1', 'Producer: 2'];
+    res.locals.visualizerMetrics = {
+      producers: ['Producer: 1', 'Producer: 2'],
+      consumers: ['Consumer: 1', 'Consumer: 2', 'Consumer: 3', 'Consumer: 4', 'Consumer: 5'],
+      brokers: ['Broker: 1', 'Broker: 2', 'Broker: 3'],
+    }
   } catch (error) {
-    console.log("error: " + error + " in getProducers");
+    console.log("error: " + error + " in getVisualizerMetrics demo");
   }
-  console.log("this is the end of getProducers in demoMetricsController");
   next();
 };
 
@@ -42,20 +53,8 @@ demoMetricsController.getProducerMetrics = async (req, res, next) => {
       requestLatencyAvg: requestLatencyAvg,
     }
   } catch (error) {
-    console.log("error: " + error + " in getProducerMetrics");
+    console.log("error: " + error + " in getProducerMetrics demo");
   }
-  next();
-};
-
-
-// gets list of consumers
-demoMetricsController.getConsumers = async (req, res, next) => {
-  try {
-    res.locals.consumers = ['Consumer: 1', 'Consumer: 2', 'Consumer: 3', 'Consumer: 4', 'Consumer: 5'];
-  } catch (error) {
-    console.log("error: " + error + " in getConsumers");
-  }
-  console.log("this is the end of getConsumers in demoMetricsController");
   next();
 };
 
@@ -77,24 +76,38 @@ demoMetricsController.getConsumerMetrics = async (req, res, next) => {
       recordsConsumedRate: recordsConsumedRateNum,
       bytesConsumedRate: bytesConsumedRate,
     }
-    res.locals.consumers = ['Consumer: 1', 'Consumer: 2', 'Consumer: 3', 'Consumer: 4', 'Consumer: 5'];
+
   } catch (error) {
-    console.log("error: " + error + " in getConsumers");
+    console.log("error: " + error + " in getConsumerMetrics demo");
   }
   next();
 };
 
-
-
-// gets list of brokers
-demoMetricsController.getBrokers = async (req, res, next) => {
+// gets cluster metrics
+demoMetricsController.getClusterMetrics = async (req, res, next) => {
   try {
-    res.locals.brokers = ['Broker: 1', 'Broker: 2', 'Broker: 3'];
+    activeControllerCountNum = activeControllerCount[Math.floor(Math.random() * 15)];
+
+    randomChance1 = Math.floor(Math.random() * 3);
+    randomChance2 = Math.floor(Math.random() * 25);
+
+    if (randomChance1 === 2) diskUsage = diskUsage + (Math.random() / 10);
+    
+    if (randomChance2 === 10) underRepPartitions += Math.floor(Math.random() * 5);
+    else underRepPartitions = 0;
+    
+    res.locals.clusterMetrics = {
+      consumerList: ['Consumer: 1', 'Consumer: 2', 'Consumer: 3', 'Consumer: 4', 'Consumer: 5'],
+      activeControllerCount: activeControllerCountNum,
+      underRepPartitions: underRepPartitions,
+      diskUsage: diskUsage,
+    }
+
   } catch (error) {
-    console.log("error: " + error + " in getBrokers");
+    console.log("error: " + error + " in getClusterMetrics demo");
   }
-  console.log("this is the end of getBrokers in demoMetricsController");
   next();
 };
+
 
 module.exports = demoMetricsController;

@@ -1,9 +1,14 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import ClusterContainer from "../ClusterContainer";
 import ProducerContainer from "../ProducerContainer";
 import ConsumerContainer from "../ConsumerContainer";
 
 function Visualizer() {
+  // location.state.id sent from navigate hook
+  const location = useLocation();
+
+
   return (
     <div>
       <h1>Kafka Ecosystem</h1>

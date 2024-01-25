@@ -9,9 +9,9 @@ function ProducerContainer () {
   useEffect(() => {
     const getProducers = async () => {
       try {
-        const response = await fetch('http://localhost:3000/kafka/producers');
+        const response = await fetch('http://localhost:3000/demo/visualizerMetrics');
         const data = await response.json();
-        setProducers(data);
+        setProducers(data.producers);
       } catch (error) {
         console.log(error + ": error fetching producers");
       }
