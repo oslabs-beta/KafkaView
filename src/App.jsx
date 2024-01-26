@@ -1,5 +1,5 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Visualizer from "./components/pages/Visualizer";
 import Home from "./components/pages/Home";
@@ -9,9 +9,14 @@ import ConsumerMetrics from "./components/pages/ConsumerMetrics";
 import "./styles/styles.css";
 
 function App() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
-    <div className="App">
+    <div className="App" style={{overflowY: 'auto'}}>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />

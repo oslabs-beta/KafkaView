@@ -44,7 +44,6 @@ h1 {
   width: 40vh;
 }
 
-
 #homeDescription {
   display: flex;
   flex-direction: column;
@@ -99,7 +98,7 @@ h1 {
   display: flex;
 }
 
-#clusterContainer{
+#clusterContainer {
   align-items: center;
   background-color: #1b27354e;
   padding: 10vh;
@@ -121,7 +120,7 @@ h1 {
   font-size: 2.5vh;
 }
 
-#visualizedButton:hover{
+#visualizedButton:hover {
   opacity: 50%;
 }
 
@@ -138,7 +137,7 @@ h1 {
 }
 
 #homeBtn:hover {
-  border: .2vh solid white;
+  border: 0.2vh solid white;
   text-decoration: none;
   opacity: var(--text-opacity-on-hover);
   background-color: #8c49ff40;
@@ -158,10 +157,25 @@ h1 {
 }
 
 #metricsOverallDiv {
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#firstContainer {
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: stretch;
+  justify-content: space-around;
+}
+
+#appDescription {
+  display: flex;
+  justify-content: center;
 }
 
 #chartDiv {
@@ -171,7 +185,6 @@ align-items: center;
   border: 1vh solid black;
   border-radius: 1vh;
   background-color: rgb(234, 234, 234);
- 
 }
 
 #metricTitle {
