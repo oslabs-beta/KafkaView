@@ -5,7 +5,7 @@ import icon from "../assets/KafkaViewLogo.png";
 import "../styles/navbar.css";
 
 function Navbar() {
-  const location = useLocation();
+  const { pathname } = useLocation();
   const [visualizerMetrics, setVisualizerMetrics] = useState([]);
   const [destination, setDestination] = useState('http://localhost:3000');
   const [ip, setIp] = useState();
@@ -24,9 +24,13 @@ function Navbar() {
     getVisualizerMetrics();
   }, []);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   // checks if user is on Home page
   // if on Home page, no Navbar is required
-  if (location.pathname === `/`) {
+  if (pathname === `/`) {
     return null;
   }
 
