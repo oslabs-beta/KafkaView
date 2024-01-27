@@ -44,6 +44,11 @@ h1 {
   width: 40vh;
 }
 
+#appDescription {
+  margin-left: 8vh;
+  margin-right: 3vh;
+}
+
 #homeDescription {
   display: flex;
   flex-direction: column;
