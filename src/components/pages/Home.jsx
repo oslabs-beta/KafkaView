@@ -31,8 +31,8 @@ function Home() {
       <div id="homeDescription">
       <img id="icon1" src={icon}/>
         <p>
-          Kafka View is a KafkaJS visualizer and data monitoring tool aimed to
-          demystify your KafkaJS project. Simply import your project's IP to
+          Kafka View is a Kafka visualizer and data monitoring tool aimed to
+          demystify your Kafka project. Simply import your project's IP to
           begin monitoring your project's real-time data. Developers can have
           confidence in their project's upkeep with Kafka View.
         </p>

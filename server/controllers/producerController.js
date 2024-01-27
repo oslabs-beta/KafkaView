@@ -1,39 +1,36 @@
-const { producer } = require('../models/kafkaBlueprint');
+const producerController = {};
 
-const connectedProducers = {}; //obj to store info on connected producers
-const producerController = {
+// gets responseRate
+producerController.getResponseRate = async (req, res, next) => {
+  try {
+    res.locals.responseRate = 1;
 
-  sendMessage: async (req, res, next) => {
-    try{
-      const messageData = req.body;
-
-      await producer.connect();
-      await producer.send({
-        topic: 'test-topic',
-        messages: [{value: JSON.stringify(messageData)}]
-      });
-      await producer.disconnect();
-
-      //logic for storing info on connected producers
-      const producerInfo = {
-        clientId: producer.clientId,
-        connectedAt: new Date(),
-      };
-      connectedProducers[producer.clientId] = producerInfo;
-
-      console.log('Message sent to Kafka producer', messageData);
-      next();
-    } catch(error) {
-      console.error('Error found at producerController.sendMessage middleware:', error);
-      res.status(500).json({error: 'Internal server Error'});
-    }
-  },
-
-  getProducers: () => {
-    //may need more logic later once we start working with this in practice
-    //what do we do with this info? save to a variable and apply it for monitoring tools
-    return Object.values(connectedProducers);
+  } catch (error) {
+    console.log("error: " + error + " in getResponseRate");
   }
+  next();
 };
 
-module.exports = { producerController }
+// gets requestRate
+producerController.getRequestRate = async (req, res, next) => {
+  try {
+    res.locals.requestRate = 1;
+
+  } catch (error) {
+    console.log("error: " + error + " in getRequestRate");
+  }
+  next();
+};
+
+// gets requestLatencyAvg
+producerController.getRequestLatencyAvg = async (req, res, next) => {
+  try {
+    res.locals.requestLatencyAvg = .2;
+
+  } catch (error) {
+    console.log("error: " + error + " in getRequestLatencyAvg");
+  }
+  next();
+};
+
+module.exports = producerController;

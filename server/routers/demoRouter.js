@@ -3,6 +3,7 @@ const router = express.Router();
 
 //require controllers
 const demoMetricsController = require('../controllers/demoMetricsController');
+const kafkajsController = require('../controllers/kafkajsController');
 
 router.get(
   '/visualizerMetrics',
@@ -33,6 +34,15 @@ router.get(
   demoMetricsController.getClusterMetrics,
   (req, res) => {
     return res.status(200).send(res.locals.clusterMetrics)
+  }
+);
+
+router.get(
+  '/kafkajs',
+  kafkajsController.initializeConsumer,
+  kafkajsController.initializeProducer,
+  (req, res) => {
+    res.send('Hello, Kafka!');
   }
 );
 
