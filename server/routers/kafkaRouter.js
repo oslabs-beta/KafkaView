@@ -1,14 +1,14 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
 //require controllers
-const visualizerController = require("../controllers/visualizerController");
-const producerController = require("../controllers/producerController");
-const consumerController = require("../controllers/consumerController");
-const clusterController = require("../controllers/clusterController");
+const visualizerController = require('../controllers/visualizerController');
+const producerController = require('../controllers/producerController');
+const consumerController = require('../controllers/consumerController');
+const clusterController = require('../controllers/clusterController');
 
 router.get(
-  "/visualizerMetrics",
+  '/visualizerMetrics',
   visualizerController.getProducers,
   visualizerController.getBrokers,
   visualizerController.getConsumers,
@@ -23,24 +23,24 @@ router.get(
 );
 
 router.get(
-  "/producerMetrics",
+  '/producerMetrics',
   visualizerController.getProducers,
   producerController.getResponseRate,
   producerController.getRequestRate,
-  producerController.getRequestLatencyAvg,
+  producerController.getRequestLatency,
   (req, res) => {
     res.locals.producerMetrics = {
       producers: res.locals.producers,
       responseRate: res.locals.responseRate,
       requestRate: res.locals.requestRate,
-      requestLatencyAvg: res.locals.requestLatencyAvg
+      requestLatencyAvg: res.locals.requestLatency,
     };
     return res.status(200).send(res.locals.producerMetrics);
   }
 );
 
 router.get(
-  "/consumerMetrics",
+  '/consumerMetrics',
   visualizerController.getConsumers,
   consumerController.getRecordsLag,
   consumerController.getBytesConsumedRate,
@@ -57,7 +57,7 @@ router.get(
 );
 
 router.get(
-  "/clusterMetrics",
+  '/clusterMetrics',
   visualizerController.getBrokers,
   clusterController.getUnderReplicatedPartitions,
   clusterController.getActiveControllerCount,
@@ -67,7 +67,7 @@ router.get(
       brokers: res.locals.brokers,
       underReplicatedPartitions: res.locals.underReplicatedPartitions,
       activeControllerCount: res.locals.activeControllerCount,
-      diskUsage: res.locals.diskUsage
+      diskUsage: res.locals.diskUsage,
     };
     return res.status(200).send(res.locals.clusterMetrics);
   }

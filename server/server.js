@@ -9,7 +9,6 @@ const cookieParser = require('cookie-parser');
 const kafkaRouter = require('./routers/kafkaRouter');
 const demoRouter = require('./routers/demoRouter');
 
-
 app.use(express.static(path.join(__dirname, '../dist')));
 app.use(express.json());
 app.use(cors());
@@ -20,10 +19,9 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
-// router route handlers 
+// router route handlers
 app.use('/kafka', kafkaRouter);
 app.use('/demo', demoRouter);
-
 
 // 404 error handler
 app.use('*', (req, res) => {
@@ -32,8 +30,16 @@ app.use('*', (req, res) => {
 
 // Global error handler
 app.use((err, req, res, next) => {
-  console.error(err);
-  res.status(500).json({ error: 'Server error detected' });
+  const defaultErr = {
+    log: 'Express error handler caught unknown middleware error: ' + err,
+    status: 500,
+    message: { err: 'An error occurred' },
+  };
+  const errorObj = Object.assign({}, defaultErr, err);
+  console.log(errorObj.log);
+  if (!res.headerSent) {
+    return res.status(errorObj.status).json(errorObj.message);
+  }
 });
 
 app.listen(PORT, () => {
