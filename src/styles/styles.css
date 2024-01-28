@@ -61,6 +61,14 @@ h1 {
   margin: 0 auto;
 }
 
+#homeDemo {
+  margin-bottom: 100vh;
+}
+
+#homeContact {
+  margin-bottom: 100vh;
+}
+
 #homeInput {
   display: flex;
   flex-direction: column;

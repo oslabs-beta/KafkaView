@@ -30,25 +30,25 @@ const lineOptions = {
     y: { ticks: { color: "#black" } },
     x: { ticks: { color: "#black" } },
   },
-  responsive: true,
-  animation: { duration: 50 },
+  tension: .2,
+  animation: { duration: 5 },
   maintainAspectRatio: false,
   elements: {
     point: {
       radius: 0,
     },
-  },
-  legend: {
-    fontColor: "white",
-  },
-  resize: true,
+  }
 };
 
+const response = await fetch('http://localhost:3000/demo/visualizerMetrics');
+const data = await response.json();
+const brokerList = data.brokers;
+
+
 function ClusterMetrics() {
-  // location.state.id sent from navigate hook
-  const location = useLocation();
   const [data, setData] = useState([]);
   let time = 0;
+  const colors = ["black", "purple", "green", "red", "yellow", "blue", "grey", "pink"];
 
   useEffect(() => {
     const interval = setInterval(async () => {
@@ -83,43 +83,37 @@ function ClusterMetrics() {
   // UnderReplicatedPartitions	The number of under-replicated partitions across all topics on the broker. Under-replicated partition metrics are a leading indicator of one or more brokers being unavailable.
   const chartData1 = {
     labels: data.map((section) => section.time),
-    datasets: [
-      {
-        label: location.state.id,
-        data: data.map((section) => section.underRepPartitions),
-        fill: false,
-        backgroundColor: "rgba(1,1,1,1)",
-        borderColor: "rgba(1,1,1,1)",
-      },
-    ],
+    datasets: brokerList.map((broker, i) => ({
+      label: broker,
+      data: data.map((section) => section.underRepPartitions[i]),
+      fill: false,
+      backgroundColor: colors[i % 9],
+      borderColor: colors[i % 9],
+    }))
   };
 
   // ActiveControllerCount	Indicates whether the broker is active and should always be equal to 1 since there is only one broker at the same time that acts as a controller.
   const chartData2 = {
     labels: data.map((section) => section.time),
-    datasets: [
-      {
-        label: location.state.id,
-        data: data.map((section) => section.activeControllerCount),
+    datasets: brokerList.map((broker, i) => ({
+        label: broker,
+        data: data.map((section) => section.activeControllerCount[i]),
         fill: false,
-        backgroundColor: "rgba(1,1,1,1)",
-        borderColor: "rgba(1,1,1,1)",
-      },
-    ],
+        backgroundColor: colors[i % 9],
+        borderColor: colors[i % 9],
+      }))
   };
 
   // Disk usage	The amount of used and available disk space.
   const chartData3 = {
     labels: data.map((section) => section.time),
-    datasets: [
-      {
-        label: location.state.id,
-        data: data.map((section) => section.diskUsage),
+    datasets: brokerList.map((broker, i) => ({
+        label: broker,
+        data: data.map((section) => section.diskUsage[i]),
         fill: false,
-        backgroundColor: "rgba(1,1,1,1)",
-        borderColor: "rgba(1,1,1,1)",
-      },
-    ],
+        backgroundColor: colors[i % 9],
+        borderColor: colors[i % 9],
+      }))
   };
   
   // charts to add:

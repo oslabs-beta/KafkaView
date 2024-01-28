@@ -14,7 +14,7 @@ function Home() {
     el.preventDefault();
 
     // To be added: logic to handle valid ips
-    if (ip.length > 5) navigate(`/visualizer`, { state: { ip: ip } });
+    if (ip.length > 5) navigate(`/visualizer`, { state: { id: ip } });
     else {
       setError(false);
       setErrorMsg('Please enter valid IP');
@@ -22,14 +22,14 @@ function Home() {
   };
 
   const routeChangeDemo = () => {
-    navigate(`/visualizer`, { state: { ip: "demo" } });
+    navigate(`/visualizer`, { state: { id: "demo" } });
   };
 
   return (
     <div id='homeDiv'>
-      <h1>Welcome to Kafka View!</h1>
+      {/* <h1>Welcome to Kafka View!</h1> */}
       <div id="homeDescription">
-      <img id="icon1" src={icon}/>
+      {/* <img id="icon1" src={icon}/> */}
         <p>
           Kafka View is a Kafka visualizer and data monitoring tool aimed to
           demystify your Kafka project. Simply import your project's IP to
@@ -38,7 +38,7 @@ function Home() {
         </p>
       </div>
       <div id="homeInput">
-        <h2>Enter your cluster IP here:</h2>
+        <h2>Enter your Kafka IP:</h2>
         <form id="ipSubmission" onSubmit={routeChange}>
           <input
             id='ipInput'
@@ -56,15 +56,21 @@ function Home() {
         <h1>OR</h1>
         <br></br>
 
-        <h2>Try our interactive Demo!</h2>
+        <h2>Try our interactive Demo:</h2>
         <button id="homeBtn" onClick={routeChangeDemo}>
           Demo
         </button>
       </div>
+      
+      <hr/>
+      <div id='homeDemo'>
+        <h1>Demo</h1>
+      </div>
 
-      {/* to be added
-      <div id='homeDemo'></div>
-      <div id='homeContact'></div> */}
+      <hr/>
+      <div id='homeContact'>
+        <h1>Contact</h1>
+      </div>
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import VisualizerBtn from './visualizerBtn';
 import '../styles/styles.css';
 
-function ProducerContainer () {
+function ProducerContainer() {
   const [producers, setProducers] = useState([]);
 
   useEffect(() => {

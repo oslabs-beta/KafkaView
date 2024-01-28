@@ -14,6 +14,9 @@ clusterController.getUnderReplicatedPartitions = async (req, res, next) => {
 // gets active controller count
 clusterController.getActiveControllerCount = async (req, res, next) => {
   try {
+    //api req to prom
+
+    // some functional
     res.locals.activeControllerCount = 1;
 
   } catch (error) {
