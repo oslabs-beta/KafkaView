@@ -25,15 +25,17 @@ router.get(
 router.get(
   '/producerMetrics',
   visualizerController.getProducers,
-  producerController.getResponseRate,
   producerController.getRequestRate,
   producerController.getRequestLatency,
+  producerController.getFailedProducerRequest,
+  producerController.getTotalMessagesIn,
   (req, res) => {
     res.locals.producerMetrics = {
       producers: res.locals.producers,
-      responseRate: res.locals.responseRate,
       requestRate: res.locals.requestRate,
       requestLatencyAvg: res.locals.requestLatency,
+      FailedProducerRequest: res.locals.failedProducerRequest,
+      TotalMessagesIn: res.locals.totalMessagesIn,
     };
     return res.status(200).send(res.locals.producerMetrics);
   }
@@ -42,15 +44,14 @@ router.get(
 router.get(
   '/consumerMetrics',
   visualizerController.getConsumers,
-  consumerController.getRecordsLag,
-  consumerController.getBytesConsumedRate,
-  consumerController.getRecordsConsumedRate,
+  consumerController.getConsumerRequests,
+  consumerController.getFailedConsumerRequests,
   (req, res) => {
     res.locals.consumerMetrics = {
       consumers: res.locals.consumers,
       recordsLag: res.locals.recordsLag,
-      bytesConsumedRate: res.locals.bytesConsumedRate,
-      recordsConsumedRate: res.locals.recordsConsumedRate,
+      consumerRequests: res.locals.consumerRequests,
+      failedConsumerRequests: res.locals.failedConsumerRequests,
     };
     return res.status(200).send(res.locals.consumerMetrics);
   }
@@ -61,13 +62,11 @@ router.get(
   visualizerController.getBrokers,
   clusterController.getUnderReplicatedPartitions,
   clusterController.getActiveControllerCount,
-  clusterController.getDiskUsage,
   (req, res) => {
     res.locals.clusterMetrics = {
       brokers: res.locals.brokers,
       underReplicatedPartitions: res.locals.underReplicatedPartitions,
       activeControllerCount: res.locals.activeControllerCount,
-      diskUsage: res.locals.diskUsage,
     };
     return res.status(200).send(res.locals.clusterMetrics);
   }

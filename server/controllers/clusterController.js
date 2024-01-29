@@ -38,15 +38,15 @@ clusterController.getActiveControllerCount = async (req, res, next) => {
 };
 
 // gets disk usage
-clusterController.getDiskUsage = async (req, res, next) => {
-  try {
-    res.locals.diskUsage = 50;
-    return next();
-  } catch (error) {
-    return next({
-      message: { err: 'error: ' + error + ' getDiskUsage' },
-    });
-  }
-};
+// clusterController.getDiskUsage = async (req, res, next) => {
+//   try {
+//     res.locals.diskUsage = 50;
+//     return next();
+//   } catch (error) {
+//     return next({
+//       message: { err: 'error: ' + error + ' getDiskUsage' },
+//     });
+//   }
+// };
 
 module.exports = clusterController;
