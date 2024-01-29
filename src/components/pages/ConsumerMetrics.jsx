@@ -30,26 +30,28 @@ const lineOptions = {
     y: { ticks: { color: "#black" } },
     x: { ticks: { color: "#black" } },
   },
-  responsive: true,
-  animation: { duration: 50 },
+  tension: .2,
+  animation: { duration: 5 },
   maintainAspectRatio: false,
   elements: {
     point: {
       radius: 0,
     },
-  },
-  legend: {
-    fontColor: "white",
-  },
-  resize: true,
+  }
 };
 
+const response = await fetch('http://localhost:3000/demo/visualizerMetrics');
+const data = await response.json();
+const consumerList = data.consumers;
+
+
 function ConsumerMetrics() {
-  // location.state.id sent from navigate hook
-  const location = useLocation();
   const [data, setData] = useState([]);
   const [recordsLagMax, setRecordsLagMax] = useState(0);
+  const [recordsLagMaxName, setRecordsLagMaxName] = useState('');
   let time = 0;
+  const colors = ["black", "purple", "green", "red", "yellow", "blue", "grey", "pink"];
+
 
   useEffect(() => {
     const interval = setInterval(async () => {
@@ -62,9 +64,13 @@ function ConsumerMetrics() {
           console.log(data);
           time++;
           data.time = time;
-          if (data.recordsLag > recordsLagMax) {
-            setRecordsLagMax(data.recordsLag)
+          for (let i = 0; i < data.recordsLag.length; i++) {
+            if (data.recordsLag[i] > recordsLagMax) {
+              setRecordsLagMax(data.recordsLag[i].toFixed(4));
+              setRecordsLagMaxName(consumerList[i]);
+            }
           }
+         
 
           setData((current) => {
             if (current.length < 6) return [...current, data];
@@ -87,43 +93,36 @@ function ConsumerMetrics() {
   //  records-lag	The number of messages consumer is behind the producer on this partition.
   const chartData1 = {
     labels: data.map((section) => section.time),
-    datasets: [
-      {
-        label: location.state.id,
-        data: data.map((section) => section.recordsLag),
-        fill: false,
-        backgroundColor: "rgba(1,1,1,1)",
-        borderColor: "rgba(1,1,1,1)",
-      },
-    ],
+    datasets: consumerList.map((consumer, i) => ({
+      label: consumer,
+      data: data.map((section) => section.recordsLag[i]),
+      fill: false,
+      backgroundColor: colors[i % 9],
+      borderColor: colors[i % 9],
+    }))
   };
 
   //  records-consumed-rate	An average number of records consumed per second for a specific topic or across all topics.
   const chartData2 = {
     labels: data.map((section) => section.time),
-    datasets: [
-      {
-        label: location.state.id,
-        data: data.map((section) => section.recordsConsumedRate),
-        fill: false,
-        backgroundColor: "rgba(1,1,1,1)",
-        borderColor: "rgba(1,1,1,1)",
-      },
-    ],
+    datasets: consumerList.map((consumer, i) => ({
+      label: consumer,
+      data: data.map((section) => section.recordsConsumedRate[i]),
+      fill: false,
+      backgroundColor: colors[i % 9],
+      borderColor: colors[i % 9],
+    }))
   };
-
   //  bytes-consumed-rate	Average bytes consumed per second for each consumer for a specific topic or across all topics.
   const chartData3 = {
     labels: data.map((section) => section.time),
-    datasets: [
-      {
-        label: location.state.id,
-        data: data.map((section) => section.bytesConsumedRate),
-        fill: false,
-        backgroundColor: "rgba(1,1,1,1)",
-        borderColor: "rgba(1,1,1,1)",
-      },
-    ],
+    datasets: consumerList.map((consumer, i) => ({
+      label: consumer,
+      data: data.map((section) => section.bytesConsumedRate[i]),
+      fill: false,
+      backgroundColor: colors[i % 9],
+      borderColor: colors[i % 9],
+    }))
   };
 
   // pull unique charts from location.state.id
@@ -138,7 +137,7 @@ function ConsumerMetrics() {
         <div id="chartDiv">
           <Line data={chartData1} options={lineOptions} />
         </div>
-        <h2>Records Lag Max: {recordsLagMax}</h2>
+        <h2>Records Lag Max: {recordsLagMax} from {recordsLagMaxName}</h2>
         <p id="metricParagraph">
         Number of messages consumer is behind producer on this partition. Records lag is the calculated difference between a consumer's current
           log offset and a producer's current log offset. Records lag max is the

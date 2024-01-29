@@ -30,26 +30,26 @@ const lineOptions = {
     y: { ticks: { color: "#black" } },
     x: { ticks: { color: "#black" } },
   },
-  responsive: true,
-  animation: { duration: 50 },
+  tension: .2,
+  animation: { duration: 5 },
   maintainAspectRatio: false,
   elements: {
     point: {
       radius: 0,
     },
-  },
-  legend: {
-    fontColor: "white",
-  },
-  resize: true,
+  }
 };
 
+const response = await fetch('http://localhost:3000/demo/visualizerMetrics');
+const data = await response.json();
+const producerList = data.producers;
+
+
 function ProducerMetrics() {
-  // location.state.id sent from navigate hook
-  const location = useLocation();
   const [data, setData] = useState([]);
   let time = 0;
-  
+  const colors = ["black", "purple", "green", "red", "yellow", "blue", "grey", "pink"];
+
   useEffect(() => {
     const interval = setInterval(async () => {
 
@@ -82,46 +82,40 @@ function ProducerMetrics() {
 
   }, []);
 
-  // response-rate	An average number of responses received per producer.
-  const chartData1 = {
-    labels: data.map((section) => section.time),
-    datasets: [
-      {
-        label: location.state.id,
-        data: data.map((section) => section.responseRate),
+    // response-rate	An average number of responses received per producer.
+    const chartData1 = {
+      labels: data.map((section) => section.time),
+      datasets: producerList.map((producer, i) => ({
+        label: producer,
+        data: data.map((section) => section.responseRate[i]),
         fill: false,
-        backgroundColor: "rgba(1,1,1,1)",
-        borderColor: "rgba(1,1,1,1)",
-      },
-    ],
-  };
+        backgroundColor: colors[i % 9],
+        borderColor: colors[i % 9],
+      }))
+    };
 
   // request-rate	An average number of responses sent per producer.
   const chartData2 = {
     labels: data.map((section) => section.time),
-    datasets: [
-      {
-        label: location.state.id,
-        data: data.map((section) => section.requestRate),
+    datasets: producerList.map((producer, i) => ({
+        label: producer,
+        data: data.map((section) => section.requestRate[i]),
         fill: false,
-        backgroundColor: "rgba(1,1,1,1)",
-        borderColor: "rgba(1,1,1,1)",
-      },
-    ],
+        backgroundColor: colors[i % 9],
+        borderColor: colors[i % 9],
+      }))
   };
 
   // request-latency-avg	Average request latency in milliseconds.
   const chartData3 = {
     labels: data.map((section) => section.time),
-    datasets: [
-      {
-        label: location.state.id,
-        data: data.map((section) => section.requestLatencyAvg),
-        fill: false,
-        backgroundColor: "rgba(1,1,1,1)",
-        borderColor: "rgba(1,1,1,1)",
-      },
-    ],
+    datasets: producerList.map((producer, i) => ({
+      label: producer,
+      data: data.map((section) => section.requestLatencyAvg[i]),
+      fill: false,
+      backgroundColor: colors[i % 9],
+      borderColor: colors[i % 9],
+    }))
   };
 
   // pull unique charts from location.state.id
