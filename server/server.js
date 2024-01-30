@@ -31,12 +31,12 @@ app.use('*', (req, res) => {
 // Global error handler
 app.use((err, req, res, next) => {
   const defaultErr = {
-    log: 'Express error handler caught unknown middleware error: ' + err,
+    log: 'Express error handler caught unknown middleware error',
     status: 500,
     message: { err: 'An error occurred' },
   };
   const errorObj = Object.assign({}, defaultErr, err);
-  console.log(errorObj.log);
+  console.log(errorObj.message.err);
   if (!res.headerSent) {
     return res.status(errorObj.status).json(errorObj.message);
   }

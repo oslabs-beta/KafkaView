@@ -72,4 +72,10 @@ router.get(
   }
 );
 
+// res.locals.clusterMetrics = {
+//   activeControllerCount: [],
+//   underRepPartitions: [],
+//   diskUsage: [],
+// };
+
 module.exports = router;

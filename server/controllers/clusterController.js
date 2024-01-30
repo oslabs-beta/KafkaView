@@ -8,9 +8,9 @@ clusterController.getUnderReplicatedPartitions = async (req, res, next) => {
       `http://${address}/api/v1/query?query=kafka_server_replicamanager_underreplicatedpartitions`
     );
     underReplicatedPartitions = await underReplicatedPartitions.json();
-
-    res.locals.underReplicatedPartitions =
-      underReplicatedPartitions.data.result[0].value[1];
+    res.locals.underReplicatedPartitions = [
+      underReplicatedPartitions.data.result[0].value[1],
+    ];
     return next();
   } catch (error) {
     return next({
@@ -26,9 +26,9 @@ clusterController.getActiveControllerCount = async (req, res, next) => {
       `http://${address}/api/v1/query?query=kafka_controller_kafkacontroller_activecontrollercount`
     );
     activeControllerCount = await activeControllerCount.json();
-
-    res.locals.activeControllerCount =
-      activeControllerCount.data.result[0].value[1];
+    res.locals.activeControllerCount = [
+      activeControllerCount.data.result[0].value[1],
+    ];
     return next();
   } catch (error) {
     return next({

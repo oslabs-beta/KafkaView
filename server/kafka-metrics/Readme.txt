@@ -8,7 +8,6 @@ To set up this kafka broker to run on your machine:
     - This builds a kafka image with the required javaagent.jar and kafka.yml files
 
 2. Set up the docker compose container with kafka and zookeeper
-    - navigate to the kafka folder
     - in the terminal type: docker compose up
 
     - This builds and starts the kafka cluster

@@ -8,8 +8,18 @@ consumerController.getConsumerRequests = async (req, res, next) => {
       `http://${address}/api/v1/query?query=rate(kafka_server_brokertopicmetrics_totalfetchrequests_total[1m])`
     );
     consumerRequests = await consumerRequests.json();
-    res.locals.consumerRequests = consumerRequests.data.result[0].value[1];
-
+    res.locals.consumerRequests = [
+      {
+        topic: 'consumerRequests',
+        value: consumerRequests.data.result[0].value[1],
+      },
+    ];
+    for (let i = 2; i < consumerRequests.data.result.length; i++) {
+      const consumerRequests = {};
+      consumerRequests.topic = consumerRequests.data.result[i].metric.topic;
+      consumerRequests.value = consumerRequests.data.result[i].value[1];
+      res.locals.consumerRequests.push(consumerRequests);
+    }
     return next();
   } catch (error) {
     return next({
@@ -25,8 +35,11 @@ consumerController.getFailedConsumerRequests = async (req, res, next) => {
       `http://${address}/api/v1/query?query=rate(kafka_server_brokertopicmetrics_failedfetchrequests_total[1m])`
     );
     failedConsumerRequests = await failedConsumerRequests.json();
-    res.locals.failedConsumerRequests =
-      failedConsumerRequests.data.result[0].value[1];
+    console.log(`~~~~~~~~~~~~~~~~1`, failedConsumerRequests.data.result);
+
+    res.locals.failedConsumerRequests = [
+      failedConsumerRequests.data.result[0].value[1],
+    ];
 
     return next();
   } catch (error) {
