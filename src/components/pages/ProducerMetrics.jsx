@@ -41,20 +41,11 @@ const lineOptions = {
   }
 };
 
-
-
-
-
-
 function ProducerMetrics() {
   const [data, setData] = useState([]);
   let time = 0;
   const colors = ["black", "purple", "green", "red", "yellow", "blue", "grey", "pink"];
-  const ip = Cookies.get('promIP');
   const navigate = useNavigate();
-
- 
-  
   
   // const response = await fetch('http://localhost:3000/kafka/getTopics');
   // const topicList = await response.json();
