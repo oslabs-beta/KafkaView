@@ -2,36 +2,28 @@ const express = require('express');
 const router = express.Router();
 
 //require controllers
-const visualizerController = require('../controllers/visualizerController');
 const producerController = require('../controllers/producerController');
 const consumerController = require('../controllers/consumerController');
 const clusterController = require('../controllers/clusterController');
+const topicsController = require('../controllers/topicsController');
+const validController = require('../controllers/validController');
 
-router.get(
-  '/visualizerMetrics',
-  visualizerController.getProducers,
-  visualizerController.getBrokers,
-  visualizerController.getConsumers,
-  (req, res) => {
-    res.locals.visualizerMetrics = {
-      producers: res.locals.producers,
-      consumers: res.locals.consumers,
-      brokers: res.locals.brokers,
-    };
-    return res.status(200).send(res.locals.visualizerMetrics);
-  }
-);
+router.post('/isValid', validController.isValid, (req, res) => {
+  res.status(200).send('true');
+});
+
+router.get('/getTopics', topicsController.getTopics, (req, res) => {
+  res.status(200).send(res.locals.kafkaTopics);
+});
 
 router.get(
   '/producerMetrics',
-  visualizerController.getProducers,
   producerController.getRequestRate,
   producerController.getRequestLatency,
   producerController.getFailedProducerRequest,
   producerController.getTotalMessagesIn,
   (req, res) => {
     res.locals.producerMetrics = {
-      producers: res.locals.producers,
       requestRate: res.locals.requestRate,
       requestLatencyAvg: res.locals.requestLatency,
       FailedProducerRequest: res.locals.failedProducerRequest,
@@ -43,12 +35,10 @@ router.get(
 
 router.get(
   '/consumerMetrics',
-  visualizerController.getConsumers,
   consumerController.getConsumerRequests,
   consumerController.getFailedConsumerRequests,
   (req, res) => {
     res.locals.consumerMetrics = {
-      consumers: res.locals.consumers,
       recordsLag: res.locals.recordsLag,
       consumerRequests: res.locals.consumerRequests,
       failedConsumerRequests: res.locals.failedConsumerRequests,
@@ -59,12 +49,10 @@ router.get(
 
 router.get(
   '/clusterMetrics',
-  visualizerController.getBrokers,
   clusterController.getUnderReplicatedPartitions,
   clusterController.getActiveControllerCount,
   (req, res) => {
     res.locals.clusterMetrics = {
-      brokers: res.locals.brokers,
       underReplicatedPartitions: res.locals.underReplicatedPartitions,
       activeControllerCount: res.locals.activeControllerCount,
     };

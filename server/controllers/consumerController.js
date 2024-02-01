@@ -3,12 +3,23 @@ const address = 'localhost:9090';
 
 consumerController.getConsumerRequests = async (req, res, next) => {
   try {
+    const { promIP } = req.cookies;
     //total consumer requests per sec over a 1 minute block
     let consumerRequests = await fetch(
       `http://${address}/api/v1/query?query=rate(kafka_server_brokertopicmetrics_totalfetchrequests_total[1m])`
     );
     consumerRequests = await consumerRequests.json();
-    res.locals.consumerRequests = consumerRequests.data.result[0].value[1];
+    res.locals.consumerRequests = [];
+
+    if (consumerRequests.data.result.length < 1) {
+      res.locals.consumerRequests = ['error'];
+    } else {
+      for (let i = 0; i < consumerRequests.data.result.length; i++) {
+        if (i === 1) continue;
+        const topicLabel = consumerRequests.data.result[i].metric.topic;
+        res.locals.consumerRequests.push(topicLabel);
+      }
+    }
 
     return next();
   } catch (error) {
@@ -20,13 +31,20 @@ consumerController.getConsumerRequests = async (req, res, next) => {
 
 consumerController.getFailedConsumerRequests = async (req, res, next) => {
   try {
+    const { promIP } = req.cookies;
     //total failed consumer requests per sec over a 1 minute block
     let failedConsumerRequests = await fetch(
       `http://${address}/api/v1/query?query=rate(kafka_server_brokertopicmetrics_failedfetchrequests_total[1m])`
     );
     failedConsumerRequests = await failedConsumerRequests.json();
-    res.locals.failedConsumerRequests =
-      failedConsumerRequests.data.result[0].value[1];
+
+    if (failedConsumerRequests.data.result.length < 1) {
+      res.locals.failedConsumerRequests = ['error'];
+    } else {
+      res.locals.failedConsumerRequests = [
+        failedConsumerRequests.data.result[0].value[1],
+      ];
+    }
 
     return next();
   } catch (error) {
@@ -35,18 +53,5 @@ consumerController.getFailedConsumerRequests = async (req, res, next) => {
     });
   }
 };
-
-// gets records consumed rate
-// consumerController.getRecordsConsumedRate = async (req, res, next) => {
-//   try {
-//     res.locals.recordsConsumedRate = 1;
-
-//     return next();
-//   } catch (error) {
-//     return next({
-//       message: { err: 'error: ' + error + ' getRecordsConsumedRate' },
-//     });
-//   }
-// };
 
 module.exports = consumerController;

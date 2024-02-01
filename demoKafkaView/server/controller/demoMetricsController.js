@@ -1,7 +1,7 @@
 const demoMetricsController = {};
 
 // producer variables
-const producerList = ["Producer: 1", "Producer: 2"];
+const producerList = ['Producer: 1', 'Producer: 2'];
 const requestRate = [0, 0, 0, 0, 0, 0, 1, 1, 1, 2, 2, 3];
 let requestRateNum;
 let responseRate;
@@ -9,11 +9,11 @@ let requestLatencyAvg;
 
 // consumer variables
 const consumerList = [
-  "Consumer: 1",
-  "Consumer: 2",
-  "Consumer: 3",
-  "Consumer: 4",
-  "Consumer: 5",
+  'Consumer: 1',
+  'Consumer: 2',
+  'Consumer: 3',
+  'Consumer: 4',
+  'Consumer: 5',
 ];
 const recordsConsumedRate = [0, 0, 0, 0, 1, 1, 2, 2, 3, 5, 6, 7, 8, 9, 10];
 let recordsConsumedRateNum;
@@ -21,7 +21,7 @@ let recordsLag;
 let bytesConsumedRate;
 
 // broker variables
-const brokerList = ["Broker: 1", "Broker: 2", "Broker: 3"];
+const brokerList = ['Broker: 1', 'Broker: 2', 'Broker: 3'];
 const activeControllerCount = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2];
 let activeControllerCountNum;
 let diskUsage = 20;
@@ -30,27 +30,27 @@ let randomChance1;
 let randomChance2;
 
 // gets list of producers
-demoMetricsController.getVisualizerMetrics = async (req, res, next) => {
+demoMetricsController.getVisualizerMetrics = (req, res, next) => {
   try {
     res.locals.visualizerMetrics = {
-      producers: ["Producer: 1", "Producer: 2"],
+      producers: ['Producer: 1', 'Producer: 2'],
       consumers: [
-        "Consumer: 1",
-        "Consumer: 2",
-        "Consumer: 3",
-        "Consumer: 4",
-        "Consumer: 5",
+        'Consumer: 1',
+        'Consumer: 2',
+        'Consumer: 3',
+        'Consumer: 4',
+        'Consumer: 5',
       ],
-      brokers: ["Broker: 1", "Broker: 2", "Broker: 3"],
+      brokers: ['Broker: 1', 'Broker: 2', 'Broker: 3'],
     };
   } catch (error) {
-    console.log("error: " + error + " in getVisualizerMetrics demo");
+    console.log('error: ' + error + ' in getVisualizerMetrics demo');
   }
-  next();
+  return next();
 };
 
 // gets producer metrics
-demoMetricsController.getProducerMetrics = async (req, res, next) => {
+demoMetricsController.getProducerMetrics = (req, res, next) => {
   res.locals.producerMetrics = {
     responseRate: [],
     requestLatencyAvg: [],
@@ -75,11 +75,11 @@ demoMetricsController.getProducerMetrics = async (req, res, next) => {
     res.locals.producerMetrics.requestLatencyAvg.push(requestLatencyAvg);
   }
 
-  next();
+  return next();
 };
 
 // gets consumer metrics
-demoMetricsController.getConsumerMetrics = async (req, res, next) => {
+demoMetricsController.getConsumerMetrics = (req, res, next) => {
   res.locals.consumerMetrics = {
     recordsLag: [],
     recordsConsumedRate: [],
@@ -105,11 +105,11 @@ demoMetricsController.getConsumerMetrics = async (req, res, next) => {
     res.locals.consumerMetrics.bytesConsumedRate.push(bytesConsumedRate);
   }
 
-  next();
+  return next();
 };
 
 // gets cluster metrics
-demoMetricsController.getClusterMetrics = async (req, res, next) => {
+demoMetricsController.getClusterMetrics = (req, res, next) => {
   res.locals.clusterMetrics = {
     activeControllerCount: [],
     underRepPartitions: [],
@@ -139,7 +139,7 @@ demoMetricsController.getClusterMetrics = async (req, res, next) => {
     res.locals.clusterMetrics.diskUsage.push(diskUsage);
   }
 
-  next();
+  return next();
 };
 
 module.exports = demoMetricsController;
