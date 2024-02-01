@@ -1,0 +1,232 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@300&family=Rubik+Doodle+Shadow&display=swap");
+
+:root {
+  --primary-color: #a3acce;
+  --background-color-light: #1b2735;
+  --background-color-medium: #1419207a;
+  --background-color-dark: #0b0c0f8d;
+  --text-opacity: 70%;
+  --text-opacity-on-hover: 100%;
+  --img-opacity: 40%;
+  --img-opacity-on-hover: 50%;
+  --max-width: 1400px;
+}
+
+body {
+  font-family: "Josefin Slab", serif;
+  box-sizing: border-box;
+  background: linear-gradient(132deg, #fffafa, #a26dff, #282d59);
+  background-size: 400% 400%;
+  animation: Gradient 10s ease infinite;
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  padding: 0;
+  margin: 0px;
+  font-size: 3vh;
+}
+
+.App {
+  overflow-y: auto;
+  max-height: 100vh;
+}
+
+h1 {
+  display: flex;
+  justify-content: center;
+  font-family: "Rubik Doodle Shadow", system-ui;
+  font-size: 6vh;
+}
+
+#icon1 {
+  height: 40vh;
+  width: 40vh;
+}
+
+#appDescription {
+  margin-left: 8vh;
+  margin-right: 3vh;
+}
+
+#homeDescription {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  width: fit-content;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+#homeDemo {
+  margin-bottom: 100vh;
+}
+
+#homeContact {
+  margin-bottom: 100vh;
+}
+
+#homeInput {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background-color-medium);
+  padding: 20px;
+  border: 1px solid var(--primary-color);
+  border-radius: 10px;
+  width: fit-content;
+  max-width: 80%;
+  margin: 0 auto;
+  margin-bottom: 5vh;
+}
+
+#homeInput:hover {
+  text-decoration: none;
+  opacity: var(--text-opacity-on-hover);
+  color: white;
+}
+
+#containersContainer {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+#detailsContainer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+#consumerContainer,
+#producerContainer {
+  background-color: #1b27354e;
+  padding: 5vh;
+  border-radius: 10px;
+  margin: 10px;
+  display: flex;
+}
+
+#clusterContainer {
+  align-items: center;
+  background-color: #1b27354e;
+  padding: 10vh;
+  border-radius: 10px;
+  margin: 10px;
+  display: flex;
+}
+
+#visualizedButton {
+  font-family: "Josefin Slab", serif;
+  cursor: pointer;
+  color: #dbfcff;
+  background-color: #8c49ffad;
+  margin-bottom: 3vh;
+  border-radius: 8px;
+  border: #002850;
+  padding: 3vh;
+  width: 25vh;
+  font-size: 2.5vh;
+}
+
+#visualizedButton:hover {
+  opacity: 50%;
+}
+
+#homeBtn {
+  cursor: pointer;
+  color: #dbfcff;
+  height: 6vh;
+  width: 15vh;
+  background-color: #8c49ffad;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: #002850;
+  padding: 8px;
+}
+
+#homeBtn:hover {
+  border: 0.2vh solid white;
+  text-decoration: none;
+  opacity: var(--text-opacity-on-hover);
+  background-color: #8c49ff40;
+}
+
+#ipInput {
+  padding: 1.5vh;
+  font-family: "Josefin Slab", serif;
+  font-size: 2.5vh;
+  border: 1px solid #ccc;
+  border-radius: 1vh;
+  margin-right: 2vh;
+}
+
+#ipSubmission {
+  outline: none;
+}
+
+#metricsOverallDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#firstContainer {
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: stretch;
+  justify-content: space-around;
+}
+
+#appDescription {
+  display: flex;
+  justify-content: center;
+}
+
+#chartDiv {
+  display: block;
+  width: 120vh;
+  height: 50vh;
+  border: 1vh solid black;
+  border-radius: 1vh;
+  background-color: rgb(234, 234, 234);
+}
+
+#metricTitle {
+  display: flex;
+  justify-content: left;
+  margin-bottom: 1vh;
+}
+#metricParagraph {
+  max-width: 120vh;
+}
+
+@keyframes Gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes cube {
+  from {
+    transform: scale(0) rotate(0deg) translate(-50%, -50%);
+    opacity: 1;
+  }
+  to {
+    transform: scale(20) rotate(960deg) translate(-50%, -50%);
+    opacity: 0;
+  }
+}

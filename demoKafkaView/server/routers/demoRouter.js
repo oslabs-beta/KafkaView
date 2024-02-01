@@ -2,12 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 //require controllers
-const demoMetricsController = require('../controllers/demoMetricsController');
-// const kafkajsController = require('../controllers/kafkajsController');
-const producerController = require('../controllers/producerController');
-const consumerController = require('../controllers/consumerController');
-const clusterController = require('../controllers/clusterController');
-const demoController = require('../controllers/kafkajsController');
+const demoMetricsController = require('../controller/demoMetricsController');
 
 router.get(
   '/visualizerMetrics',
@@ -38,16 +33,6 @@ router.get(
   demoMetricsController.getClusterMetrics,
   (req, res) => {
     return res.status(200).send(res.locals.clusterMetrics);
-  }
-);
-
-router.get(
-  '/kafkajs',
-  demoController.initializeKafka,
-  producerController.getRequestLatency,
-  producerController.getFailedProducerRequest,
-  (req, res) => {
-    res.status(200).send('Kafka Metrics');
   }
 );
 
