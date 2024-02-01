@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -40,17 +41,31 @@ const lineOptions = {
   }
 };
 
-const response = await fetch('http://localhost:3000/demo/visualizerMetrics');
-const data = await response.json();
-const producerList = data.producers;
+
+
+
 
 
 function ProducerMetrics() {
   const [data, setData] = useState([]);
   let time = 0;
   const colors = ["black", "purple", "green", "red", "yellow", "blue", "grey", "pink"];
+  const ip = Cookies.get('promIP');
+  const navigate = useNavigate();
+
+ 
+  
+  
+  // const response = await fetch('http://localhost:3000/kafka/getTopics');
+  // const topicList = await response.json();
+  const topicList = ['topic1', 'topic2'];
 
   useEffect(() => {
+    //check if promIP cookie exists
+    if (Cookies.get('promIP') === undefined) {
+      navigate('/')
+    }
+
     const interval = setInterval(async () => {
 
       const getProducerMetrics = async () => {
@@ -85,8 +100,8 @@ function ProducerMetrics() {
     // response-rate	An average number of responses received per producer.
     const chartData1 = {
       labels: data.map((section) => section.time),
-      datasets: producerList.map((producer, i) => ({
-        label: producer,
+      datasets: topicList.map((topic, i) => ({
+        label: topic,
         data: data.map((section) => section.responseRate[i]),
         fill: false,
         backgroundColor: colors[i % 9],
@@ -97,8 +112,8 @@ function ProducerMetrics() {
   // request-rate	An average number of responses sent per producer.
   const chartData2 = {
     labels: data.map((section) => section.time),
-    datasets: producerList.map((producer, i) => ({
-        label: producer,
+    datasets: topicList.map((topic, i) => ({
+        label: topic,
         data: data.map((section) => section.requestRate[i]),
         fill: false,
         backgroundColor: colors[i % 9],
@@ -109,8 +124,8 @@ function ProducerMetrics() {
   // request-latency-avg	Average request latency in milliseconds.
   const chartData3 = {
     labels: data.map((section) => section.time),
-    datasets: producerList.map((producer, i) => ({
-      label: producer,
+    datasets: topicList.map((topic, i) => ({
+      label: topic,
       data: data.map((section) => section.requestLatencyAvg[i]),
       fill: false,
       backgroundColor: colors[i % 9],

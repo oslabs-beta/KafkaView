@@ -40,19 +40,9 @@ router.get(
 
 router.get(
   '/kafkajs',
-  kafkajsController.initializeConsumer,
-  kafkajsController.initializeProducer,
+  kafkajsController.initializeKafka,
   (req, res) => {
-    res.redirect('/demo/metrics');
-  }
-);
-
-router.get(
-  '/metrics',
-  clusterController.getUnderReplicatedPartitions,
-  clusterController.getActiveControllerCount,
-  (req, res) => {
-    res.send('Hello, Kafka!');
+    res.redirect('/');
   }
 );
 

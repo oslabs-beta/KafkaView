@@ -1,39 +1,48 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import icon from '../../assets/KafkaViewLogo.png';
+import Cookies from "js-cookie";
+import icon from "../../assets/KafkaViewLogo.png";
 
 function Home() {
   const [ip, setIP] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  const [error, setError] = useState(true); 
+  const [error, setError] = useState(true);
   const navigate = useNavigate();
+  Cookies.remove("promIP");
+  // Cookies.set("promIP", 'test', { expires: 1 });
 
-  const routeChange = (el) => {
-    //prevents default form submissions so page doesnt re-render after setErrorMsg updates
+  const routeChange = async (el) => {
+    // prevents default form submissions so page doesnt re-render after setErrorMsg updates
     el.preventDefault();
 
-    // To be added: logic to handle valid ips
-    if (ip.length > 5) navigate(`/visualizer`, { state: { id: ip } });
-    else {
+    // returns true/false if prometheus ip is running and valid
+    const response = await fetch("http://localhost:3000/kafka/isValid", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ip: ip }),
+    });
+    const data = await response.json();
+   
+    // if user enters valid ip, set cookie to ip address and redirect to metrics
+    if (data) {
+      Cookies.set("promIP", ip, { expires: 1 });
+      navigate(`/cluster`);
+    } else {
       setError(false);
-      setErrorMsg('Please enter valid IP');
+      setErrorMsg("Please enter a valid IP");
     }
   };
 
-  const routeChangeDemo = () => {
-    navigate(`/visualizer`, { state: { id: "demo" } });
-  };
-
   return (
-    <div id='homeDiv'>
+    <div id="homeDiv">
       {/* <h1>Welcome to Kafka View!</h1> */}
       <div id="homeDescription">
-      {/* <img id="icon1" src={icon}/> */}
+        {/* <img id="icon1" src={icon}/> */}
         <p>
           Kafka View is a Kafka visualizer and data monitoring tool aimed to
-          demystify your Kafka project. Simply import your project's IP to
-          begin monitoring your project's real-time data. Developers can have
+          demystify your Kafka project. Simply import your project's IP to begin
+          monitoring your project's real-time data. Developers can have
           confidence in their project's upkeep with Kafka View.
         </p>
       </div>
@@ -41,7 +50,7 @@ function Home() {
         <h2>Enter your Kafka IP:</h2>
         <form id="ipSubmission" onSubmit={routeChange}>
           <input
-            id='ipInput'
+            id="ipInput"
             placeholder="Enter Valid IP"
             onChange={(el) => setIP(el.target.value)}
             value={ip}
@@ -52,24 +61,6 @@ function Home() {
         </form>
         <div id="errorText">{errorMsg}</div>
         {error && <br />}
-        
-        <h1>OR</h1>
-        <br></br>
-
-        <h2>Try our interactive Demo:</h2>
-        <button id="homeBtn" onClick={routeChangeDemo}>
-          Demo
-        </button>
-      </div>
-      
-      <hr/>
-      <div id='homeDemo'>
-        <h1>Demo</h1>
-      </div>
-
-      <hr/>
-      <div id='homeContact'>
-        <h1>Contact</h1>
       </div>
     </div>
   );
