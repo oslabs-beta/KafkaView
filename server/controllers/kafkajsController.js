@@ -1,93 +1,45 @@
 const { Kafka } = require('kafkajs');
+const { Kafka } = require('kafkajs');
 const demoController = {};
 
 demoController.initializeKafka = async (req, res, next) => {
-  const kafka = new Kafka({
+  const kafkaConsumer = new Kafka({
     clientId: 'demo-consumer',
-    brokers: ['localhost:9092', 'localhost:9093'],
+    brokers: ['localhost:9092'],
+  });
+  const kafkaProducer = new Kafka({
+    clientId: 'demo-producer',
+    brokers: ['localhost:9092'],
   });
 
   const { Partitioners } = require('kafkajs');
-  const producer1 = kafka.producer({
+  const producer1 = kafkaProducer.producer({
     createPartitioner: Partitioners.DefaultPartitioner,
     allowAutoTopicCreation: false,
     transactionTimeout: 30000,
     isIdempotent: true,
   });
-
-  const producer2 = kafka.producer({
+  const { Partitioners } = require("kafkajs");
+  const producer = kafka.producer({
     createPartitioner: Partitioners.DefaultPartitioner,
     allowAutoTopicCreation: false,
     transactionTimeout: 30000,
     isIdempotent: true,
   });
-
-  const consumer1 = kafka.consumer({ groupId: 'test-group1' });
-  const consumer2 = kafka.consumer({ groupId: 'test-group2' });
-  const consumer3 = kafka.consumer({ groupId: 'test-group3' });
-  const consumer4 = kafka.consumer({ groupId: 'test-group4' });
-  const consumer5 = kafka.consumer({ groupId: 'test-group5' });
-
-  const consumerArr = [consumer1, consumer2, consumer3, consumer4, consumer5];
-  const producerArr = [producer1, producer2];
-  const topicArr = [
-    'testTopic1',
-    'testTopic2',
-    'testTopic3',
-    'testTopic4',
-    'testTopic5',
-    'testTopic6',
-    'testTopic7',
-    'testTopic8',
-    'testTopic9',
-    'testTopic10',
+  
+  // producer.clientId;
+  // console.log("kafka.clientId at initializeProducerDemo:", kafka.clientId)
+  // producer.clientId = kafka.clientId;
+  // console.log("PRODUCER INFO:", producer);
+  
+  const topics = [
+    "testTopic1",
+    "testTopic2",
+    "testTopic3",
+    "testTopic4",
+    "testTopic5",
   ];
-
-  const consumerSetup = async () => {
-    let randomTopics = [];
-    let randomLength;
-    let randomIndex;
-
-    for (let i = 0; i < consumerArr.length; i++) {
-      randomLength = Math.floor(Math.random() * 10) + 1;
-
-      for (let j = 0; j < randomLength; j++) {
-        randomIndex = Math.floor(Math.random() * 10);
-        if (!randomTopics.includes(topicArr[randomIndex])) {
-          randomTopics.push(topicArr[randomIndex]);
-        }
-      }
-
-      console.log('random topics: ' + randomTopics);
-
-      await consumerArr[i].connect();
-
-      if (i === 5) {
-        await consumerArr[i].subscribe({
-          topics: topicArr,
-          fromBeginning: true,
-        });
-      } else {
-        await consumerArr[i].subscribe({
-          topics: randomTopics,
-          fromBeginning: true,
-        });
-      }
-
-      await consumerArr[i].run({
-        eachMessage: async ({ topic, partition, message }) => {
-          console.log({
-            value: message.value.toString(),
-          });
-        },
-      });
-    }
-  };
-
-  consumerSetup().catch(() => {
-    console.log('error with consumer');
-  });
-
+  
   const getRandomTopic = () => {
     return topicArr[Math.floor(Math.random() * topicArr.length)];
   };
@@ -104,20 +56,61 @@ demoController.initializeKafka = async (req, res, next) => {
       // console.log('producer:', producer)
       // console.log('producer.clientId:', producer.clientId)
     } catch (error) {
-      console.log('error: ' + error + ' in messageSender');
-      await producer1.disconnect();
-      await producer2.disconnect();
+      console.log("error: " + error + " in messageSender");
+      await producer.disconnect();
     }
   };
+  await producer.connect();
+  // //logic for storing info on connected producers 
+ function Producer (producerName) {
+    this.clientId = producerName;
+    this.connectedAt = new Date();
+  };
 
-  await producer1.connect();
-  await producer2.connect();
+  //  3. Event emitter to add producer to connectedProducers
+  //instrumentation event using EventEmitter => on producer request event, console log the clientId
+  const { REQUEST } = producer.events;           
+  const logClientId = producer.on(REQUEST, e => console.log('logClientIdFunction attempting to log e.payload.clientId:', e.payload.clientId)); //"demo-producer"
+  // const saveClientId = producer.on(REQUEST, e => 
+  //   connectedDemoProducers[e.payload.clientId] 
+  //   ? connectedDemoProducers[e.payload.clientId] 
+  //   : connectedDemoProducers[e.payload.clientId]= true);
 
-  const sendInterval = setInterval(messageSender, 1000);
-  sendInterval;
+  const saveProducer = producer.on(REQUEST, e => {
+   //add Producer to set and map if it does not exist in connectedDemoProducers.producerSet
+   let producerName = e.payload.clientId;
+   console.log("producerName:", producerName)   //  works
+   if(!connectedDemoProducers.producerSet.has(producerName)) {
+    connectedDemoProducers.producerSet.add(producerName);
+    // const key = connectedDemoProducers.length;
+    //  invoke Producer function, add length to connectedDemoProducers,
+    //  and add the result to the producers arr/obj
+    const newProducer = new Producer(producerName);
+    console.log("newProducer: ", newProducer)
+    // connectedDemoProducers.length++;
+    // connectedDemoProducers.producers[key] = newProducer;
+    connectedDemoProducers.producerMap.set(producerName, newProducer);
+    console.log('connected demo producers:', connectedDemoProducers);
+    console.log("connectedDemoProducers.producerMap:", connectedDemoProducers.producerMap)
+    console.log("connectedDemoProducers.producerMap.size:", connectedDemoProducers.producerMap.size)
+   }   
+  })
+  //  end
 
-  console.log('this is the end of initializeKafka in demoController');
-  return next();
+  const sendInterval = setInterval(messageSender, 3000);
+  console.log('connected demo producers:', connectedDemoProducers);
+  console.log("this is the end of initializeProducer in demoController");
+
+  next();
+};
+
+// to be added if necessary (no routes to this currently)
+demoController.stopProducer = async (req, res, next) => {
+
+  // await producer.disconnect();
+  console.log("this is the end of stopProducer in demoController");
+  
+  next();
 };
 
 module.exports = demoController;

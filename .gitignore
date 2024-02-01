@@ -2,3 +2,4 @@ dist
 node_modules
 kafka
 server/kafka-metrics/prometheus
+demoKafkaView/server/kafka-metrics/prometheus
