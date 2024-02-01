@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import ClusterContainer from "../ClusterContainer";
 import ProducerContainer from "../ProducerContainer";
 import ConsumerContainer from "../ConsumerContainer";
 import { ArcherContainer, ArcherElement } from "react-archer";
 
-function Visualizer() {
+function Information() {
 
   return (
     <div>
@@ -61,4 +60,4 @@ function Visualizer() {
   );
 }
 
-export default Visualizer;
+export default Information;
