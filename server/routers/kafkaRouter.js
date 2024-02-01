@@ -26,8 +26,8 @@ router.get(
     res.locals.producerMetrics = {
       requestRate: res.locals.requestRate,
       requestLatencyAvg: res.locals.requestLatency,
-      FailedProducerRequest: res.locals.failedProducerRequest,
-      TotalMessagesIn: res.locals.totalMessagesIn,
+      failedProducerRequest: res.locals.failedProducerRequest,
+      totalMessagesIn: res.locals.totalMessagesIn,
     };
     return res.status(200).send(res.locals.producerMetrics);
   }

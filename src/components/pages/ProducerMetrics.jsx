@@ -41,15 +41,15 @@ const lineOptions = {
   }
 };
 
-function ProducerMetrics() {
+async function ProducerMetrics() {
   const [data, setData] = useState([]);
   let time = 0;
   const colors = ["black", "purple", "green", "red", "yellow", "blue", "grey", "pink"];
   const navigate = useNavigate();
   
-  // const response = await fetch('http://localhost:3000/kafka/getTopics');
-  // const topicList = await response.json();
-  const topicList = ['topic1', 'topic2'];
+  const response = await fetch('http://localhost:3000/kafka/getTopics');
+  const topicList = await response.json();
+  // const topicList = ['topic1', 'topic2'];
 
   useEffect(() => {
     //check if promIP cookie exists
@@ -61,7 +61,7 @@ function ProducerMetrics() {
 
       const getProducerMetrics = async () => {
         try {
-          const response = await fetch('http://localhost:3000/demo/producerMetrics');
+          const response = await fetch('http://localhost:3000/kafka/producerMetrics');
           const data = await response.json();
           console.log(data)
           time++;
@@ -88,20 +88,8 @@ function ProducerMetrics() {
 
   }, []);
 
-    // response-rate	An average number of responses received per producer.
-    const chartData1 = {
-      labels: data.map((section) => section.time),
-      datasets: topicList.map((topic, i) => ({
-        label: topic,
-        data: data.map((section) => section.responseRate[i]),
-        fill: false,
-        backgroundColor: colors[i % 9],
-        borderColor: colors[i % 9],
-      }))
-    };
-
   // request-rate	An average number of responses sent per producer.
-  const chartData2 = {
+  const chartData1 = {
     labels: data.map((section) => section.time),
     datasets: topicList.map((topic, i) => ({
         label: topic,
@@ -113,11 +101,37 @@ function ProducerMetrics() {
   };
 
   // request-latency-avg	Average request latency in milliseconds.
-  const chartData3 = {
+  const chartData2 = {
     labels: data.map((section) => section.time),
     datasets: topicList.map((topic, i) => ({
       label: topic,
       data: data.map((section) => section.requestLatencyAvg[i]),
+      fill: false,
+      backgroundColor: colors[i % 9],
+      borderColor: colors[i % 9],
+    }))
+  };
+
+  // failed-producer-requests
+  const chartData3 = {
+    labels: data.map((section) => section.time),
+    datasets: [
+      {
+        label: 'Total',
+        data: data.map((section) => section.failedProducerRequest[0]),
+        fill: false,
+        backgroundColor: colors[0],
+        borderColor: colors[0],
+      },
+    ],
+  };
+
+  // total-messages-in	
+  const chartData4 = {
+    labels: data.map((section) => section.time),
+    datasets: topicList.map((topic, i) => ({
+      label: topic,
+      data: data.map((section) => section.totalMessagesIn[i]),
       fill: false,
       backgroundColor: colors[i % 9],
       borderColor: colors[i % 9],
@@ -133,21 +147,11 @@ function ProducerMetrics() {
   return (
     <div id="metricsOverallDiv">
       <h1>Producer Metrics</h1>
-      <div>
-        <h2 id="metricTitle">Response Rate:</h2>
-        <div id="chartDiv">
-          <Line data={chartData1} options={lineOptions} />
-        </div>
-        <p id="metricParagraph">
-          The response rate represents the rate of responses received from
-          brokers. Brokers respond to producers when the data has been received.
-        </p>
-      </div>
 
       <div>
         <h2 id="metricTitle">Request Rate:</h2>
         <div id="chartDiv">
-          <Line data={chartData2} options={lineOptions} />
+          <Line data={chartData1} options={lineOptions} />
         </div>
         <p id="metricParagraph">
           The request rate is the rate at which producers send data to brokers.
@@ -159,12 +163,32 @@ function ProducerMetrics() {
       <div>
         <h2 id="metricTitle">Request Latency Average:</h2>
         <div id="chartDiv">
-          <Line data={chartData3} options={lineOptions} />
+          <Line data={chartData2} options={lineOptions} />
         </div>
         <p id="metricParagraph">
           The average request latency is a measure of the amount of time between
           when a message is sent to the broker from a producer, until the
           producer then receives a response from the broker.
+        </p>
+      </div>
+
+      <div>
+        <h2 id="metricTitle">Failed Producer Requests:</h2>
+        <div id="chartDiv">
+          <Line data={chartData3} options={lineOptions} />
+        </div>
+        <p id="metricParagraph">
+          xxx
+        </p>
+      </div>
+
+      <div>
+        <h2 id="metricTitle">Total Messages In:</h2>
+        <div id="chartDiv">
+          <Line data={chartData4} options={lineOptions} />
+        </div>
+        <p id="metricParagraph">
+          xxx
         </p>
       </div>
     </div>

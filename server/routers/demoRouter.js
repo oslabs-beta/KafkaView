@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 //require controllers
-const demoMetricsController = require('../controller/demoMetricsController');
+const demoMetricsController = require('../controllers/demoMetricsController');
 
 router.get(
   '/visualizerMetrics',

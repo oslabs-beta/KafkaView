@@ -24,12 +24,6 @@ app.get('/', (req, res) => {
 app.use('/kafka', kafkaRouter);
 app.use('/demo', demoRouter);
 
-
-// app.get('*', (req, res) => {
-//   console.log('GET * route hit');
-//   res.sendFile(path.join(__dirname, '../dist/index.html'));
-// });
-
 // 404 error handler
 app.use('*', (req, res) => {
   res.status(404).send('Page not Found');

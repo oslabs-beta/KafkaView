@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import ClusterContainer from "../ClusterContainer";
 import ProducerContainer from "../ProducerContainer";
 import ConsumerContainer from "../ConsumerContainer";
