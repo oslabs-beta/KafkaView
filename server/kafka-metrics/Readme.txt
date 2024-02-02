@@ -14,9 +14,9 @@ To set up this kafka broker to run on your machine:
 
 3. Start the prometheus server
     - navigate to the kafka-metrics folder
-    - download and unpack the linux version of prometheus here
+    - download and unpack the (linux/mac/windows) version of prometheus here
     - replace the unpacked prometheus.yml with the one provided
+    - navigate to the prometheus folder
     - to start prometheus server in the terminal type: ./prometheus --config.file=prometheus.yml
-
     - This will start the prometheus server and run it on localhost 
     - navigate to the localhost port that this server is running on to view the metrics data

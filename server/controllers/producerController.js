@@ -1,13 +1,12 @@
 const producerController = {};
-const address = 'localhost:9090';
 
 // gets requestRate
 producerController.getRequestRate = async (req, res, next) => {
   try {
-    const { promIP } = req.cookies;
+    const { ip } = req.body;
     //rate of producer request per second over a 1 minute block
     let requestRate = await fetch(
-      `http://${address}/api/v1/query?query=kafka_server_brokertopicmetrics_totalproducerequests_total`
+      `http://${ip}/api/v1/query?query=kafka_server_brokertopicmetrics_totalproducerequests_total`
     );
     requestRate = await requestRate.json();
     res.locals.requestRate = [];
@@ -32,10 +31,10 @@ producerController.getRequestRate = async (req, res, next) => {
 // gets requestLatencyAvg
 producerController.getRequestLatency = async (req, res, next) => {
   try {
-    const { promIP } = req.cookies;
+    const { ip } = req.body;
     // the latency of requests not sure if this is correct
     let requestLatency = await fetch(
-      `http://${address}/api/v1/query?query=requestLatency.data.result[0].value[1]`
+      `http://${ip}/api/v1/query?query=requestLatency.data.result[0].value[1]`
     );
 
     requestLatency = await requestLatency.json();
@@ -54,10 +53,10 @@ producerController.getRequestLatency = async (req, res, next) => {
 
 producerController.getFailedProducerRequest = async (req, res, next) => {
   try {
-    const { promIP } = req.cookies;
+    const { ip } = req.body;
     //rate of failed producer messages per second over a 1 minute block
     let failedProducerRequest = await fetch(
-      `http://${address}/api/v1/query?query=rate(kafka_server_brokertopicmetrics_failedproducerequests_total[1m])`
+      `http://${ip}/api/v1/query?query=rate(kafka_server_brokertopicmetrics_failedproducerequests_total[1m])`
     );
     failedProducerRequest = await failedProducerRequest.json();
 
@@ -79,10 +78,10 @@ producerController.getFailedProducerRequest = async (req, res, next) => {
 
 producerController.getTotalMessagesIn = async (req, res, next) => {
   try {
-    const { promIP } = req.cookies;
+    const { ip } = req.body;
     // rate of total produced messages in per second over a 1 minute block
     let totalMessagesIn = await fetch(
-      `http://${address}/api/v1/query?query=rate(kafka_server_brokertopicmetrics_messagesin_total[1m])`
+      `http://${ip}/api/v1/query?query=rate(kafka_server_brokertopicmetrics_messagesin_total[1m])`
     );
     totalMessagesIn = await totalMessagesIn.json();
     res.locals.totalMessagesIn = [];

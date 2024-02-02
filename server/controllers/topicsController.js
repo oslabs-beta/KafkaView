@@ -3,13 +3,12 @@ const address = 'localhost:9090';
 
 topicsController.getTopics = async (req, res, next) => {
   try {
-    const { promIP } = req.cookies;
+    const { ip } = req.body;
     let requestRateTopics = await fetch(
-      `http://${address}/api/v1/query?query=kafka_server_brokertopicmetrics_totalproducerequests_total`
+      `http://${ip}/api/v1/query?query=kafka_server_brokertopicmetrics_totalproducerequests_total`
     );
-    requestRateTopics = await requestRate.json();
+    requestRate = await requestRateTopics.json();
     res.locals.kafkaTopics = [];
-
     if (requestRate.data.result.length < 0) {
       res.locals.kafkaTopics = ['error'];
     } else {
@@ -20,10 +19,8 @@ topicsController.getTopics = async (req, res, next) => {
     }
 
     return next();
-  } catch (error) {
-    return next({
-      message: { err: 'error: ' + error + ' getTopics' },
-    });
+  } catch {
+    return res.status(200).send([]);
   }
 };
 
