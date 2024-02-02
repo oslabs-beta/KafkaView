@@ -6,17 +6,12 @@ const producerController = require('../controllers/producerController');
 const consumerController = require('../controllers/consumerController');
 const clusterController = require('../controllers/clusterController');
 const topicsController = require('../controllers/topicsController');
-const validController = require('../controllers/validController');
 
-router.post('/isValid', validController.isValid, (req, res) => {
-  res.status(200).send('true');
-});
-
-router.get('/getTopics', topicsController.getTopics, (req, res) => {
+router.post('/getTopics', topicsController.getTopics, (req, res) => {
   res.status(200).send(res.locals.kafkaTopics);
 });
 
-router.get(
+router.post(
   '/producerMetrics',
   producerController.getRequestRate,
   producerController.getRequestLatency,
@@ -33,13 +28,12 @@ router.get(
   }
 );
 
-router.get(
+router.post(
   '/consumerMetrics',
   consumerController.getConsumerRequests,
   consumerController.getFailedConsumerRequests,
   (req, res) => {
     res.locals.consumerMetrics = {
-      recordsLag: res.locals.recordsLag,
       consumerRequests: res.locals.consumerRequests,
       failedConsumerRequests: res.locals.failedConsumerRequests,
     };
@@ -47,7 +41,7 @@ router.get(
   }
 );
 
-router.get(
+router.post(
   '/clusterMetrics',
   clusterController.getUnderReplicatedPartitions,
   clusterController.getActiveControllerCount,

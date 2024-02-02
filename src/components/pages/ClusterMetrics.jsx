@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -29,32 +31,48 @@ const lineOptions = {
     y: { ticks: { color: "#black" } },
     x: { ticks: { color: "#black" } },
   },
-  tension: .2,
+  tension: 0.2,
   animation: { duration: 5 },
   maintainAspectRatio: false,
   elements: {
     point: {
       radius: 0,
     },
-  }
+  },
 };
-
-const response = await fetch('http://localhost:3000/demo/visualizerMetrics');
-const data = await response.json();
-const brokerList = data.brokers;
-
 
 function ClusterMetrics() {
   const [data, setData] = useState([]);
   let time = 0;
-  const colors = ["black", "purple", "green", "red", "yellow", "blue", "grey", "pink"];
+  const colors = [
+    "black",
+    "purple",
+    "green",
+    "red",
+    "yellow",
+    "blue",
+    "grey",
+    "pink",
+  ];
+  const navigate = useNavigate();
+  const ip = Cookies.get("promIP");
 
   useEffect(() => {
+    //check if promIP cookie exists
+    if (ip === undefined) {
+      navigate("/");
+    }
+
     const interval = setInterval(async () => {
       const getClusterMetrics = async () => {
         try {
           const response = await fetch(
-            "http://localhost:3000/demo/clusterMetrics"
+            "http://localhost:3000/kafka/clusterMetrics",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ ip: ip }),
+            }
           );
           const data = await response.json();
           console.log(data);
@@ -82,39 +100,31 @@ function ClusterMetrics() {
   // UnderReplicatedPartitions	The number of under-replicated partitions across all topics on the broker. Under-replicated partition metrics are a leading indicator of one or more brokers being unavailable.
   const chartData1 = {
     labels: data.map((section) => section.time),
-    datasets: brokerList.map((broker, i) => ({
-      label: broker,
-      data: data.map((section) => section.underRepPartitions[i]),
-      fill: false,
-      backgroundColor: colors[i % 9],
-      borderColor: colors[i % 9],
-    }))
+    datasets: [
+      {
+        label: "Across All Topics",
+        data: data.map((section) => section.underReplicatedPartitions[0]),
+        fill: false,
+        backgroundColor: colors[0],
+        borderColor: colors[0],
+      },
+    ],
   };
 
   // ActiveControllerCount	Indicates whether the broker is active and should always be equal to 1 since there is only one broker at the same time that acts as a controller.
   const chartData2 = {
     labels: data.map((section) => section.time),
-    datasets: brokerList.map((broker, i) => ({
-        label: broker,
-        data: data.map((section) => section.activeControllerCount[i]),
+    datasets: [
+      {
+        label: "Across All Topics",
+        data: data.map((section) => section.activeControllerCount[0]),
         fill: false,
-        backgroundColor: colors[i % 9],
-        borderColor: colors[i % 9],
-      }))
+        backgroundColor: colors[0],
+        borderColor: colors[0],
+      },
+    ],
   };
 
-  // Disk usage	The amount of used and available disk space.
-  const chartData3 = {
-    labels: data.map((section) => section.time),
-    datasets: brokerList.map((broker, i) => ({
-        label: broker,
-        data: data.map((section) => section.diskUsage[i]),
-        fill: false,
-        backgroundColor: colors[i % 9],
-        borderColor: colors[i % 9],
-      }))
-  };
-  
   // charts to add:
   // IsrShrinksPerSec/IsrExpandsPerSec	If a broker goes down, in-sync replica ISRs for some of the partitions shrink. When that broker is up again, ISRs are expanded once the replicas are fully caught up.
   // OfflinePartitionsCount	The number of partitions that don’t have an active leader and are hence not writable or readable. A non-zero value indicates that brokers are not available.
@@ -164,22 +174,6 @@ function ClusterMetrics() {
           ActiveControllerCount across all of your brokers should always equal
           one, and you should alert on any other value that lasts for longer
           than one second.
-        </p>
-      </div>
-
-      <div>
-        <h2 id="metricTitle">Disk Usage:</h2>
-        <div id="chartDiv">
-          <Line data={chartData3} options={lineOptions} />
-        </div>
-        <p id="metricParagraph">
-          Disk space currently consumed, versus what is still available on the
-          broker. Because Kafka persists all data to disk, it is necessary to
-          monitor the amount of free disk space available to Kafka. Kafka will
-          fail should its disk become full, so it’s very important that you keep
-          track of disk growth over time, and set alerts to inform
-          administrators at an appropriate amount of time before disk space is
-          all but used up.
         </p>
       </div>
     </div>

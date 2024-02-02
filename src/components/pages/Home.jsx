@@ -10,6 +10,7 @@ function Home() {
   const [error, setError] = useState(true);
   const navigate = useNavigate();
   Cookies.remove("promIP");
+  Cookies.remove("topics");
   // Cookies.set("promIP", 'test', { expires: 1 });
 
   const routeChange = async (el) => {
@@ -17,7 +18,7 @@ function Home() {
     el.preventDefault();
 
     // returns true/false if prometheus ip is running and valid
-    const response = await fetch("http://localhost:3000/kafka/isValid", {
+    const response = await fetch("http://localhost:3000/kafka/getTopics", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ip: ip }),
@@ -25,8 +26,10 @@ function Home() {
     const data = await response.json();
    
     // if user enters valid ip, set cookie to ip address and redirect to metrics
-    if (data) {
+    if (data.length > 1) {
+      console.log(data)
       Cookies.set("promIP", ip, { expires: 1 });
+      Cookies.set("topics", data, { expires: 1 });
       navigate(`/cluster`);
     } else {
       setError(false);

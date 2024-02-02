@@ -41,19 +41,18 @@ const lineOptions = {
   }
 };
 
-async function ProducerMetrics() {
+function ProducerMetrics() {
   const [data, setData] = useState([]);
   let time = 0;
   const colors = ["black", "purple", "green", "red", "yellow", "blue", "grey", "pink"];
   const navigate = useNavigate();
   
-  const response = await fetch('http://localhost:3000/kafka/getTopics');
-  const topicList = await response.json();
-  // const topicList = ['topic1', 'topic2'];
+  const ip = Cookies.get('promIP');
+  const topicList = Cookies.get('topics').split(',');
 
   useEffect(() => {
     //check if promIP cookie exists
-    if (Cookies.get('promIP') === undefined) {
+    if (ip === undefined) {
       navigate('/')
     }
 
@@ -61,7 +60,14 @@ async function ProducerMetrics() {
 
       const getProducerMetrics = async () => {
         try {
-          const response = await fetch('http://localhost:3000/kafka/producerMetrics');
+          const response = await fetch(
+            "http://localhost:3000/kafka/producerMetrics",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ ip: ip }),
+            }
+          );
           const data = await response.json();
           console.log(data)
           time++;
@@ -103,13 +109,15 @@ async function ProducerMetrics() {
   // request-latency-avg	Average request latency in milliseconds.
   const chartData2 = {
     labels: data.map((section) => section.time),
-    datasets: topicList.map((topic, i) => ({
-      label: topic,
-      data: data.map((section) => section.requestLatencyAvg[i]),
-      fill: false,
-      backgroundColor: colors[i % 9],
-      borderColor: colors[i % 9],
-    }))
+    datasets: [
+      {
+        label: 'Across All Topics',
+        data: data.map((section) => section.requestLatencyAvg[0]),
+        fill: false,
+        backgroundColor: colors[0],
+        borderColor: colors[0],
+      },
+    ],
   };
 
   // failed-producer-requests
@@ -117,7 +125,7 @@ async function ProducerMetrics() {
     labels: data.map((section) => section.time),
     datasets: [
       {
-        label: 'Total',
+        label: 'Across All Topics',
         data: data.map((section) => section.failedProducerRequest[0]),
         fill: false,
         backgroundColor: colors[0],
