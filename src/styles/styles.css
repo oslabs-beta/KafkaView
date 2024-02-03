@@ -209,6 +209,26 @@ h1 {
   max-width: 120vh;
 }
 
+#producerInfo{
+  display: flex;
+
+}
+
+#consumerInfo{
+  display: flex;
+  
+}
+
+#brokerInfo{
+  display: flex;
+  
+}
+
+#eventsInfo{
+  display: flex;
+  
+}
+
 @keyframes Gradient {
   0% {
     background-position: 0% 50%;
