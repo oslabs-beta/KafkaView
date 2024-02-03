@@ -1,12 +1,11 @@
 const clusterController = {};
-const address = 'localhost:9090';
 
 // gets under replicated partitions
 clusterController.getUnderReplicatedPartitions = async (req, res, next) => {
   try {
-    const { promIP } = req.cookies;
+    const { ip } = req.body;
     let underReplicatedPartitions = await fetch(
-      `http://${address}/api/v1/query?query=kafka_server_replicamanager_underreplicatedpartitions`
+      `http://${ip}/api/v1/query?query=kafka_server_replicamanager_underreplicatedpartitions`
     );
     underReplicatedPartitions = await underReplicatedPartitions.json();
 
@@ -29,9 +28,9 @@ clusterController.getUnderReplicatedPartitions = async (req, res, next) => {
 // gets active controller count
 clusterController.getActiveControllerCount = async (req, res, next) => {
   try {
-    const { promIP } = req.cookies;
+    const { ip } = req.body;
     let activeControllerCount = await fetch(
-      `http://${address}/api/v1/query?query=kafka_controller_kafkacontroller_activecontrollercount`
+      `http://${ip}/api/v1/query?query=kafka_controller_kafkacontroller_activecontrollercount`
     );
     activeControllerCount = await activeControllerCount.json();
 

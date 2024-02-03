@@ -1,12 +1,11 @@
 const consumerController = {};
-const address = 'localhost:9090';
 
 consumerController.getConsumerRequests = async (req, res, next) => {
   try {
-    const { promIP } = req.cookies;
+    const { ip } = req.body;
     //total consumer requests per sec over a 1 minute block
     let consumerRequests = await fetch(
-      `http://${address}/api/v1/query?query=rate(kafka_server_brokertopicmetrics_totalfetchrequests_total[1m])`
+      `http://${ip}/api/v1/query?query=rate(kafka_server_brokertopicmetrics_totalfetchrequests_total[1m])`
     );
     consumerRequests = await consumerRequests.json();
     res.locals.consumerRequests = [];
@@ -20,6 +19,7 @@ consumerController.getConsumerRequests = async (req, res, next) => {
         res.locals.consumerRequests.push(topicLabel);
       }
     }
+    console.log(res.locals.consumerRequests + "this is consumerReq")
 
     return next();
   } catch (error) {
@@ -31,10 +31,10 @@ consumerController.getConsumerRequests = async (req, res, next) => {
 
 consumerController.getFailedConsumerRequests = async (req, res, next) => {
   try {
-    const { promIP } = req.cookies;
+    const { ip } = req.body;
     //total failed consumer requests per sec over a 1 minute block
     let failedConsumerRequests = await fetch(
-      `http://${address}/api/v1/query?query=rate(kafka_server_brokertopicmetrics_failedfetchrequests_total[1m])`
+      `http://${ip}/api/v1/query?query=rate(kafka_server_brokertopicmetrics_failedfetchrequests_total[1m])`
     );
     failedConsumerRequests = await failedConsumerRequests.json();
 
