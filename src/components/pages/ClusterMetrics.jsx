@@ -127,7 +127,6 @@ function ClusterMetrics() {
     ],
   };
 
-
   // // ActiveControllerCount	Indicates whether the broker is active and should always be equal to 1 since there is only one broker at the same time that acts as a controller.
   const chartData3 = {
     labels: data.map((section) => section.time),
@@ -139,8 +138,8 @@ function ClusterMetrics() {
       borderColor: colors[i % 9],
     })),
   };
-  
-  // total-messages-in
+
+  // total-messages per topic
   const chartData4 = {
     labels: data.map((section) => section.time),
     datasets: topicList.map((topic, i) => ({
@@ -163,7 +162,6 @@ function ClusterMetrics() {
       borderColor: colors[i % 9],
     })),
   };
-
 
   return (
     <div id="metricsOverallDiv">
@@ -209,7 +207,10 @@ function ClusterMetrics() {
           <Line data={chartData3} options={lineOptions} />
         </div>
         <p id="metricParagraph">
-        Average latency for ZooKeeper response from requests from broker.
+          Average latency for ZooKeeper response from requests from broker.
+          Dramatic spikes in latency indicate broker-zookeeper connectivity
+          issues or downed brokers. Above average latency could indicate impoper
+          zookeeper configuration.
         </p>
       </div>
 
@@ -219,20 +220,24 @@ function ClusterMetrics() {
           <Line data={chartData4} options={lineOptions} />
         </div>
         <p id="metricParagraph">
-        x
+          This metric measure the total number of messages in each topic across
+          all brokers.
         </p>
       </div>
-    
+
       <div>
         <h2 id="metricTitle">Topic Size: (bytes)</h2>
         <div id="chartDiv">
           <Line data={chartData5} options={lineOptions} />
         </div>
         <p id="metricParagraph">
-        x
+          This metric measures the storage size, in bytes, per topic across all
+          brokers. Be wary of topic size versus broker disc storage size. Steady
+          increase in size across long periods of time could indicate a lack of
+          message retention period. Make sure you're only persisting still
+          relevant data.
         </p>
       </div>
-
     </div>
   );
 }

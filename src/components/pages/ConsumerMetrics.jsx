@@ -31,33 +31,41 @@ const lineOptions = {
     y: { ticks: { color: "#black" } },
     x: { ticks: { color: "#black" } },
   },
-  tension: .2,
+  tension: 0.2,
   animation: { duration: 5 },
   maintainAspectRatio: false,
   elements: {
     point: {
       radius: 0,
     },
-  }
+  },
 };
 
 function ConsumerMetrics() {
   const [data, setData] = useState([]);
   let time = 0;
-  const colors = ["black", "purple", "green", "red", "yellow", "blue", "grey", "pink"];
+  const colors = [
+    "black",
+    "purple",
+    "green",
+    "red",
+    "yellow",
+    "blue",
+    "grey",
+    "pink",
+  ];
   const navigate = useNavigate();
 
-  const ip = Cookies.get('promIP');
-  const topicList = Cookies.get('topics').split(',');
+  const ip = Cookies.get("promIP");
+  const topicList = Cookies.get("topics").split(",");
 
   useEffect(() => {
     //check if promIP cookie exists
     if (ip === undefined) {
-      navigate('/')
+      navigate("/");
     }
 
     const interval = setInterval(async () => {
-    
       const getConsumerMetrics = async () => {
         try {
           const response = await fetch(
@@ -100,27 +108,22 @@ function ConsumerMetrics() {
       fill: false,
       backgroundColor: colors[i % 9],
       borderColor: colors[i % 9],
-    }))
+    })),
   };
 
-    // failed-consumer-requests
-    const chartData2 = {
-      labels: data.map((section) => section.time),
-      datasets: [
-        {
-          label: 'Across All Topics',
-          data: data.map((section) => section.failedConsumerRequests[0]),
-          fill: false,
-          backgroundColor: colors[0],
-          borderColor: colors[0],
-        },
-      ],
-    };
-
-
-  // pull unique charts from location.state.id
-  // charts to add:
-  //  fetch-rate	The number of fetch requests per second from the consumer.
+  // failed-consumer-requests
+  const chartData2 = {
+    labels: data.map((section) => section.time),
+    datasets: [
+      {
+        label: "Across All Topics",
+        data: data.map((section) => section.failedConsumerRequests[0]),
+        fill: false,
+        backgroundColor: colors[0],
+        borderColor: colors[0],
+      },
+    ],
+  };
 
   return (
     <div id="metricsOverallDiv">
@@ -132,7 +135,9 @@ function ConsumerMetrics() {
           <Line data={chartData1} options={lineOptions} />
         </div>
         <p id="metricParagraph">
-        Average number of records consumed per second across all topics.
+          Records Consumed Rate measures the rate at which records are successfully
+          consumed by Kafka consumers. It provides a real-time view
+          of consumers's pulling messages from brokers.
         </p>
       </div>
 
@@ -142,9 +147,12 @@ function ConsumerMetrics() {
           <Line data={chartData2} options={lineOptions} />
         </div>
         <p id="metricParagraph">
-        xx
+          Failed Consumer Requests tracks instances where consumer
+          requests to Kafka brokers have failed, highlighting potential issues
+          such as network connectivity issues, misconfigurations, or resource
+          constraints. This metric should always be 0.
         </p>
-      </div>    
+      </div>
     </div>
   );
 }

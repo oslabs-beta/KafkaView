@@ -172,25 +172,25 @@ function ProducerMetrics() {
           <Line data={chartData2} options={lineOptions} />
         </div>
         <p id="metricParagraph">
-          The request queue time, in percentile values, is the time passed between a load balancer
-          receiving a request and the application code processing the request. A
-          high value (usually for p99/p999) can imply there aren't enough IO threads or the CPU is a
-          bottleneck, or the request queue isnt large enough. The request queue
-          size should match the number of connections.
+          The request queue time, in percentile values, is the time passed
+          between a load balancer receiving a request and the application code
+          processing the request. A high value (usually for p99/p999) can imply
+          there aren't enough IO threads or the CPU is a bottleneck, or the
+          request queue isnt large enough. The request queue size should match
+          the number of connections.
         </p>
       </div>
 
       <div>
-        <h2 id="metricTitle">Request Queue Time: (ms)</h2>
+        <h2 id="metricTitle">Response Queue Time: (ms)</h2>
         <div id="chartDiv">
           <Line data={chartData3} options={lineOptions} />
         </div>
         <p id="metricParagraph">
-          The request queue time, in percentile values, is the time passed between a load balancer
-          receiving a request and the application code processing the request. A
-          high value (usually for p99/p999) can imply there aren't enough IO threads or the CPU is a
-          bottleneck, or the request queue isnt large enough. The request queue
-          size should match the number of connections.
+          The response queue time, in percentile values, is the time passed
+          between application code sending a response and the load balancer
+          recieving the response. Like request queue time, a high value (usually
+          for p99/p999) indicated queue failure or connectivity issues.
         </p>
       </div>
 
@@ -199,9 +199,13 @@ function ProducerMetrics() {
         <div id="chartDiv">
           <Line data={chartData4} options={lineOptions} />
         </div>
-        <p id="metricParagraph">xxx</p>
+        <p id="metricParagraph">
+          Failed Producer Requests tracks instances where producer requests to
+          Kafka brokers have failed, highlighting potential issues such as
+          network connectivity issues, misconfigurations, or resource
+          constraints. This metric should always be 0.
+        </p>
       </div>
-
     </div>
   );
 }
