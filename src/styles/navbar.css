@@ -24,6 +24,7 @@ nav li:hover {
 }
 
 nav #navbarLink {
+  font-size: 2.5vmin;
   color: inherit;
   text-decoration: none;
   height: 100%;

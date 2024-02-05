@@ -31,7 +31,7 @@ function Information() {
                   targetId: "element3",
                   targetAnchor: "left",
                   sourceAnchor: "right",
-                  style: { strokeColor: "purple", strokeWidth: 2 },
+                  style: { strokeColor: "#19caf2", strokeWidth: 2 },
                 },
               ]}
             >
@@ -68,7 +68,7 @@ function Information() {
                   targetId: "element3",
                   targetAnchor: "right",
                   sourceAnchor: "left",
-                  style: { strokeColor: "purple", strokeWidth: 2 },
+                  style: { strokeColor: "#19caf2", strokeWidth: 2 },
                 },
               ]}
             >
@@ -99,7 +99,7 @@ function Information() {
             with Kafka guarantee that all messages with the same non-empty key
             will be sent to the same partition.
           </p>
-          <a href="https://docs.confluent.io/platform/current/clients/producer.html">
+          <a id="hyperlink" href="https://docs.confluent.io/platform/current/clients/producer.html">
             Producer Info
           </a>
         </div>
@@ -111,7 +111,7 @@ function Information() {
             and usually a server that is meant to be a Kafka broker will solely
             run the necessary program and nothing else.
           </p>
-          <a href="https://www.conduktor.io/kafka/kafka-brokers/">
+          <a id="hyperlink" href="https://www.conduktor.io/kafka/kafka-brokers/">
             Broker Info
           </a>
         </div>
@@ -125,7 +125,7 @@ function Information() {
             significant control over this position and can rewind it to
             re-consume data if desired.
           </p>
-          <a href="https://docs.confluent.io/platform/current/clients/consumer.html">
+          <a id="hyperlink" href="https://docs.confluent.io/platform/current/clients/consumer.html">
             Consumer Info
           </a>
         </div>
@@ -138,7 +138,7 @@ function Information() {
             the form of events. Conceptually, an event has a key, value,
             timestamp, and optional metadata headers.
           </p>
-          <a href="https://kafka.apache.org/documentation/">Events Info</a>
+          <a id="hyperlink" href="https://kafka.apache.org/documentation/">Events Info</a>
         </div>
       </div>
     </div>

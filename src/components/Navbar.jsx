@@ -78,18 +78,18 @@ function Navbar() {
     );
   }
 
-  return (
-    <nav>
-      <div id="home">
-        <Link id="navbarLink" to="/">
-          Kafka View
-        </Link>
-        <Link id="navbarLink" className="home" to="/">
-          <img id="icon" src={icon} />
-        </Link>
-      </div>
-    </nav>
-  );
+  // return (
+  //   <nav>
+  //     <div id="home">
+  //       <Link id="navbarLink" to="/">
+  //         Kafka View
+  //       </Link>
+  //       <Link id="navbarLink" className="home" to="/">
+  //         <img id="icon" src={icon} />
+  //       </Link>
+  //     </div>
+  //   </nav>
+  // );
 }
 
 export default Navbar;
