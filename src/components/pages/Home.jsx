@@ -38,10 +38,10 @@ function Home() {
 
   return (
     <div id="homeDiv">
-      {/* <h1>Welcome to Kafka View!</h1> */}
+      <h1>Welcome to Kafka View!</h1>
       <div id="homeDescription">
-        {/* <img id="icon1" src={icon}/> */}
-        <p>
+        <img id="icon1" src={icon}/>
+        <p id="descriptionText">
           Kafka View is a Kafka visualizer and data monitoring tool aimed to
           demystify your Kafka project. Simply import your project's IP to begin
           monitoring your project's real-time data. Developers can have

@@ -10,7 +10,7 @@ function VisualizerBtn({ name, type }) {
 
   return (
     <div id="visualizerBtn">
-      <button id="visualizedButton" onClick={routeChange}>{name}</button>
+      <div id="visualizedButton">{name}</div>
     </div>
   );
 }

@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@300&family=Rubik+Doodle+Shadow&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Karla:wght@200&display=swap");
+
 
 :root {
   --primary-color: #a3acce;
@@ -13,18 +15,16 @@
 }
 
 body {
-  font-family: "Josefin Slab", serif;
+  font-family: 'Karla', Arial, sans-serif;
+  color: white;
   box-sizing: border-box;
-  background: linear-gradient(132deg, #fffafa, #a26dff, #282d59);
+  background: #434e59;
   background-size: 400% 400%;
   animation: Gradient 10s ease infinite;
   position: relative;
-  /* height: 100vh; */
-  /* width: 100vh; */
   overflow: hidden;
   padding: 0;
   margin: 0px;
-  /* font-size: 3vh; */
 }
 
 .App {
@@ -33,6 +33,7 @@ body {
 }
 
 h1 {
+  color: white;
   display: flex;
   justify-content: center;
   font-family: "Rubik Doodle Shadow", system-ui;
@@ -41,6 +42,7 @@ h1 {
 
 h2 {
   font-size: 3vmin;
+  font-family: 'Karla', Arial, sans-serif;
 }
 
 #icon1 {
@@ -76,6 +78,7 @@ h2 {
 }
 
 #homeInput {
+  color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -87,12 +90,11 @@ h2 {
   width: fit-content;
   max-width: 80%;
   margin: 0 auto;
-  margin-bottom: 5vh;
 }
 
-#homeInput:hover {
-  text-decoration: none;
-  opacity: var(--text-opacity-on-hover);
+#descriptionText{
+  font-family: 'Karla', Arial, sans-serif;
+  font-size: 2.8vmin;
   color: white;
 }
 
@@ -110,7 +112,7 @@ h2 {
 
 #secondContainer {
   background-color: #1b27354e;
-  padding: 3vmin;
+  padding: 20px;
   border-radius: 10px;
   margin: 10px;
   display: flex;
@@ -130,9 +132,8 @@ h2 {
 }
 
 #visualizedButton {
-  font-family: "Josefin Slab", serif;
-  cursor: pointer;
-  color: #dbfcff;
+  font-family: 'Karla', Arial, sans-serif;
+  color: white;
   background-color: #8c49ffad;
   margin-bottom: 3vh;
   border-radius: 8px;
@@ -142,13 +143,10 @@ h2 {
   font-size: 2.5vh;
 }
 
-#visualizedButton:hover {
-  opacity: 50%;
-}
-
 #homeBtn {
+  font-size: 2.3vmin;
   cursor: pointer;
-  color: #dbfcff;
+  color: white;
   height: 6vh;
   width: 15vh;
   background-color: #8c49ffad;
@@ -167,8 +165,8 @@ h2 {
 
 #ipInput {
   padding: 1.5vh;
-  font-family: "Josefin Slab", serif;
-  font-size: 2.5vh;
+  font-family: 'Karla', Arial, sans-serif;
+  font-size: 2.5vmin;
   border: 1px solid #ccc;
   border-radius: 1vh;
   margin-right: 2vh;
@@ -192,7 +190,6 @@ h2 {
   flex-direction: row;
   align-content: stretch;
   justify-content: space-around;
-  /* width: 30vmin */
 }
 
 #appDescription {
@@ -217,6 +214,7 @@ h2 {
 }
 #metricParagraph {
   max-width: 120vh;
+  font-size: 2.2vmin;
 }
 
 #ecosystemContainer{
@@ -224,8 +222,6 @@ h2 {
 }
 
 .descriptions {
-  /* font-size: 2vmin; */
-  font-weight: bolder;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -238,6 +234,10 @@ h2 {
   flex-direction: column;
   padding: 2vh;
   width: 30vw;
+}
+
+#hyperlink{
+  color: #69d3eb;
 }
 
 @keyframes Gradient {
