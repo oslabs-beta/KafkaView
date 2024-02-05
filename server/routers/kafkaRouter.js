@@ -14,13 +14,13 @@ router.post('/getTopics', topicsController.getTopics, (req, res) => {
 router.post(
   '/producerMetrics',
   producerController.getRequestRate,
-  producerController.getRequestLatency,
+  producerController.getRequestQueueTime,
   producerController.getFailedProducerRequest,
   producerController.getTotalMessagesIn,
   (req, res) => {
     res.locals.producerMetrics = {
       requestRate: res.locals.requestRate,
-      requestLatencyAvg: res.locals.requestLatency,
+      requestQueueTime: res.locals.requestQueueTime,
       failedProducerRequest: res.locals.failedProducerRequest,
       totalMessagesIn: res.locals.totalMessagesIn,
     };

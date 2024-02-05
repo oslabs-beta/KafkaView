@@ -9,17 +9,15 @@ consumerController.getConsumerRequests = async (req, res, next) => {
     );
     consumerRequests = await consumerRequests.json();
     res.locals.consumerRequests = [];
-
+    
+    console.log(consumerRequests.data.result)
     if (consumerRequests.data.result.length < 1) {
       res.locals.consumerRequests = ['error'];
     } else {
-      for (let i = 0; i < consumerRequests.data.result.length; i++) {
-        if (i === 1) continue;
-        const topicLabel = consumerRequests.data.result[i].metric.topic;
-        res.locals.consumerRequests.push(topicLabel);
+      for (let i = 1; i < consumerRequests.data.result.length; i++) {
+        res.locals.consumerRequests.push(consumerRequests.data.result[i].value[1]);
       }
     }
-    console.log(res.locals.consumerRequests + "this is consumerReq")
 
     return next();
   } catch (error) {

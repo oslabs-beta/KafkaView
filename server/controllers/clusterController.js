@@ -50,4 +50,8 @@ clusterController.getActiveControllerCount = async (req, res, next) => {
   }
 };
 
+//zookeeper request latency: p.5, .75, .9 etc Latency in millseconds for ZooKeeper requests from broker
+
+// partition size per topic
+
 module.exports = clusterController;
