@@ -54,6 +54,34 @@ producerController.getRequestQueueTime = async (req, res, next) => {
   }
 };
 
+// gets responseQueueTime
+producerController.getResponseQueueTime = async (req, res, next) => {
+  try {
+    const { ip } = req.body;
+    // the latency of requests not sure if this is correct
+    let responseQueueTime = await fetch(
+      `http://${ip}/api/v1/query?query=kafka_network_requestmetrics_responsequeuetimems{request="Produce",}`
+    );
+
+    responseQueueTime = await responseQueueTime.json();
+    res.locals.responseQueueTime = [];
+
+    if (responseQueueTime.data.result.length < 1) {
+      res.locals.responseQueueTime = ['error'];
+    } else {
+      for (let i = 0; i < responseQueueTime.data.result.length; i++) {
+        res.locals.responseQueueTime.push(responseQueueTime.data.result[i].value[1]);
+      }
+    }
+    
+    return next();
+  } catch (error) {
+    return next({
+      message: { err: 'error: ' + error + ' getResponseQueueTime' },
+    });
+  }
+};
+
 producerController.getFailedProducerRequest = async (req, res, next) => {
   try {
     const { ip } = req.body;
@@ -75,31 +103,6 @@ producerController.getFailedProducerRequest = async (req, res, next) => {
   } catch (error) {
     return next({
       message: { err: 'error: ' + error + ' getFailedProducerRequest' },
-    });
-  }
-};
-
-producerController.getTotalMessagesIn = async (req, res, next) => {
-  try {
-    const { ip } = req.body;
-    // rate of total produced messages in per second over a 1 minute block
-    let totalMessagesIn = await fetch(
-      `http://${ip}/api/v1/query?query=kafka_server_brokertopicmetrics_messagesin_total`
-    );
-    totalMessagesIn = await totalMessagesIn.json();
-    res.locals.totalMessagesIn = [];
-
-    if (totalMessagesIn.data.result.length < 1) {
-      res.locals.totalMessagesIn = ['error'];
-    } else {
-      for (let i = 2; i < totalMessagesIn.data.result.length; i++) {
-        res.locals.totalMessagesIn.push(totalMessagesIn.data.result[i].value[1]);
-      }
-    }
-    return next();
-  } catch (error) {
-    return next({
-      message: { err: 'error: ' + error + ' getTotalMessagesIn' },
     });
   }
 };

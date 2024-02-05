@@ -44,18 +44,6 @@ function Navbar() {
             >
               Cluster Metrics
             </Link>
-            <div id="dropdown-content1">
-              {clusterMetrics.map((name) => (
-                <Link
-                  id="navbarLink"
-                  to="/cluster"
-                  key={name}
-                  state={{ id: name }}
-                >
-                  {name}
-                </Link>
-              ))}
-            </div>
           </li>
 
           <li id="dropdown">
@@ -67,18 +55,6 @@ function Navbar() {
             >
               Producer Metrics
             </Link>
-            <div id="dropdown-content1">
-              {producerMetrics.map((name) => (
-                <Link
-                  id="navbarLink"
-                  to="/producer"
-                  key={name}
-                  state={{ id: name }}
-                >
-                  {name}
-                </Link>
-              ))}
-            </div>
           </li>
 
           <li id="dropdown">
@@ -90,18 +66,6 @@ function Navbar() {
             >
               Consumer Metrics
             </Link>
-            <div id="dropdown-content2">
-              {consumerMetrics.map((name) => (
-                <Link
-                  id="navbarLink"
-                  to="/consumer"
-                  key={name}
-                  state={{ id: name }}
-                >
-                  {name}
-                </Link>
-              ))}
-            </div>
           </li>
 
           <li>

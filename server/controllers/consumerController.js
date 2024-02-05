@@ -10,7 +10,6 @@ consumerController.getConsumerRequests = async (req, res, next) => {
     consumerRequests = await consumerRequests.json();
     res.locals.consumerRequests = [];
     
-    console.log(consumerRequests.data.result)
     if (consumerRequests.data.result.length < 1) {
       res.locals.consumerRequests = ['error'];
     } else {

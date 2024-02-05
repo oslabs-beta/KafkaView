@@ -112,7 +112,7 @@ function ProducerMetrics() {
     })),
   };
 
-  // request-latency-avg	Average request latency in milliseconds.
+  // request queue time
   const chartData2 = {
     labels: data.map((section) => section.time),
     datasets: quantile.map((quantile, i) => ({
@@ -124,8 +124,20 @@ function ProducerMetrics() {
     })),
   };
 
-  // failed-producer-requests
+  // response queue time
   const chartData3 = {
+    labels: data.map((section) => section.time),
+    datasets: quantile.map((quantile, i) => ({
+      label: quantile,
+      data: data.map((section) => section.responseQueueTime[i]),
+      fill: false,
+      backgroundColor: colors[i % 9],
+      borderColor: colors[i % 9],
+    })),
+  };
+
+  // failed-producer-requests
+  const chartData4 = {
     labels: data.map((section) => section.time),
     datasets: [
       {
@@ -136,18 +148,6 @@ function ProducerMetrics() {
         borderColor: colors[0],
       },
     ],
-  };
-
-  // total-messages-in
-  const chartData4 = {
-    labels: data.map((section) => section.time),
-    datasets: topicList.map((topic, i) => ({
-      label: topic,
-      data: data.map((section) => section.totalMessagesIn[i]),
-      fill: false,
-      backgroundColor: colors[i % 9],
-      borderColor: colors[i % 9],
-    })),
   };
 
   return (
@@ -181,20 +181,27 @@ function ProducerMetrics() {
       </div>
 
       <div>
-        <h2 id="metricTitle">Failed Producer Requests:</h2>
+        <h2 id="metricTitle">Request Queue Time: (ms)</h2>
         <div id="chartDiv">
           <Line data={chartData3} options={lineOptions} />
         </div>
-        <p id="metricParagraph">xxx</p>
+        <p id="metricParagraph">
+          The request queue time, in percentile values, is the time passed between a load balancer
+          receiving a request and the application code processing the request. A
+          high value (usually for p99/p999) can imply there aren't enough IO threads or the CPU is a
+          bottleneck, or the request queue isnt large enough. The request queue
+          size should match the number of connections.
+        </p>
       </div>
 
       <div>
-        <h2 id="metricTitle">Total Messages In:</h2>
+        <h2 id="metricTitle">Failed Producer Requests:</h2>
         <div id="chartDiv">
           <Line data={chartData4} options={lineOptions} />
         </div>
         <p id="metricParagraph">xxx</p>
       </div>
+
     </div>
   );
 }
