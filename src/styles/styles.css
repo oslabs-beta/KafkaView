@@ -108,8 +108,7 @@ h2 {
   justify-content: space-around;
 }
 
-#consumerContainer,
-#producerContainer {
+#secondContainer {
   background-color: #1b27354e;
   padding: 3vmin;
   border-radius: 10px;
@@ -124,6 +123,10 @@ h2 {
   border-radius: 10px;
   margin: 10px;
   display: flex;
+}
+
+#ecosystemContainer {
+  min-height: 80vh;
 }
 
 #visualizedButton {
