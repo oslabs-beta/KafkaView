@@ -22,7 +22,7 @@ function ProducerContainer() {
 
   return (
     <div id="producerContainer">
-      <div id="producerButton">
+      <div>
       {producers.map((producer, index) => (
         <VisualizerBtn name={producer} key={index} type='producer'/>
       ))}

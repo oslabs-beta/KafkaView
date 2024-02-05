@@ -22,7 +22,7 @@ function ClusterContainer() {
 
   return (
     <div id="clusterContainer">
-      <div id="clusterButton">
+      <div>
       {brokers.map((broker, index) => (
         <VisualizerBtn name={broker} key={index} type='cluster'/>
       ))}
