@@ -5,12 +5,12 @@ function VisualizerBtn({ name, type }) {
 
   const navigate = useNavigate(); 
   const routeChange = () => { 
-    navigate(`/${type}`, { state: { id: name } });
+    navigate(`/${type}`);
   }
 
   return (
     <div id="visualizerBtn">
-      {/* <button id="visualizedButton" onClick={routeChange}>{name}</button> */}
+      <button id="visualizedButton" onClick={routeChange}>{name}</button>
     </div>
   );
 }

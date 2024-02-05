@@ -27,7 +27,6 @@ function Home() {
    
     // if user enters valid ip, set cookie to ip address and redirect to metrics
     if (data.length > 1) {
-      console.log(data)
       Cookies.set("promIP", ip, { expires: 1 });
       Cookies.set("topics", data, { expires: 1 });
       navigate(`/cluster`);

@@ -14,15 +14,15 @@ router.post('/getTopics', topicsController.getTopics, (req, res) => {
 router.post(
   '/producerMetrics',
   producerController.getRequestRate,
-  producerController.getRequestLatency,
+  producerController.getRequestQueueTime,
+  producerController.getResponseQueueTime,
   producerController.getFailedProducerRequest,
-  producerController.getTotalMessagesIn,
   (req, res) => {
     res.locals.producerMetrics = {
       requestRate: res.locals.requestRate,
-      requestLatencyAvg: res.locals.requestLatency,
+      requestQueueTime: res.locals.requestQueueTime,
+      responseQueueTime: res.locals.responseQueueTime,
       failedProducerRequest: res.locals.failedProducerRequest,
-      totalMessagesIn: res.locals.totalMessagesIn,
     };
     return res.status(200).send(res.locals.producerMetrics);
   }
@@ -45,10 +45,16 @@ router.post(
   '/clusterMetrics',
   clusterController.getUnderReplicatedPartitions,
   clusterController.getActiveControllerCount,
+  clusterController.getZookeeperRequestLatency,
+  clusterController.getTopicSize,
+  clusterController.getTotalMessages,
   (req, res) => {
     res.locals.clusterMetrics = {
       underReplicatedPartitions: res.locals.underReplicatedPartitions,
       activeControllerCount: res.locals.activeControllerCount,
+      zookeeperRequestLatency: res.locals.zookeeperRequestLatency,
+      topicSize: res.locals.topicSize,
+      totalMessages: res.locals.totalMessages,
     };
     return res.status(200).send(res.locals.clusterMetrics);
   }
