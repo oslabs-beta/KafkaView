@@ -19,17 +19,17 @@ body {
   background-size: 400% 400%;
   animation: Gradient 10s ease infinite;
   position: relative;
-  height: 100vh;
-  width: 100%;
+  /* height: 100vh; */
+  /* width: 100vh; */
   overflow: hidden;
   padding: 0;
   margin: 0px;
-  font-size: 3vh;
+  /* font-size: 3vh; */
 }
 
 .App {
   overflow-y: auto;
-  max-height: 100vh;
+  max-height: 100%;
 }
 
 h1 {
@@ -37,6 +37,10 @@ h1 {
   justify-content: center;
   font-family: "Rubik Doodle Shadow", system-ui;
   font-size: 6vh;
+}
+
+h2 {
+  font-size: 3vmin;
 }
 
 #icon1 {
@@ -47,6 +51,8 @@ h1 {
 #appDescription {
   margin-left: 8vh;
   margin-right: 3vh;
+  padding-bottom: 3vh;
+  font-size: px;
 }
 
 #homeDescription {
@@ -105,7 +111,7 @@ h1 {
 #consumerContainer,
 #producerContainer {
   background-color: #1b27354e;
-  padding: 5vh;
+  padding: 3vmin;
   border-radius: 10px;
   margin: 10px;
   display: flex;
@@ -114,7 +120,7 @@ h1 {
 #clusterContainer {
   align-items: center;
   background-color: #1b27354e;
-  padding: 10vh;
+  padding: 20px;
   border-radius: 10px;
   margin: 10px;
   display: flex;
@@ -181,14 +187,15 @@ h1 {
   align-items: center;
   justify-self: center;
   flex-direction: row;
-  flex-wrap: wrap;
   align-content: stretch;
   justify-content: space-around;
+  /* width: 30vmin */
 }
 
 #appDescription {
   display: flex;
   justify-content: center;
+  font-size: 3vmin;
 }
 
 #chartDiv {
@@ -207,6 +214,27 @@ h1 {
 }
 #metricParagraph {
   max-width: 120vh;
+}
+
+#ecosystemContainer{
+  height: 65%;
+}
+
+.descriptions {
+  /* font-size: 2vmin; */
+  font-weight: bolder;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+}
+
+#infoContainer{
+  display: flex;
+  font-weight: bolder;
+  flex-direction: column;
+  padding: 2vh;
+  width: 30vw;
 }
 
 @keyframes Gradient {
