@@ -78,7 +78,6 @@ function ClusterMetrics() {
             },
           );
           const data = await response.json();
-          console.log(data);
           time++;
           data.time = time;
 

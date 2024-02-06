@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import icon from '../assets/KafkaViewLogo.png';
+import icon from '../assets/kafkalogofinal.png';
 import '../styles/navbar.css';
 
 function Navbar() {

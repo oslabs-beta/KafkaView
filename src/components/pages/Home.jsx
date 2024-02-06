@@ -42,6 +42,7 @@ function Home() {
         <form id="ipSubmission" onSubmit={routeChange}>
           <div className="form__group field">
             <input
+              autoComplete="off"
               name="name"
               type="input"
               className="form__field"
