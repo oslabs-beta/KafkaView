@@ -83,3 +83,37 @@ git clone https://github.com/oslabs-beta/KafkaView.git
 @seannguyen96
 @Chris00
 @hJosephDafesh
+<table>
+  <tr>
+    <td align="center">
+      <img src="assets/readme/clhilgert.png" width="140px;" alt="a photo of Clay Hilgert"/>
+      <br />
+      <sub><b>Clay Hilgert</b></sub>
+      <br />
+      <a href="https://www.linkedin.com/in/clay-hilgert/">Linkedin</a> |
+      <a href="https://github.com/clhilgert">GitHub</a>
+    </td>
+     <td align="center">
+      <img src="assets/readme/duke-ahn.png" width="140px;" alt="a photo of Duke Ahn"/>
+      <br />
+      <sub><b>Duke Ahn</b></sub>
+      <br />
+      <a href="https://www.linkedin.com/in/duke-ahn-3886b9284/">Linkedin</a> |
+      <a href="https://github.com/AhnDuke">GitHub</a>
+    </td> <td align="center">
+      <img src="assets/readme/dpavel.png" width="140px;" alt="a photo of Darren Pavel"/>
+      <br />
+      <sub><b>Darren Pavel</b></sub>
+      <br />
+      <a href="https://www.linkedin.com/in/darren-pavel/">Linkedin</a> |
+      <a href="https://github.com/dcpavel">GitHub</a>
+    </td> <td align="center">
+      <img src="assets/readme/Blotski.png" width="140px;" alt="a photo of Vitaly Blotski"/>
+      <br />
+      <sub><b>Vitaly Blotski</b></sub>
+      <br />
+      <a href="https://www.linkedin.com/in/vitaly-blotski/">Linkedin</a> |
+      <a href="https://github.com/Blotski">GitHub</a>
+    </td>     
+  </tr>
+</table>
