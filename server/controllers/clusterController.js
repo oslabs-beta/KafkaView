@@ -5,7 +5,7 @@ clusterController.getUnderReplicatedPartitions = async (req, res, next) => {
   try {
     const { ip } = req.body;
     let underReplicatedPartitions = await fetch(
-      `http://${ip}/api/v1/query?query=kafka_server_replicamanager_underreplicatedpartitions`
+      `http://${ip}/api/v1/query?query=kafka_server_replicamanager_underreplicatedpartitions`,
     );
     underReplicatedPartitions = await underReplicatedPartitions.json();
 
@@ -20,7 +20,7 @@ clusterController.getUnderReplicatedPartitions = async (req, res, next) => {
     return next();
   } catch (error) {
     return next({
-      message: { err: 'error: ' + error + ' getUnderReplicatedPartitions' },
+      message: { err: `error: ${error} getUnderReplicatedPartitions` },
     });
   }
 };
@@ -30,7 +30,7 @@ clusterController.getActiveControllerCount = async (req, res, next) => {
   try {
     const { ip } = req.body;
     let activeControllerCount = await fetch(
-      `http://${ip}/api/v1/query?query=kafka_controller_kafkacontroller_activecontrollercount`
+      `http://${ip}/api/v1/query?query=kafka_controller_kafkacontroller_activecontrollercount`,
     );
     activeControllerCount = await activeControllerCount.json();
 
@@ -45,7 +45,7 @@ clusterController.getActiveControllerCount = async (req, res, next) => {
     return next();
   } catch (error) {
     return next({
-      message: { err: 'error: ' + error + ' getActiveControllerCount' },
+      message: { err: `error: ${error} getActiveControllerCount` },
     });
   }
 };
@@ -55,7 +55,7 @@ clusterController.getZookeeperRequestLatency = async (req, res, next) => {
   try {
     const { ip } = req.body;
     let zookeeperRequestLatency = await fetch(
-      `http://${ip}/api/v1/query?query=kafka_server_zookeeperclientmetrics_zookeeperrequestlatencyms`
+      `http://${ip}/api/v1/query?query=kafka_server_zookeeperclientmetrics_zookeeperrequestlatencyms`,
     );
     zookeeperRequestLatency = await zookeeperRequestLatency.json();
     res.locals.zookeeperRequestLatency = [];
@@ -64,14 +64,16 @@ clusterController.getZookeeperRequestLatency = async (req, res, next) => {
       res.locals.zookeeperRequestLatency = ['error'];
     } else {
       for (let i = 0; i < zookeeperRequestLatency.data.result.length; i++) {
-        res.locals.zookeeperRequestLatency.push(zookeeperRequestLatency.data.result[i].value[1]);
+        res.locals.zookeeperRequestLatency.push(
+          zookeeperRequestLatency.data.result[i].value[1],
+        );
       }
     }
 
     return next();
   } catch (error) {
     return next({
-      message: { err: 'error: ' + error + ' getZookeeperRequestLatency' },
+      message: { err: `error: ${error} getZookeeperRequestLatency` },
     });
   }
 };
@@ -81,7 +83,7 @@ clusterController.getTopicSize = async (req, res, next) => {
   try {
     const { ip } = req.body;
     let topicSize = await fetch(
-      `http://${ip}/api/v1/query?query=kafka_log_log_size{partition="0"}`
+      `http://${ip}/api/v1/query?query=kafka_log_log_size{partition="0"}`,
     );
     topicSize = await topicSize.json();
     res.locals.topicSize = [];
@@ -97,7 +99,7 @@ clusterController.getTopicSize = async (req, res, next) => {
     return next();
   } catch (error) {
     return next({
-      message: { err: 'error: ' + error + ' getTopicSize' },
+      message: { err: `error: ${error} getTopicSize` },
     });
   }
 };
@@ -108,7 +110,7 @@ clusterController.getTotalMessages = async (req, res, next) => {
     const { ip } = req.body;
 
     let totalMessages = await fetch(
-      `http://${ip}/api/v1/query?query=kafka_server_brokertopicmetrics_messagesin_total`
+      `http://${ip}/api/v1/query?query=kafka_server_brokertopicmetrics_messagesin_total`,
     );
     totalMessages = await totalMessages.json();
     res.locals.totalMessages = [];
@@ -123,7 +125,7 @@ clusterController.getTotalMessages = async (req, res, next) => {
     return next();
   } catch (error) {
     return next({
-      message: { err: 'error: ' + error + ' getTotalMessagesIn' },
+      message: { err: `error: ${error} getTotalMessagesIn` },
     });
   }
 };

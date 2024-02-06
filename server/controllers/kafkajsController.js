@@ -1,4 +1,6 @@
 const { Kafka } = require('kafkajs');
+const { Partitioners } = require('kafkajs');
+
 const demoController = {};
 
 demoController.initializeKafka = async (req, res, next) => {
@@ -11,7 +13,6 @@ demoController.initializeKafka = async (req, res, next) => {
     brokers: ['localhost:9092'],
   });
 
-  const { Partitioners } = require('kafkajs');
   const producer1 = kafkaProducer.producer({
     createPartitioner: Partitioners.DefaultPartitioner,
     allowAutoTopicCreation: false,
@@ -47,7 +48,7 @@ demoController.initializeKafka = async (req, res, next) => {
   ];
 
   const consumerSetup = async (consumer) => {
-    let randomTopics = [];
+    const randomTopics = [];
     let randomLength;
     let randomIndex;
 
@@ -61,7 +62,7 @@ demoController.initializeKafka = async (req, res, next) => {
         }
       }
 
-      console.log('random topics: ' + randomTopics);
+      console.log(`random topics: ${randomTopics}`);
 
       await consumerArr[i].connect();
 
@@ -91,13 +92,12 @@ demoController.initializeKafka = async (req, res, next) => {
     console.log('error with consumer');
   });
 
-  const getRandomTopic = () => {
-    return topicArr[Math.floor(Math.random() * topicArr.length)];
-  };
+  const getRandomTopic = () =>
+    topicArr[Math.floor(Math.random() * topicArr.length)];
 
   const messageSender = async () => {
     try {
-      let randomProd = Math.floor(Math.random() * 2);
+      const randomProd = Math.floor(Math.random() * 2);
       await producerArr[randomProd].send({
         topic: await getRandomTopic(),
         messages: [
@@ -107,7 +107,7 @@ demoController.initializeKafka = async (req, res, next) => {
       // console.log('producer:', producer)
       // console.log('producer.clientId:', producer.clientId)
     } catch (error) {
-      console.log('error: ' + error + ' in messageSender');
+      console.log(`error: ${error} in messageSender`);
       await producer1.disconnect();
       await producer2.disconnect();
     }
@@ -124,4 +124,3 @@ demoController.initializeKafka = async (req, res, next) => {
 };
 
 module.exports = demoController;
-

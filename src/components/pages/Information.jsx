@@ -1,17 +1,18 @@
-import React from "react";
-import VisualizerBtn from "../visualizerBtn";
-import { ArcherContainer, ArcherElement } from "react-archer";
+/* eslint-disable react/no-array-index-key */
+import React from 'react';
+import { ArcherContainer, ArcherElement } from 'react-archer';
+import VisualizerBtn from '../visualizerBtn';
 
 function Information() {
-  const producers = ["Producer 1", "Producer 2", "Producer 3", "..."];
-  const brokers = ["Broker 1", "Broker 2", "..."];
+  const producers = ['Producer 1', 'Producer 2', 'Producer 3', '...'];
+  const brokers = ['Broker 1', 'Broker 2', '...'];
   const consumers = [
-    "Consumer 1",
-    "Consumer 2",
-    "Consumer 3",
-    "Consumer 4",
-    "Consumer 5",
-    "...",
+    'Consumer 1',
+    'Consumer 2',
+    'Consumer 3',
+    'Consumer 4',
+    'Consumer 5',
+    '...',
   ];
 
   return (
@@ -28,10 +29,10 @@ function Information() {
               id="element2"
               relations={[
                 {
-                  targetId: "element3",
-                  targetAnchor: "left",
-                  sourceAnchor: "right",
-                  style: { strokeColor: "#000000ad", strokeWidth: 2 },
+                  targetId: 'element3',
+                  targetAnchor: 'left',
+                  sourceAnchor: 'right',
+                  style: { strokeColor: '#000000ad', strokeWidth: 2 },
                 },
               ]}
             >
@@ -52,10 +53,10 @@ function Information() {
               id="element3"
               relations={[
                 {
-                  targetId: "element4",
-                  targetAnchor: "left",
-                  sourceAnchor: "right",
-                  style: { strokeColor: "#000000ad", strokeWidth: 2 },
+                  targetId: 'element4',
+                  targetAnchor: 'left',
+                  sourceAnchor: 'right',
+                  style: { strokeColor: '#000000ad', strokeWidth: 2 },
                 },
               ]}
             >
@@ -97,7 +98,7 @@ function Information() {
               non-empty key will be sent to the same partition.
             </p>
             <form action="https://docs.confluent.io/platform/current/clients/producer.html">
-              <button id="infoButton">Producer Information</button>
+              <button type="submit" id="infoButton">Producer Information</button>
             </form>
           </div>
           <div id="infoContainer">
@@ -106,10 +107,11 @@ function Information() {
               A single Kafka server is called a Kafka Broker. That Kafka broker
               is a program that runs on the Java Virtual Machine (Java version
               11+) and usually a server that is meant to be a Kafka broker will
-              solely run the necessary program and nothing else.
+              solely run the necessary program and nothing else. A broker in a
+              cluster is identified by a unique numeric ID.
             </p>
             <form action="https://www.conduktor.io/kafka/kafka-brokers/">
-              <button id="infoButton">Broker Information</button>
+              <button type="submit" id="infoButton">Broker Information</button>
             </form>
           </div>
         </div>
@@ -126,22 +128,21 @@ function Information() {
             </p>
 
             <form action="https://docs.confluent.io/platform/current/clients/consumer.html">
-              <button id="infoButton">Consumer Information</button>
+              <button type="submit" id="infoButton">Consumer Information</button>
             </form>
           </div>
           <div id="infoContainer">
             <h2>Events</h2>
             <p>
-              An event records the fact that "something happened" in the world
+              An event records the fact that “something happened” in the world
               or in your business. It is also called record or message in the
               documentation. When you read or write data to Kafka, you do this
               in the form of events. Conceptually, an event has a key, value,
               timestamp, and optional metadata headers.
             </p>
 
-
             <form action="https://kafka.apache.org/documentation/">
-              <button id="infoButton">Events Information</button>
+              <button type="submit" id="infoButton">Events Information</button>
             </form>
           </div>
         </div>

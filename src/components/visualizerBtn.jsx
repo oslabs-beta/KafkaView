@@ -1,5 +1,5 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function VisualizerBtn({ name, type }) {
   const navigate = useNavigate();
@@ -9,7 +9,7 @@ function VisualizerBtn({ name, type }) {
 
   return (
     <div id="visualizerBtn">
-      <button id="visualizedButton" onClick={routeChange}>
+      <button type="submit" id="visualizedButton" onClick={routeChange}>
         {name}
       </button>
     </div>

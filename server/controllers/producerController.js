@@ -4,9 +4,9 @@ const producerController = {};
 producerController.getRequestRate = async (req, res, next) => {
   try {
     const { ip } = req.body;
-    //rate of producer request per second over a 1 minute block
+    // rate of producer request per second over a 1 minute block
     let requestRate = await fetch(
-      `http://${ip}/api/v1/query?query=rate(kafka_server_brokertopicmetrics_totalproducerequests_total[1m])`
+      `http://${ip}/api/v1/query?query=rate(kafka_server_brokertopicmetrics_totalproducerequests_total[1m])`,
     );
     requestRate = await requestRate.json();
     res.locals.requestRate = [];
@@ -21,7 +21,7 @@ producerController.getRequestRate = async (req, res, next) => {
     return next();
   } catch (error) {
     return next({
-      message: { err: 'error: ' + error + ' getRequestRate' },
+      message: { err: `error: ${error} getRequestRate` },
     });
   }
 };
@@ -32,7 +32,7 @@ producerController.getRequestQueueTime = async (req, res, next) => {
     const { ip } = req.body;
     // the latency of requests not sure if this is correct
     let requestQueueTime = await fetch(
-      `http://${ip}/api/v1/query?query=kafka_network_requestmetrics_requestqueuetimems{request="Produce",}`
+      `http://${ip}/api/v1/query?query=kafka_network_requestmetrics_requestqueuetimems{request="Produce",}`,
     );
 
     requestQueueTime = await requestQueueTime.json();
@@ -42,14 +42,16 @@ producerController.getRequestQueueTime = async (req, res, next) => {
       res.locals.requestQueueTime = ['error'];
     } else {
       for (let i = 0; i < requestQueueTime.data.result.length; i++) {
-        res.locals.requestQueueTime.push(requestQueueTime.data.result[i].value[1]);
+        res.locals.requestQueueTime.push(
+          requestQueueTime.data.result[i].value[1],
+        );
       }
     }
-    
+
     return next();
   } catch (error) {
     return next({
-      message: { err: 'error: ' + error + ' getRequestQueueTime' },
+      message: { err: `error: ${error} getRequestQueueTime` },
     });
   }
 };
@@ -60,7 +62,7 @@ producerController.getResponseQueueTime = async (req, res, next) => {
     const { ip } = req.body;
     // the latency of requests not sure if this is correct
     let responseQueueTime = await fetch(
-      `http://${ip}/api/v1/query?query=kafka_network_requestmetrics_responsequeuetimems{request="Produce",}`
+      `http://${ip}/api/v1/query?query=kafka_network_requestmetrics_responsequeuetimems{request="Produce",}`,
     );
 
     responseQueueTime = await responseQueueTime.json();
@@ -70,14 +72,16 @@ producerController.getResponseQueueTime = async (req, res, next) => {
       res.locals.responseQueueTime = ['error'];
     } else {
       for (let i = 0; i < responseQueueTime.data.result.length; i++) {
-        res.locals.responseQueueTime.push(responseQueueTime.data.result[i].value[1]);
+        res.locals.responseQueueTime.push(
+          responseQueueTime.data.result[i].value[1],
+        );
       }
     }
-    
+
     return next();
   } catch (error) {
     return next({
-      message: { err: 'error: ' + error + ' getResponseQueueTime' },
+      message: { err: `error: ${error} getResponseQueueTime` },
     });
   }
 };
@@ -85,9 +89,9 @@ producerController.getResponseQueueTime = async (req, res, next) => {
 producerController.getFailedProducerRequest = async (req, res, next) => {
   try {
     const { ip } = req.body;
-    //rate of failed producer messages per second over a 1 minute block
+    // rate of failed producer messages per second over a 1 minute block
     let failedProducerRequest = await fetch(
-      `http://${ip}/api/v1/query?query=rate(kafka_server_brokertopicmetrics_failedproducerequests_total[1m])`
+      `http://${ip}/api/v1/query?query=rate(kafka_server_brokertopicmetrics_failedproducerequests_total[1m])`,
     );
     failedProducerRequest = await failedProducerRequest.json();
 
@@ -102,7 +106,7 @@ producerController.getFailedProducerRequest = async (req, res, next) => {
     return next();
   } catch (error) {
     return next({
-      message: { err: 'error: ' + error + ' getFailedProducerRequest' },
+      message: { err: `error: ${error} getFailedProducerRequest` },
     });
   }
 };

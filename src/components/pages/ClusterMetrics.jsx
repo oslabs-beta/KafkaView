@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,8 +11,8 @@ import {
   PointElement,
   LineElement,
   Filler,
-} from "chart.js";
-import { Line } from "react-chartjs-2";
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
 
 ChartJS.register(
   CategoryScale,
@@ -22,14 +22,14 @@ ChartJS.register(
   Legend,
   PointElement,
   LineElement,
-  Filler
+  Filler,
 );
 
-//Global options for the chartJS elements
+// Global options for the chartJS elements
 const lineOptions = {
   scales: {
-    y: { ticks: { color: "#black" } },
-    x: { ticks: { color: "#black" } },
+    y: { ticks: { color: '#black' } },
+    x: { ticks: { color: '#black' } },
   },
   tension: 0.2,
   animation: { duration: 5 },
@@ -45,52 +45,50 @@ function ClusterMetrics() {
   const [data, setData] = useState([]);
   let time = 0;
   const colors = [
-    "black",
-    "darkblue",
-    "purple",
-    "darkgreen",
-    "darkred",
-    "goldenrod",
-    "pink",
-    "grey",
-    "wheat"
+    'black',
+    'darkblue',
+    'purple',
+    'darkgreen',
+    'darkred',
+    'goldenrod',
+    'pink',
+    'grey',
+    'wheat',
   ];
-  const quantile = ["p50", "p75", "p95", "p98", "p99", "p99.9"];
+  const quantile = ['p50', 'p75', 'p95', 'p98', 'p99', 'p99.9'];
   const navigate = useNavigate();
-  const ip = Cookies.get("promIP");
-  const topicList = Cookies.get("topics").split(",");
+  const ip = Cookies.get('promIP');
+  const topicList = Cookies.get('topics').split(',');
 
   useEffect(() => {
-    //check if promIP cookie exists
+    // check if promIP cookie exists
     if (ip === undefined) {
-      navigate("/");
+      navigate('/');
     }
 
     const interval = setInterval(async () => {
       const getClusterMetrics = async () => {
         try {
           const response = await fetch(
-            "http://localhost:3000/kafka/clusterMetrics",
+            'http://localhost:3000/kafka/clusterMetrics',
             {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ ip: ip }),
-            }
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ ip }),
+            },
           );
           const data = await response.json();
-          console.log(data);
           time++;
           data.time = time;
 
           setData((current) => {
             if (current.length < 6) return [...current, data];
-            else {
-              current.shift();
-              return [...current, data];
-            }
+
+            current.shift();
+            return [...current, data];
           });
         } catch (error) {
-          console.log(error + ": error fetching clusterMetrics");
+          console.log(`${error}: error fetching clusterMetrics`);
         }
       };
 
@@ -100,12 +98,14 @@ function ClusterMetrics() {
     return () => clearInterval(interval);
   }, []);
 
-  // UnderReplicatedPartitions	The number of under-replicated partitions across all topics on the broker. Under-replicated partition metrics are a leading indicator of one or more brokers being unavailable.
+  // UnderReplicatedPartitions - The number of under-replicated partitions across all topics on the
+  // broker. Under-replicated partition metrics are a leading indicator of one or more
+  // brokers being unavailable.
   const chartData1 = {
     labels: data.map((section) => section.time),
     datasets: [
       {
-        label: "Across All Topics",
+        label: 'Across All Topics',
         data: data.map((section) => section.underReplicatedPartitions[0]),
         fill: false,
         backgroundColor: colors[0],
@@ -114,12 +114,13 @@ function ClusterMetrics() {
     ],
   };
 
-  // ActiveControllerCount	Indicates whether the broker is active and should always be equal to 1 since there is only one broker at the same time that acts as a controller.
+  // ActiveControllerCount - Indicates whether the broker is active and should always be
+  // equal to 1 since there is only one broker at the same time that acts as a controller.
   const chartData2 = {
     labels: data.map((section) => section.time),
     datasets: [
       {
-        label: "Across All Topics",
+        label: 'Across All Topics',
         data: data.map((section) => section.activeControllerCount[0]),
         fill: false,
         backgroundColor: colors[0],
@@ -128,7 +129,8 @@ function ClusterMetrics() {
     ],
   };
 
-  // // ActiveControllerCount	Indicates whether the broker is active and should always be equal to 1 since there is only one broker at the same time that acts as a controller.
+  // ActiveControllerCount - Indicates whether the broker is active and should always
+  // be equal to 1 since there is only one broker at the same time that acts as a controller.
   const chartData3 = {
     labels: data.map((section) => section.time),
     datasets: quantile.map((quantile, i) => ({
@@ -235,7 +237,7 @@ function ClusterMetrics() {
           This metric measures the storage size, in bytes, per topic across all
           brokers. Be wary of topic size versus broker disc storage size. Steady
           increase in size across long periods of time could indicate a lack of
-          message retention period. Make sure you're only persisting still
+          message retention period. Make sure you are only persisting still
           relevant data.
         </p>
       </div>
