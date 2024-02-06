@@ -46,13 +46,14 @@ function ConsumerMetrics() {
   let time = 0;
   const colors = [
     "black",
+    "darkblue",
     "purple",
-    "green",
-    "red",
-    "yellow",
-    "blue",
-    "grey",
+    "darkgreen",
+    "darkred",
+    "goldenrod",
     "pink",
+    "grey",
+    "wheat"
   ];
   const navigate = useNavigate();
 

@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import icon from "../../assets/KafkaViewLogo.png";
 
 function Home() {
   const [ip, setIP] = useState("");
@@ -24,7 +23,7 @@ function Home() {
       body: JSON.stringify({ ip: ip }),
     });
     const data = await response.json();
-   
+
     // if user enters valid ip, set cookie to ip address and redirect to metrics
     if (data.length > 1) {
       Cookies.set("promIP", ip, { expires: 1 });
@@ -38,32 +37,27 @@ function Home() {
 
   return (
     <div id="homeDiv">
-      <h1>Welcome to Kafka View!</h1>
-      <div id="homeDescription">
-        <img id="icon1" src={icon}/>
-        <p id="descriptionText">
-          Kafka View is a Kafka visualizer and data monitoring tool aimed to
-          demystify your Kafka project. Simply import your project's IP to begin
-          monitoring your project's real-time data. Developers can have
-          confidence in their project's upkeep with Kafka View.
-        </p>
-      </div>
-      <div id="homeInput">
-        <h2>Enter your Kafka IP:</h2>
+      <div id="homeInput" class="box animate fadeInLeft">
+        <h1 id='homeTitle'>Welcome to Kafka View</h1>
         <form id="ipSubmission" onSubmit={routeChange}>
-          <input
-            id="ipInput"
-            placeholder="Enter Valid IP"
-            onChange={(el) => setIP(el.target.value)}
+          <div class="form__group field">
+            <input
+              type="input"
+              class="form__field"
+              id='name' 
+              placeholder="name"
+              onChange={(el) => setIP(el.target.value)}
             value={ip}
-          ></input>
-          <button id="homeBtn" type="submit">
-            Submit
-          </button>
+            />
+            <label for="name" class="form__label">
+              Prometheus IP
+            </label>
+          </div>
         </form>
         <div id="errorText">{errorMsg}</div>
         {error && <br />}
       </div>
+
     </div>
   );
 }

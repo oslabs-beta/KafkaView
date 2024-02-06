@@ -1,16 +1,17 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function VisualizerBtn({ name, type }) {
-
-  const navigate = useNavigate(); 
-  const routeChange = () => { 
+  const navigate = useNavigate();
+  const routeChange = () => {
     navigate(`/${type}`);
-  }
+  };
 
   return (
     <div id="visualizerBtn">
-      <div id="visualizedButton">{name}</div>
+      <button id="visualizedButton" onClick={routeChange}>
+        {name}
+      </button>
     </div>
   );
 }

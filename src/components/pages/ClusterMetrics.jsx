@@ -46,13 +46,14 @@ function ClusterMetrics() {
   let time = 0;
   const colors = [
     "black",
+    "darkblue",
     "purple",
-    "green",
-    "red",
-    "yellow",
-    "blue",
-    "grey",
+    "darkgreen",
+    "darkred",
+    "goldenrod",
     "pink",
+    "grey",
+    "wheat"
   ];
   const quantile = ["p50", "p75", "p95", "p98", "p99", "p99.9"];
   const navigate = useNavigate();
