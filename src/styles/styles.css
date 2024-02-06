@@ -26,6 +26,18 @@ body {
   overflow: hidden;
   padding: 0;
   margin: 0px;
+  animation: fadeInAnimation ease 5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
 }
 
 .App {
@@ -38,9 +50,9 @@ h1 {
   display: flex;
   justify-content: center;
   font-family: 'Work Sans', sans-serif;
-  /* font-family: "Rubik Doodle Shadow", system-ui; */
   font-size: 6vh;
   margin-bottom: 1vh;
+  margin-top: 5vh;
 }
 
 h2 {
@@ -72,6 +84,10 @@ h2 {
   margin: 0 auto;
 }
 
+#homeTitle {
+  color: #e3e3e3;
+}
+
 #homeDemo {
   margin-bottom: 100vh;
 }
@@ -86,13 +102,10 @@ h2 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--background-color-medium);
-  padding: 20px;
-  border: 1px solid var(--primary-color);
-  border-radius: 10px;
-  width: fit-content;
-  max-width: 80%;
-  margin: 0 auto;
+}
+
+#homeDiv {
+margin-top: 20vh
 }
 
 #descriptionText{
@@ -175,9 +188,6 @@ p {
   font-family: 'Karla', Arial, sans-serif;
   font-size: large;
 }
-/* #metricParagraph {
-  font-size: xx-large;
-} */
 
 #infoButton {
   font-family: 'Karla', Arial, sans-serif;
@@ -224,6 +234,12 @@ p {
   outline: none;
 }
 
+#errorText {
+  color: rgb(248, 52, 52);
+  font-family: 'Work Sans', sans-serif;
+  font-size: larger;
+}
+
 #metricsOverallDiv {
   display: flex;
   flex-direction: column;
@@ -238,7 +254,7 @@ p {
   flex-direction: row;
   align-content: stretch;
   justify-content: space-around;
-  margin-top: 8vh;
+  margin-top: 3vh;
 }
 
 #appDescription {
@@ -291,28 +307,111 @@ p {
   width: 30vw;
 }
 
-#hyperlink{
-  color: #69d3eb;
+
+/*=== FADE IN LEFT ===*/
+@-webkit-keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
 }
 
-@keyframes Gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+.fadeInLeft {
+  -webkit-animation-name: fadeInLeft;
+  animation-name: fadeInLeft;
 }
-@keyframes cube {
-  from {
-    transform: scale(0) rotate(0deg) translate(-50%, -50%);
-    opacity: 1;
-  }
-  to {
-    transform: scale(20) rotate(960deg) translate(-50%, -50%);
-    opacity: 0;
-  }
+
+/*=== Trigger  ===*/
+.animate {
+  -webkit-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+/*=== Trigger  ===*/
+.animate {
+  -webkit-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.form__group {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+  width: 50%;
+}
+
+.form__field {
+  font-family: 'Karla', Arial, sans-serif;
+  width: 70vh;
+  border: 0;
+  border-bottom: 2px solid #9b9b9b;
+  outline: 0;
+  font-size: 1.3rem;
+  color: #fff;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+.form__field::placeholder {
+  color: transparent;
+}
+.form__field:placeholder-shown ~ .form__label {
+  font-size: 1.4rem;
+  cursor: text;
+  top: 20px;
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #9b9b9b;
+}
+
+.form__field:focus {
+  padding-bottom: 6px;
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, rgb(19, 19, 84), rgb(88, 12, 88));
+  border-image-slice: 1;
+}
+.form__field:focus ~ .form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: #9b9b9b;
+  font-weight: 700;
+}
+
+/* reset input */
+.form__field:required, .form__field:invalid {
+  box-shadow: none;
 }

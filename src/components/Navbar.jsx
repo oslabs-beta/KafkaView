@@ -7,15 +7,20 @@ function Navbar() {
   const { pathname } = useLocation();
 
   // // checks if user is on and page besides home
-  if (pathname === `/cluster` || pathname === `/producer` || pathname === `/consumer` || pathname === `/information`) {
+  if (
+    pathname === `/cluster` ||
+    pathname === `/producer` ||
+    pathname === `/consumer` ||
+    pathname === `/information`
+  ) {
     return (
       <nav>
         <div id="home">
-          <Link id="navbarLink1" to="/">
-            Kafka View
-          </Link>
           <Link id="navbarLink1" className="home" to="/">
             <img id="icon" src={icon} />
+          </Link>
+          <Link id="navbarLink1" to="/">
+            Kafka View
           </Link>
         </div>
 

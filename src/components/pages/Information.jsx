@@ -16,7 +16,7 @@ function Information() {
 
   return (
     <div>
-      <h1>Kafka Ecosystem</h1>
+      <h1 id="informationTitle">Kafka Ecosystem</h1>
       {/* <div id="appDescription">
         Here is what a Kafka ecosystem looks like. Information on each part of a
         Kafka system is given below.
