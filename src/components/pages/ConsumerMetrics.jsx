@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,8 +11,8 @@ import {
   PointElement,
   LineElement,
   Filler,
-} from "chart.js";
-import { Line } from "react-chartjs-2";
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
 
 ChartJS.register(
   CategoryScale,
@@ -22,14 +22,14 @@ ChartJS.register(
   Legend,
   PointElement,
   LineElement,
-  Filler
+  Filler,
 );
 
-//Global options for the chartJS elements
+// Global options for the chartJS elements
 const lineOptions = {
   scales: {
-    y: { ticks: { color: "#black" } },
-    x: { ticks: { color: "#black" } },
+    y: { ticks: { color: '#black' } },
+    x: { ticks: { color: '#black' } },
   },
   tension: 0.2,
   animation: { duration: 5 },
@@ -45,37 +45,37 @@ function ConsumerMetrics() {
   const [data, setData] = useState([]);
   let time = 0;
   const colors = [
-    "black",
-    "darkblue",
-    "purple",
-    "darkgreen",
-    "darkred",
-    "goldenrod",
-    "pink",
-    "grey",
-    "wheat"
+    'black',
+    'darkblue',
+    'purple',
+    'darkgreen',
+    'darkred',
+    'goldenrod',
+    'pink',
+    'grey',
+    'wheat',
   ];
   const navigate = useNavigate();
 
-  const ip = Cookies.get("promIP");
-  const topicList = Cookies.get("topics").split(",");
+  const ip = Cookies.get('promIP');
+  const topicList = Cookies.get('topics').split(',');
 
   useEffect(() => {
-    //check if promIP cookie exists
+    // check if promIP cookie exists
     if (ip === undefined) {
-      navigate("/");
+      navigate('/');
     }
 
     const interval = setInterval(async () => {
       const getConsumerMetrics = async () => {
         try {
           const response = await fetch(
-            "http://localhost:3000/kafka/consumerMetrics",
+            'http://localhost:3000/kafka/consumerMetrics',
             {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ ip: ip }),
-            }
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ ip }),
+            },
           );
           const data = await response.json();
           console.log(data);
@@ -84,13 +84,12 @@ function ConsumerMetrics() {
 
           setData((current) => {
             if (current.length < 6) return [...current, data];
-            else {
-              current.shift();
-              return [...current, data];
-            }
+
+            current.shift();
+            return [...current, data];
           });
         } catch (error) {
-          console.log(error + ": error fetching consumerMetrics");
+          console.log(`${error}: error fetching consumerMetrics`);
         }
       };
 
@@ -100,7 +99,8 @@ function ConsumerMetrics() {
     return () => clearInterval(interval);
   }, [ip, navigate]);
 
-  // records-consumed-rate	An average number of records consumed per second for a specific topic or across all topics.
+  // records-consumed-rate - An average number of records consumed per
+  // second for a specific topic or across all topics.
   const chartData1 = {
     labels: data.map((section) => section.time),
     datasets: topicList.map((topic, i) => ({
@@ -117,7 +117,7 @@ function ConsumerMetrics() {
     labels: data.map((section) => section.time),
     datasets: [
       {
-        label: "Across All Topics",
+        label: 'Across All Topics',
         data: data.map((section) => section.failedConsumerRequests[0]),
         fill: false,
         backgroundColor: colors[0],
@@ -138,7 +138,7 @@ function ConsumerMetrics() {
         <p id="metricParagraph">
           Records Consumed Rate measures the rate at which records are successfully
           consumed by Kafka consumers. It provides a real-time view
-          of consumers's pulling messages from brokers.
+          of consumers pulling messages from brokers.
         </p>
       </div>
 

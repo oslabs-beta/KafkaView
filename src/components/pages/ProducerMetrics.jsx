@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,8 +11,8 @@ import {
   PointElement,
   LineElement,
   Filler,
-} from "chart.js";
-import { Line } from "react-chartjs-2";
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
 
 ChartJS.register(
   CategoryScale,
@@ -22,14 +22,14 @@ ChartJS.register(
   Legend,
   PointElement,
   LineElement,
-  Filler
+  Filler,
 );
 
-//Global options for the chartJS elements
+// Global options for the chartJS elements
 const lineOptions = {
   scales: {
-    y: { ticks: { color: "#black" } },
-    x: { ticks: { color: "#black" } },
+    y: { ticks: { color: '#black' } },
+    x: { ticks: { color: '#black' } },
   },
   tension: 0.2,
   animation: { duration: 5 },
@@ -45,38 +45,38 @@ function ProducerMetrics() {
   const [data, setData] = useState([]);
   let time = 0;
   const colors = [
-    "black",
-    "darkblue",
-    "purple",
-    "darkgreen",
-    "darkred",
-    "goldenrod",
-    "pink",
-    "grey",
-    "wheat"
+    'black',
+    'darkblue',
+    'purple',
+    'darkgreen',
+    'darkred',
+    'goldenrod',
+    'pink',
+    'grey',
+    'wheat',
   ];
-  const quantile = ["p50", "p75", "p95", "p98", "p99", "p99.9"];
+  const quantile = ['p50', 'p75', 'p95', 'p98', 'p99', 'p99.9'];
   const navigate = useNavigate();
 
-  const ip = Cookies.get("promIP");
-  const topicList = Cookies.get("topics").split(",");
+  const ip = Cookies.get('promIP');
+  const topicList = Cookies.get('topics').split(',');
 
   useEffect(() => {
-    //check if promIP cookie exists
+    // check if promIP cookie exists
     if (ip === undefined) {
-      navigate("/");
+      navigate('/');
     }
 
     const interval = setInterval(async () => {
       const getProducerMetrics = async () => {
         try {
           const response = await fetch(
-            "http://localhost:3000/kafka/producerMetrics",
+            'http://localhost:3000/kafka/producerMetrics',
             {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ ip: ip }),
-            }
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ ip }),
+            },
           );
           const data = await response.json();
           console.log(data);
@@ -85,13 +85,12 @@ function ProducerMetrics() {
 
           setData((current) => {
             if (current.length < 6) return [...current, data];
-            else {
-              current.shift();
-              return [...current, data];
-            }
+
+            current.shift();
+            return [...current, data];
           });
         } catch (error) {
-          console.log(error + ": error fetching producerMetrics");
+          console.log(`${error}: error fetching producerMetrics`);
         }
       };
 
@@ -101,7 +100,7 @@ function ProducerMetrics() {
     return () => clearInterval(interval);
   }, [ip, navigate]);
 
-  // request-rate	An average number of responses sent per producer.
+  // request-rate - An average number of responses sent per producer.
   const chartData1 = {
     labels: data.map((section) => section.time),
     datasets: topicList.map((topic, i) => ({
@@ -142,7 +141,7 @@ function ProducerMetrics() {
     labels: data.map((section) => section.time),
     datasets: [
       {
-        label: "Across All Topics",
+        label: 'Across All Topics',
         data: data.map((section) => section.failedProducerRequest[0]),
         fill: false,
         backgroundColor: colors[0],
@@ -176,7 +175,7 @@ function ProducerMetrics() {
           The request queue time, in percentile values, is the time passed
           between a load balancer receiving a request and the application code
           processing the request. A high value (usually for p99/p999) can imply
-          there aren't enough IO threads or the CPU is a bottleneck, or the
+          there aren&apos;t enough IO threads or the CPU is a bottleneck, or the
           request queue isnt large enough. The request queue size should match
           the number of connections.
         </p>
