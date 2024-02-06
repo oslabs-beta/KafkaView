@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@300&family=Rubik+Doodle+Shadow&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Karla:wght@200&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap');
 
 
 :root {
@@ -36,13 +37,16 @@ h1 {
   color: white;
   display: flex;
   justify-content: center;
-  font-family: "Rubik Doodle Shadow", system-ui;
+  font-family: 'Work Sans', sans-serif;
+  /* font-family: "Rubik Doodle Shadow", system-ui; */
   font-size: 6vh;
+  margin-bottom: 1vh;
 }
 
 h2 {
-  font-size: 3vmin;
-  font-family: 'Karla', Arial, sans-serif;
+  font-size: 4vmin;
+  font-family: 'Work Sans', sans-serif;
+  margin-bottom: 0;
 }
 
 #icon1 {
@@ -54,7 +58,6 @@ h2 {
   margin-left: 8vh;
   margin-right: 3vh;
   padding-bottom: 3vh;
-  font-size: px;
 }
 
 #homeDescription {
@@ -111,36 +114,81 @@ h2 {
 }
 
 #secondContainer {
-  background-color: #1b27354e;
+  background-color: #090a0c4e;
   padding: 20px;
   border-radius: 10px;
+  border: 1px solid black;
   margin: 10px;
   display: flex;
+  min-width: 35vh;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
 #clusterContainer {
+  border: 1px solid black;
   align-items: center;
-  background-color: #1b27354e;
+  background-color: #090a0c4e;
   padding: 20px;
   border-radius: 10px;
   margin: 10px;
   display: flex;
+  min-height: 60vh;
+  min-width: 40vh;
+  justify-content: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+#clusterContainer:hover {
+  background-color: #0202024e;
+}
+#secondContainer:hover {
+  background-color: #0202024e;
 }
 
 #ecosystemContainer {
   min-height: 80vh;
 }
 
+#visualizedButton:hover {
+  opacity: 80%;
+}
 #visualizedButton {
   font-family: 'Karla', Arial, sans-serif;
   color: white;
-  background-color: #8c49ffad;
+  background-color: #000000ad;
   margin-bottom: 3vh;
   border-radius: 8px;
   border: #002850;
   padding: 3vh;
   width: 25vh;
   font-size: 2.5vh;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+#infoButton:hover {
+  opacity: 80%;
+}
+
+p {
+  font-family: 'Karla', Arial, sans-serif;
+  font-size: large;
+}
+/* #metricParagraph {
+  font-size: xx-large;
+} */
+
+#infoButton {
+  font-family: 'Karla', Arial, sans-serif;
+  color: white;
+  background-color: #090909ad;
+  margin-bottom: 0vh;
+  border-radius: 8px;
+  border: #002850;
+  padding: 1vh;
+  font-size: medium;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
 #homeBtn {
@@ -190,6 +238,7 @@ h2 {
   flex-direction: row;
   align-content: stretch;
   justify-content: space-around;
+  margin-top: 8vh;
 }
 
 #appDescription {
@@ -202,9 +251,10 @@ h2 {
   display: block;
   width: 120vh;
   height: 50vh;
-  border: 1vh solid black;
+  border: .8vh solid black;
   border-radius: 1vh;
   background-color: rgb(234, 234, 234);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
 #metricTitle {
@@ -214,24 +264,29 @@ h2 {
 }
 #metricParagraph {
   max-width: 120vh;
-  font-size: 2.2vmin;
+  font-size: 2.5vmin;
 }
 
 #ecosystemContainer{
   height: 65%;
 }
 
-.descriptions {
+#infoDes {
+  background-color: #090a0c4e;
+  border-top: black 1px solid;
+  margin-top: 10vh;
+  padding-top: 6vh;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-
+  justify-content: space-around;
 }
 
 #infoContainer{
   display: flex;
   font-weight: bolder;
   flex-direction: column;
+  align-items: center;
+  text-align: left;
   padding: 2vh;
   width: 30vw;
 }

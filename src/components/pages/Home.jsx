@@ -38,7 +38,7 @@ function Home() {
 
   return (
     <div id="homeDiv">
-      <h1>Welcome to Kafka View!</h1>
+      {/* <h1>Welcome to Kafka View!</h1>
       <div id="homeDescription">
         <img id="icon1" src={icon}/>
         <p id="descriptionText">
@@ -47,7 +47,7 @@ function Home() {
           monitoring your project's real-time data. Developers can have
           confidence in their project's upkeep with Kafka View.
         </p>
-      </div>
+      </div> */}
       <div id="homeInput">
         <h2>Enter your Kafka IP:</h2>
         <form id="ipSubmission" onSubmit={routeChange}>
