@@ -15,6 +15,7 @@ To only set up the Prometheus server skip to step 3:
     - Download and unpack the (linux/darwin/windows) version of Prometheus online that corresponds to your local machine
     - Rename the folder to "prometheus"
     - Replace the unpacked prometheus.yml with the one provided
+    - If using your own kafka cluster, enter list of broker ports under, "target" within prometheus.yml
     - Navigate to the "prometheus" folder
     - To start Prometheus server in the terminal type: "./prometheus --config.file=prometheus.yml"
     - This will start the Prometheus server and run it on "localhost"
