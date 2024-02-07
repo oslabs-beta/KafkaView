@@ -1,5 +1,4 @@
 To set up the KafkaJS demo broker to run on your local machine follow steps:
-To only set up the Prometheus server skip to step 3:
 
 1. Set up the KafkaJS metrics docker image
     - Navigate to the "Kafka_Prom_Initialize" folder

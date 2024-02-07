@@ -69,7 +69,7 @@ git clone https://github.com/oslabs-beta/KafkaView.git
 1. Add your Prometheus server by typing in the ip address and exposed port of your server.
 
 <br/>
-<img src="src/assets/login.gif" width="800" height="400"/>
+<img src="src/assets/login.gif" width="700" height="350"/>
 
 <br/>
 
@@ -79,7 +79,7 @@ git clone https://github.com/oslabs-beta/KafkaView.git
 1. Congrats! You can now explore the Kafka ecosystem! You will find a variety of metrics right at your fingertips, including live updates on under-replicated partitions and the total count of messages being transmitted. You can navigate to other metrics by clicking the links at the top of the page.
   
 <br/>
-<img src="src/assets/producerMetrics.gif" width="800" height="400"/>
+<img src="src/assets/producerMetrics.gif" width="700" height="500"/>
 
 <br/>
 
@@ -87,11 +87,14 @@ git clone https://github.com/oslabs-beta/KafkaView.git
 3. If you would like to learn more about the kafka ecosystem, click on the Kafka Information page. Enjoy!
    
 <br/>
-<img src="src/assets/kafkaInfo.gif" width="800" height="400"/>
+<img src="src/assets/kafkaInfo.gif" width="700" height="500"/>
 
 ## Roadmap
 
-- 
+- Expand range of metrics. If you would like to see something missing, consider contributing to the project.
+- Alert system that send a message to users when a metric reaches a critical threshold
+- Expand support for other Kafka controller systems
+- Containerize entire project 
 
 ## Contact
 
@@ -125,7 +128,7 @@ git clone https://github.com/oslabs-beta/KafkaView.git
     </td> <td align="center">
       <img src="https://avatars.githubusercontent.com/u/148285698?v=4" width="140px;" alt="a photo of Joseph Defesh"/>
       <br />
-      <strong>Joseph Defesh</strong>
+      <strong>Joseph Dafesh</strong>
       <br />
       <a href="https://github.com/JosephDafesh">
         <img style="padding-top: 10px" src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
