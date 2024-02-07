@@ -45,6 +45,7 @@ demoController.initializeKafka = async (req, res, next) => {
     'testTopic7',
     'testTopic8',
     'testTopic9',
+    'testTopic10'
   ];
 
   const consumerSetup = async (consumer) => {

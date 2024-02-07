@@ -25,7 +25,7 @@
 
 </div>
 
-KafkaView is an open-source solution for monitoring your Kafka clusters. View metrics and information with just the broker IP address! Try it out for yourself or take a look at our *demo*  here. *demo-link-to-lp-here*
+Kafka View is an open-source solution for monitoring your Kafka clusters. View metrics and information with just the prometheus IP address! Try it out for yourself or take a look at our *demo*  here. *demo-link-to-lp-here*
 
 ## Table of Contents
 
@@ -41,7 +41,7 @@ KafkaView is an open-source solution for monitoring your Kafka clusters. View me
 
 Kafka is one of the most powerful and widely used event streaming platforms, however the flow of data is widely misunderstood. The Kafka ecosystem is hard to understand and Kafka lacks a UI for monitoring. Onboarding is a problem to do its complexity.
 
-KafkaView provides real-time graphs displaying useful metrics for monitoring clusters, such as the rate at which producers send data to brokers, the total number of messages in each topic, etc. Visualize your Kafka metrics and simplify the structure of your Kafka projects. For beginners, KafkaView provides an information page to show users how a kafka ecosystem is set up along with descriptions of each part. 
+Kafka View provides real-time graphs displaying useful metrics for monitoring clusters, such as the rate at which producers send data to brokers, the total number of messages in each topic, etc. Visualize your Kafka metrics and simplify the structure of your Kafka projects. For beginners, KafkaView provides an information page to show users how a kafka ecosystem is set up along with descriptions of each part. 
 
 ## Installation
 
@@ -60,7 +60,7 @@ git clone https://github.com/oslabs-beta/KafkaView.git
 - **npm start**
 
 > [!NOTE]
-> We should get a successful message saying the server is running on port 8080. If encountering an issue here, check if you typed 'npm install' or verify your current repository is correct. Open the server up on [localhost:8080](locahost:8080) if it doesn't already do so.
+> You should get a successful message saying the server is running on port 8080. If encountering an issue here, check if you typed 'npm install' or verify your current repository is correct. Open the server up on [localhost:8080](locahost:8080).
 
 
 1. Add your Prometheus server by typing in the ip address and exposed port.
@@ -71,9 +71,9 @@ git clone https://github.com/oslabs-beta/KafkaView.git
 <br/>
 
 > [!NOTE]
-> If you would like to use our demo Prometheus server, open kafka-metrics folder and follow steps in the Readme.txt to run our pre-configured kafka cluster.
+> If you would like help setting up your Prometheus server or you would like to use our demo KafkaJS cluster, open the "Kafka_Prom_Initialize" folder and follow steps in the Readme.txt.
 
-2. Congrats! You can now view metrics! Various metrics, such as real-time updates on under replicated partitions and total messages being sent, are available on the first page. You can navigate to other metrics by clicking the link at the top of the page.
+2. Congrats! You can now view metrics! Various cluster metrics, such as real-time updates on under replicated partitions and total messages being sent, are available on the first page. You can navigate to other metrics by clicking the link at the top of the page.
   
 <br/>
 <img src="src/assets/producerMetrics.gif" width="800" height="400"/>
