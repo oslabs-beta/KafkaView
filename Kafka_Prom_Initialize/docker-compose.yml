@@ -20,7 +20,6 @@ services:
       EXTRA_ARGS: -javaagent:/opt/kafka_2.13-2.8.1/libs/jmx_prometheus_javaagent.jar=7070:/opt/kafka_2.13-2.8.1/libs/kafka.yml
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
       KAFKA_DELETE_TOPIC_ENABLE: 'true'
-      KAFKA_CREATE_TOPICS: 'topic-test:1:1'
       KAFKA_ADVERTISED_PORT: 9092
       JMX_PORT: 1099
       KAFKA_JMX_OPTS: '-Dcom.sun.management.jmxremote=true

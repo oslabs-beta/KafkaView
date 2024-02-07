@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,8 +11,8 @@ import {
   PointElement,
   LineElement,
   Filler,
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
+} from "chart.js";
+import { Line } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
@@ -22,14 +22,14 @@ ChartJS.register(
   Legend,
   PointElement,
   LineElement,
-  Filler,
+  Filler
 );
 
 // Global options for the chartJS elements
 const lineOptions = {
   scales: {
-    y: { ticks: { color: '#black' } },
-    x: { ticks: { color: '#black' } },
+    y: { ticks: { color: "#black" } },
+    x: { ticks: { color: "#black" } },
   },
   tension: 0.2,
   animation: { duration: 5 },
@@ -45,37 +45,37 @@ function ConsumerMetrics() {
   const [data, setData] = useState([]);
   let time = 0;
   const colors = [
-    'black',
-    'darkblue',
-    'purple',
-    'darkgreen',
-    'darkred',
-    'goldenrod',
-    'pink',
-    'grey',
-    'wheat',
+    "black",
+    "darkblue",
+    "purple",
+    "darkgreen",
+    "darkred",
+    "goldenrod",
+    "pink",
+    "grey",
+    "wheat",
   ];
   const navigate = useNavigate();
 
-  const ip = Cookies.get('promIP');
-  const topicList = Cookies.get('topics').split(',');
+  const ip = Cookies.get("promIP");
+  const topicList = Cookies.get("topics").split(",");
 
   useEffect(() => {
     // check if promIP cookie exists
     if (ip === undefined) {
-      navigate('/');
+      navigate("/");
     }
 
     const interval = setInterval(async () => {
       const getConsumerMetrics = async () => {
         try {
           const response = await fetch(
-            'http://localhost:3000/kafka/consumerMetrics',
+            "http://localhost:3000/kafka/consumerMetrics",
             {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
               body: JSON.stringify({ ip }),
-            },
+            }
           );
           const data = await response.json();
           console.log(data);
@@ -117,7 +117,7 @@ function ConsumerMetrics() {
     labels: data.map((section) => section.time),
     datasets: [
       {
-        label: 'Across All Topics',
+        label: "Across All Topics",
         data: data.map((section) => section.failedConsumerRequests[0]),
         fill: false,
         backgroundColor: colors[0],
@@ -131,14 +131,15 @@ function ConsumerMetrics() {
       <h1>Consumer Metrics</h1>
 
       <div>
-        <h2 id="metricTitle">Records Consumed Rate:</h2>
+        <h2 id="metricTitle">Records Consumed Rate: (/s)</h2>
         <div id="chartDiv">
           <Line data={chartData1} options={lineOptions} />
         </div>
         <p id="metricParagraph">
-          Records Consumed Rate measures the rate at which records are successfully
-          consumed by Kafka consumers. It provides a real-time view
-          of consumers pulling messages from brokers.
+          Records Consumed Rate measures the rate (average records consumed/sec
+          in the last minute) at which records are successfully consumed by
+          Kafka consumers. It provides a real-time view of consumers pulling
+          messages from brokers.
         </p>
       </div>
 
@@ -148,9 +149,9 @@ function ConsumerMetrics() {
           <Line data={chartData2} options={lineOptions} />
         </div>
         <p id="metricParagraph">
-          Failed Consumer Requests tracks instances where consumer
-          requests to Kafka brokers have failed, highlighting potential issues
-          such as network connectivity issues, misconfigurations, or resource
+          Failed Consumer Requests tracks instances where consumer requests to
+          Kafka brokers have failed, highlighting potential issues such as
+          network connectivity issues, misconfigurations, or resource
           constraints. This metric should always be 0.
         </p>
       </div>

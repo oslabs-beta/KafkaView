@@ -49,7 +49,6 @@ nav {
 
 }
 
-
 ul {
   display: flex;
   justify-content: space-around;
@@ -72,6 +71,6 @@ li {
 }
 
 #icon {
-  height: 3rem;
-  width: 3rem;
+  height: 2.3rem;
+  width: 2.3rem;
 }

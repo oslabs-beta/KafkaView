@@ -40,10 +40,6 @@ Welcome to KafkaView, the open-source tool designed to simplify the Kafka ecosys
 
 ## Description
 
-<!-- Kafka is one of the most powerful and widely used event streaming platforms, however the flow of data is widely misunderstood. The Kafka ecosystem is hard to understand and Kafka lacks a UI for monitoring. Onboarding is a problem to do its complexity.
-
-KafkaView provides real-time graphs displaying useful metrics for monitoring clusters, such as the rate at which producers send data to brokers, the total number of messages in each topic, etc. Visualize your Kafka metrics and simplify the structure of your Kafka projects. For beginners, KafkaView provides an information page to show users how a kafka ecosystem is set up along with descriptions of each part.  -->
-
 KafkaView is an intuitive monitoring tool designed to simplify the complexity of Apache Kafka, one of the most potent and prevalent event streaming platforms. Despite Kafka's widespread use, its intricate data flow and ecosystem can be challenging to grasp, and the platform traditionally lacks a user-friendly interface for monitoring. This often makes onboarding a daunting task for new users.
 
 With KafkaView, users gain access to real-time updates that offer a clear view of crucial metrics for Kafka cluster management. This includes visualizing the rate at which data is produced to brokers and tracking the volume of messages across various topics. KafkaView aims to demystify Kafka's operations, presenting a more approachable structure for your Kafka projects.
