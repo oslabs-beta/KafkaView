@@ -57,14 +57,13 @@ git clone https://github.com/oslabs-beta/KafkaView.git
 - **npm install**
 
   Then type the following command:
-- **npm run dev**
+- **npm start**
 
 > [!NOTE]
-> We should get a successful message saying the server is running on port 8080. If encountering an issue here, check if you typed 'npm install' or verify your current repository is correct.
+> We should get a successful message saying the server is running on port 8080. If encountering an issue here, check if you typed 'npm install' or verify your current repository is correct. Open the server up on [localhost:8080](locahost:8080) if it doesn't already do so.
 
-3. Open the server up on [localhost:8080](locahost:8080) if it doesn't already do so. You just set up the front-end for monitoring your metrics!
 
-4. Add your Prometheus server by typing in the ip address and exposed port.
+1. Add your Prometheus server by typing in the ip address and exposed port.
 
 <br/>
 <img src="src/assets/login.gif" width="800" height="400"/>
@@ -72,9 +71,9 @@ git clone https://github.com/oslabs-beta/KafkaView.git
 <br/>
 
 > [!NOTE]
-> If you would like to use our demo Prometheus server, open kafka-metrics folder and follow steps in the Readme.txt.
+> If you would like to use our demo Prometheus server, open kafka-metrics folder and follow steps in the Readme.txt to run our pre-configured kafka cluster.
 
-5. Congrats! You can now view metrics! Various metrics, such as real-time updates on under replicated partitions and total messages being sent, are available on the first page. You can navigate to other metrics by clicking the link at the top of the page.
+2. Congrats! You can now view metrics! Various metrics, such as real-time updates on under replicated partitions and total messages being sent, are available on the first page. You can navigate to other metrics by clicking the link at the top of the page.
   
 <br/>
 <img src="src/assets/producerMetrics.gif" width="800" height="400"/>
@@ -82,7 +81,7 @@ git clone https://github.com/oslabs-beta/KafkaView.git
 <br/>
 
 
-6. If you would like to learn more about the kafka ecosystem, click on the Kafka Information page. Enjoy!
+3. If you would like to learn more about the kafka ecosystem, click on the Kafka Information page. Enjoy!
    
 <br/>
 <img src="src/assets/kafkaInfo.gif" width="800" height="400"/>
