@@ -4,13 +4,11 @@ const path = require('path');
 
 const app = express();
 const PORT = 3000;
-const cookieParser = require('cookie-parser');
 
 // Require routers
 const kafkaRouter = require('./routers/kafkaRouter');
 const demoRouter = require('./routers/demoRouter');
 
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../dist')));
 app.use(express.json());
 app.use(cors());
