@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    container_name: zookeeper
+    ports:
+      - '2181:2181'
+  kafka:
+    image: dockerpromkafka:latest
+    container_name: kafka
+    ports:
+      - '9092:9092'
+      - '7070:7070'
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      EXTRA_ARGS: -javaagent:/opt/kafka_2.13-2.8.1/libs/jmx_prometheus_javaagent.jar=7070:/opt/kafka_2.13-2.8.1/libs/kafka.yml
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_DELETE_TOPIC_ENABLE: 'true'
+      KAFKA_ADVERTISED_PORT: 9092
+      JMX_PORT: 1099
+      KAFKA_JMX_OPTS: '-Dcom.sun.management.jmxremote=true
+        -Dcom.sun.management.jmxremote.authenticate=false
+        -Dcom.sun.management.jmxremote.ssl=false
+        -Djava.rmi.server.hostname=localhost
+        -Dcom.sun.management.jmxremote.host=localhost
+        -Dcom.sun.management.jmxremote.port=9999
+        -Dcom.sun.management.jmxremote.rmi.port=9999
+        -Djava.net.preferIPv4Stack=true'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+# run 'docker compose up' to initialize container locally
+
+
+
