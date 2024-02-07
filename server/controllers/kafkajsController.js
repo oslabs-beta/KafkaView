@@ -45,7 +45,7 @@ demoController.initializeKafka = async (req, res, next) => {
     'testTopic7',
     'testTopic8',
     'testTopic9',
-    'testTopic10'
+    'testTopic10',
   ];
 
   const consumerSetup = async (consumer) => {
@@ -105,8 +105,6 @@ demoController.initializeKafka = async (req, res, next) => {
           { value: `Random Message ${Math.floor(Math.random() * 1000)}` },
         ],
       });
-      // console.log('producer:', producer)
-      // console.log('producer.clientId:', producer.clientId)
     } catch (error) {
       console.log(`error: ${error} in messageSender`);
       await producer1.disconnect();
@@ -118,7 +116,6 @@ demoController.initializeKafka = async (req, res, next) => {
   await producer2.connect();
 
   const sendInterval = setInterval(messageSender, 1000);
-  // sendInterval;
 
   console.log('this is the end of initializeKafka in demoController');
   return next();

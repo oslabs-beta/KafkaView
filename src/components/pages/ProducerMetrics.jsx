@@ -160,9 +160,9 @@ function ProducerMetrics() {
           <Line data={chartData1} options={lineOptions} />
         </div>
         <p id="metricParagraph">
-          The request rate is the rate (average request/sec in the last minute) at which producers send data to brokers.
-          Keeping an eye on peaks and drops is essential to ensure continuous
-          service availability.
+          The request rate is the rate (average request/sec in the last minute) at which
+          producers send data to brokers.Keeping an eye on peaks and drops is essential
+          to ensure continuous service availability.
         </p>
       </div>
 

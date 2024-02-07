@@ -2,7 +2,7 @@
 
 <div align="center">
 
-  <img src="./src/assets/kafkalogofinal.png" width="200" height="200">
+  <img src="./src/assets/kafkalogofinal.png" width="400" height="400">
 
 </div>
 
@@ -25,7 +25,7 @@
 
 </div>
 
-Kafka View is an open-source solution for monitoring your Kafka clusters. View metrics and information with just the prometheus IP address! Try it out for yourself or take a look at our *demo*  here. *demo-link-to-lp-here*
+Welcome to KafkaView, the open-source tool designed to simplify the Kafka ecosystem for developers and data engineers. Kafka, renowned for its powerful event streaming capabilities, often presents a steep learning curve due to its complex data flow and lack of intuitive monitoring interfaces. KafkaView is here to change that. Visit our website here  [KafkaView.com](https://www.kafkaview.com)
 
 ## Table of Contents
 
@@ -34,49 +34,52 @@ Kafka View is an open-source solution for monitoring your Kafka clusters. View m
   - [Table of Contents](#table-of-contents)
   - [Description](#description)
   - [Installation](#installation)
+  - [Roadmap](#roadmap)
   - [Contact](#contact)
   - [License](#license)
 
 ## Description
 
-Kafka is one of the most powerful and widely used event streaming platforms, however the flow of data is widely misunderstood. The Kafka ecosystem is hard to understand and Kafka lacks a UI for monitoring. Onboarding is a problem to do its complexity.
+KafkaView is an intuitive monitoring tool designed to simplify the complexity of Apache Kafka, one of the most potent and prevalent event streaming platforms. Despite Kafka's widespread use, its intricate data flow and ecosystem can be challenging to grasp, and the platform traditionally lacks a user-friendly interface for monitoring. This often makes onboarding a daunting task for new users.
 
-Kafka View provides real-time graphs displaying useful metrics for monitoring clusters, such as the rate at which producers send data to brokers, the total number of messages in each topic, etc. Visualize your Kafka metrics and simplify the structure of your Kafka projects. For beginners, KafkaView provides an information page to show users how a kafka ecosystem is set up along with descriptions of each part. 
+With KafkaView, users gain access to real-time updates that offer a clear view of crucial metrics for Kafka cluster management. This includes visualizing the rate at which data is produced to brokers and tracking the volume of messages across various topics. KafkaView aims to demystify Kafka's operations, presenting a more approachable structure for your Kafka projects.
+
+Especially beneficial for newcomers, KafkaView features a dedicated informational section. This segment provides a detailed overview of the Kafka ecosystem, complete with easy-to-understand descriptions of its components. By making Kafka's inner workings more transparent, KafkaView facilitates a smoother learning curve and enhances the monitoring experience for users at all levels of experience.
 
 ## Installation
 
 
-1. Decide where to clone this repository and type the following into terminal:
+1. Clone our repository to your local machine by typing the following command into your terminal:
 
 ```
 git clone https://github.com/oslabs-beta/KafkaView.git
 ```
 
-2. Now type the following into your terminal:
+1. Open the repo with your favorite IDE. Once complete install the dependencies for our application by typing into your terminal:
 
 - **npm install**
 
-  Then type the following command:
+  Then type the following command to start the server:
 - **npm start**
 
 > [!NOTE]
-> You should get a successful message saying the server is running on port 8080. If encountering an issue here, check if you typed 'npm install' or verify your current repository is correct. Open the server up on [localhost:8080](locahost:8080).
+> Our application should automatically open a web browser window with our home page. You should also see a confirmation message in your terminal that the server has started. If you are encountering an issue here, check if you typed 'npm install' or verify your current repository is correct. Once you have verified everything installed correctly and the server is running, navigate to our home page by clicking this link: [localhost:8080](locahost:8080)
 
 
-1. Add your Prometheus server by typing in the ip address and exposed port.
+1. Add your Prometheus server by typing in the ip address and exposed port of your server.
 
 <br/>
-<img src="src/assets/login.gif" width="800" height="400"/>
+<img src="src/assets/login.gif" width="700" height="350"/>
 
 <br/>
 
 > [!NOTE]
-> If you would like help setting up your Prometheus server or you would like to use our demo KafkaJS cluster, open the "Kafka_Prom_Initialize" folder and follow steps in the Readme.txt.
+> If you would like to demo KafkaView without a prometheus-configured kafka cluster, open kafka-metrics folder and follow steps in the Readme.txt to use our provided setup.
 
-2. Congrats! You can now view metrics! Various cluster metrics, such as real-time updates on under replicated partitions and total messages being sent, are available on the first page. You can navigate to other metrics by clicking the link at the top of the page.
+1. Congrats! You can now explore the Kafka ecosystem! You will find a variety of metrics right at your fingertips, including live updates on under-replicated partitions and the total count of messages being transmitted. You can navigate to other metrics by clicking the links at the top of the page.
   
 <br/>
-<img src="src/assets/producerMetrics.gif" width="800" height="400"/>
+<img src="src/assets/producerMetrics.gif" width="700" height="500"/>
 
 <br/>
 
@@ -84,7 +87,14 @@ git clone https://github.com/oslabs-beta/KafkaView.git
 3. If you would like to learn more about the kafka ecosystem, click on the Kafka Information page. Enjoy!
    
 <br/>
-<img src="src/assets/kafkaInfo.gif" width="800" height="400"/>
+<img src="src/assets/kafkaInfo.gif" width="700" height="500"/>
+
+## Roadmap
+
+- Expand range of metrics. If you would like to see something missing, consider contributing to the project.
+- Alert system that send a message to users when a metric reaches a critical threshold
+- Expand support for other Kafka controller systems
+- Containerize entire project 
 
 ## Contact
 
@@ -118,7 +128,7 @@ git clone https://github.com/oslabs-beta/KafkaView.git
     </td> <td align="center">
       <img src="https://avatars.githubusercontent.com/u/148285698?v=4" width="140px;" alt="a photo of Joseph Defesh"/>
       <br />
-      <strong>Joseph Defesh</strong>
+      <strong>Joseph Dafesh</strong>
       <br />
       <a href="https://github.com/JosephDafesh">
         <img style="padding-top: 10px" src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
