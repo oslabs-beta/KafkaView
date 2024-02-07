@@ -35,16 +35,16 @@ KafkaView is an open-source solution for monitoring your Kafka clusters. View me
   - [Description](#description)
   - [Installation](#installation)
   - [Contact](#contact)
+  - [License](#license)
 
 ## Description
 
 Kafka is one of the most powerful and widely used event streaming platforms, however the flow of data is widely misunderstood. The Kafka ecosystem is hard to understand and Kafka lacks a UI for monitoring. Onboarding is a problem to do its complexity.
 
-KafkaView provides real-time graphs displaying useful metrics for monitoring clusters, such as response rate, etc *add more metrics here*. Visualize your Kafka metrics and simplify the structure of your Kafka projects.
+KafkaView provides real-time graphs displaying useful metrics for monitoring clusters, such as the rate at which producers send data to brokers, the total number of messages in each topic, etc. Visualize your Kafka metrics and simplify the structure of your Kafka projects. For beginners, KafkaView provides an information page to show users how a kafka ecosystem is set up along with descriptions of each part. 
 
 ## Installation
 
-*Describe the installation process, if any. Provide code examples and explanations for getting your project up and running.*
 
 1. Decide where to clone this repository and type the following into terminal:
 
@@ -57,29 +57,92 @@ git clone https://github.com/oslabs-beta/KafkaView.git
 - **npm install**
 
   Then type the following command:
-- **npm run dev**
+- **npm start**
 
 > [!NOTE]
-> We should get a successful message saying the server is running on port 8080. If encountering an issue here, check if you typed 'npm install' or verify your current repository is correct.
+> We should get a successful message saying the server is running on port 8080. If encountering an issue here, check if you typed 'npm install' or verify your current repository is correct. Open the server up on [localhost:8080](locahost:8080) if it doesn't already do so.
 
-3. Open the server up on [localhost:8080](locahost:8080) if it doesn't already do so. You just set up the front-end for monitoring your metrics!
 
-4. Add your Prometheus server by typing in the ip address and exposed port. 
+1. Add your Prometheus server by typing in the ip address and exposed port.
 
-![Alt Text](src/assets/login.gif)
+<br/>
+<img src="src/assets/login.gif" width="800" height="400"/>
+
+<br/>
 
 > [!NOTE]
-> If you would like to use our demo Prometheus server, open kafka-metrics folder and follow steps in the Readme.txt.
+> If you would like to use our demo Prometheus server, open kafka-metrics folder and follow steps in the Readme.txt to run our pre-configured kafka cluster.
 
-5. Congrats! You can now view metrics! Various metrics, such as real-time updates on under replicated partitions and total messages being sent, are available on the first page. You can navigate to other metrics by clicking the link at the top of the page. 
+2. Congrats! You can now view metrics! Various metrics, such as real-time updates on under replicated partitions and total messages being sent, are available on the first page. You can navigate to other metrics by clicking the link at the top of the page.
+  
+<br/>
+<img src="src/assets/producerMetrics.gif" width="800" height="400"/>
 
-<img src="src/assets/producerMetrics.gif" width="1000" height="500"/>
+<br/>
 
-6. If you would like to learn more about the kafka ecosystem, click on the Kafka Information page. Enjoy!
+
+3. If you would like to learn more about the kafka ecosystem, click on the Kafka Information page. Enjoy!
+   
+<br/>
+<img src="src/assets/kafkaInfo.gif" width="800" height="400"/>
 
 ## Contact
 
-@BryceK2
-@seannguyen96
-@Chris00
-@hJosephDafesh
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/108435897?v=4" width="140px;" alt="a photo of Byrce Kelly"/>
+      <br />
+      <strong>Byrce Kelly</strong>
+      <br />
+      <a href="https://github.com/BryceK2">
+        <img style="padding-top: 10px" src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+      </a>
+      <br />
+      <a href="https://www.linkedin.com/in/-brycekelly/">
+        <img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+      </a>
+    </td>
+     <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/14811666?v=4" width="140px;" alt="a photo of Chris Johnson"/>
+      <br />
+      <strong>Chris Johnson</strong>
+      <br />
+      <a href="https://github.com/Johnson-Chris00">
+        <img style="padding-top: 10px" src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+      </a>
+      <br />
+      <a href="https://www.linkedin.com/in/johnson-chris00">
+        <img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+      </a>
+    </td> <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/148285698?v=4" width="140px;" alt="a photo of Joseph Defesh"/>
+      <br />
+      <strong>Joseph Defesh</strong>
+      <br />
+      <a href="https://github.com/JosephDafesh">
+        <img style="padding-top: 10px" src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+      </a>
+      <br />
+      <a href="https://www.linkedin.com/">
+        <img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+      </a>
+    </td> <td align="center">
+      <img src="https://avatars.githubusercontent.com/u/26880119?s=400&u=94f7e8ea169586b630323f7a3e4ea6ea01922403&v=4" width="140px;" alt="a photo of Sean Nguyen"/>
+      <br />
+      <strong>Sean Nguyen</strong>
+      <br />
+      <a href="https://github.com/seannguyen96">
+        <img style="padding-top: 10px" src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+      </a>
+      <br />
+      <a href="https://www.linkedin.com/in/sean-nguyen-cpslo/">
+       <img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+      </a>
+      </form>
+    </td>
+  </tr>
+</table>
+
+## License
+By contributing, you are agreeing that your contributions will be licensed under the [MIT License](/LICENSE).
