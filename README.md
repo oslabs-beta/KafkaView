@@ -55,7 +55,7 @@ Especially beneficial for newcomers, KafkaView features a dedicated informationa
 git clone https://github.com/oslabs-beta/KafkaView.git
 ```
 
-1. Open the repo with your favorite IDE. Once complete install the dependencies for our application by typing into your terminal:
+2. Open the repo with your favorite IDE. Once complete install the dependencies for our application by typing into your terminal:
 
 - **npm install**
 
@@ -66,7 +66,7 @@ git clone https://github.com/oslabs-beta/KafkaView.git
 > Our application should automatically open a web browser window with our home page. You should also see a confirmation message in your terminal that the server has started. If you are encountering an issue here, check if you typed 'npm install' or verify your current repository is correct. Once you have verified everything installed correctly and the server is running, navigate to our home page by clicking this link: [localhost:8080](locahost:8080)
 
 
-1. Add your Prometheus server by typing in the ip address and exposed port of your server.
+3. Add your Prometheus server by typing in the ip address and exposed port of your server.
 
 <br/>
 <img src="src/assets/login.gif" width="700" height="350"/>
@@ -76,7 +76,7 @@ git clone https://github.com/oslabs-beta/KafkaView.git
 > [!NOTE]
 > If you would like to demo KafkaView without a prometheus-configured kafka cluster, open kafka-metrics folder and follow steps in the Readme.txt to use our provided setup.
 
-1. Congrats! You can now explore the Kafka ecosystem! You will find a variety of metrics right at your fingertips, including live updates on under-replicated partitions and the total count of messages being transmitted. You can navigate to other metrics by clicking the links at the top of the page.
+4. Congrats! You can now explore the Kafka ecosystem! You will find a variety of metrics right at your fingertips, including live updates on under-replicated partitions and the total count of messages being transmitted. You can navigate to other metrics by clicking the links at the top of the page.
   
 <br/>
 <img src="src/assets/producerMetrics.gif" width="700" height="500"/>
@@ -84,7 +84,7 @@ git clone https://github.com/oslabs-beta/KafkaView.git
 <br/>
 
 
-3. If you would like to learn more about the kafka ecosystem, click on the Kafka Information page. Enjoy!
+5. If you would like to learn more about the kafka ecosystem, click on the Kafka Information page. Enjoy!
    
 <br/>
 <img src="src/assets/kafkaInfo.gif" width="700" height="500"/>
